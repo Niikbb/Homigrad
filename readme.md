@@ -1,5 +1,5 @@
 ### Респект разработчикам: Sadsalat, Useless, Mr. Point, 0oa
-
+- Скачай сборку: https://github.com/Niikbb/Homigrad/archive/refs/heads/main.zip
 - Перетащи все папки в GarrysMod/garrysmod/addons и запускай игру.
 - Сабнись на контент пак: https://s.team/sf/3251006969
 - Жди пока всё установится. Без контента работать не будет. Даже не надейся.
