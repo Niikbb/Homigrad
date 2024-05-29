@@ -79,8 +79,6 @@ function cp.StartRoundSV()
     tdm.CenterInit()
 
     cp.ragdolls = {}
-
-    
 end
 
 function cp.Think()
