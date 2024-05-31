@@ -1,29 +1,33 @@
-function igib.StartRoundSV()
-    tdm.RemoveItems()
+igib.ragdolls = {}
 
-	roundTimeStart = CurTime()
-	roundTime = 300
-
-    local players = PlayersInGame()
-    for i,ply in pairs(players) do ply:SetTeam(1) end
-
-    local aviable = ReadDataMap("dm")
-    aviable = #aviable ~= 0 and aviable or homicide.Spawns()
-    tdm.SpawnCommand(team.GetPlayers(1),aviable,function(ply)
-        ply:Freeze(true)
-    end)
-    freezing = true
-
-    RTV_CountRound = RTV_CountRound - 1
-    roundTimeRespawn = CurTime() + 15
-
-    return {roundTimeStart,roundTime}
+local function GetTeamSpawns(ply)
+	local spawnsT = tdm.SpawnsTwoCommand()
+    if ply:Team() == 1 then
+        return spawnsT
+    else
+        return false
+    end
 end
 
-function cp.Think()
-    cp.LastWave = cp.LastWave or CurTime() + 15
+function igib.StartRoundSV()
+local players = PlayersInGame()
+local spawnsT,spawnsCT = tdm.SpawnsTwoCommand()
 
-    if CurTime() >= cp.LastWave then
+    tdm.RemoveItems()
+	roundTimeStart = CurTime()
+    roundTimeRespawn = CurTime() + 15
+	roundTime = 300
+
+    tdm.SpawnCommand(team.GetPlayers(1),spawnsT)
+
+    for i,ply in pairs(players) do ply:SetTeam(1) end
+    return {roundTimeStart,roundTime}   
+end
+
+function igib.Think()
+    igib.LastWave = igib.LastWave or CurTime() + 15
+
+    if CurTime() >= igib.LastWave then
         SetGlobalInt("igib_respawntime", CurTime())
     
         for _, v in pairs(player.GetAll()) do
@@ -42,13 +46,13 @@ function cp.Think()
             end
         end
     
-        for ent in pairs(cp.ragdolls) do
+        for ent in pairs(igib.ragdolls) do
             if IsValid(ent) then ent:Remove() end
     
-            cp.ragdolls[ent] = nil
+            igib.ragdolls[ent] = nil
         end
 
-        cp.LastWave = CurTime() + 15
+        igib.LastWave = CurTime() + 15
     end
 end
 
@@ -73,7 +77,7 @@ function igib.PlayerSpawn(ply,teamID)
     ply:Give("weapon_igib")
     ply:SetLadderClimbSpeed(100)
     ply:SetWalkSpeed(350)
-    ply:SetRunSpeed(500)
+    ply:SetRunSpeed(700)
 end
 
 function igib.PlayerInitialSpawn(ply)

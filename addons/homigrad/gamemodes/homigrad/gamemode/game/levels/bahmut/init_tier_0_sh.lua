@@ -26,9 +26,33 @@ bahmut.teamEncoder = {
 
 function bahmut.StartRound()
 	game.CleanUpMap(false)
+	bahmut.points = {}
+    if !file.Read( "homigrad/maps/controlpoint/"..game.GetMap()..".txt", "DATA" ) and SERVER then
+        print("Скажите админу чтоб тот создал !point control_point или хуярьтесь без Точек Захвата.") 
+        PrintMessage(HUD_PRINTCENTER, "Скажите админу чтоб тот создал !point control_point или хуярьтесь без Точек Захвата.")
+    end
+
+	bahmut.LastWave = CurTime()
+
+    bahmut.WinPoints = {}
+    bahmut.WinPoints[1] = 0
+    bahmut.WinPoints[2] = 0
 
 	team.SetColor(1,bahmut.red[2])
 	team.SetColor(2,bahmut.blue[2])
+
+	for i, point in pairs(SpawnPointsList.controlpoint[3]) do
+        SetGlobalInt(i .. "PointProgress", 0)
+        SetGlobalInt(i .. "PointCapture", 0)
+        bahmut.points[i] = {}
+    end
+
+    SetGlobalInt("Bahmut_respawntime", CurTime())
+
+	if CLIENT then return end
+		timer.Create("Bahmut_ThinkAboutPoints", 1, 0, function() --подумай о точках... засунул в таймер для оптимизации, ибо там каждый тик игроки в сфере подглядываются, ну и в целом для удобства
+        	bahmut.PointsThink()
+    	end)
 
 	if CLIENT then
 

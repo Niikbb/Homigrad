@@ -59,9 +59,9 @@ function css.GetListMul(list,mul,func,max)
 end
 
 changeClass = {
-	--["prop_vehicle_jeep"]="vehicle_van",
-	--["prop_vehcle_jeep_old"]="vehicle_van",
-	--["prop_vehicle_airboat"]="vehicle_van",
+	["prop_vehicle_jeep"]="vehicle_van",
+	["prop_vehcle_jeep_old"]="vehicle_van",
+	["prop_vehicle_airboat"]="vehicle_van",
 	["weapon_crowbar"]="weapon_bat",
 	["weapon_stunstick"]="weapon_knife",
 	["weapon_pistol"]="weapon_glock",
@@ -105,6 +105,22 @@ function css.RemoveItems()
 		end
 	end
 end
+
+/*function css.StartRoundSV()
+    css.RemoveItems()
+
+	roundTimeStart = CurTime()
+	roundTime = 60 * (2 + math.min(#player.GetAll() / 8,2))
+
+	for i,ply in pairs(team.GetPlayers(3)) do ply:SetTeam(math.random(1,2)) end
+
+	OpposingAllTeam()
+	AutoBalanceTwoTeam()
+
+	local spawnsT,spawnsCT = css.SpawnsTwoCommand()
+	css.SpawnCommand(team.GetPlayers(1),spawnsT)
+	css.SpawnCommand(team.GetPlayers(2),spawnsCT)
+end*/
 
 function css.StartRoundSV()
     css.RemoveItems()
@@ -244,6 +260,27 @@ function css.EndRound(winner)
     timer.Remove("CSS_ThinkAboutPoints")
 end
 
+/*function css.RoundEndCheck()
+	if roundTimeStart + roundTime - CurTime() <= 0 then EndRound() end
+
+	local TAlive = css.GetCountLive(team.GetPlayers(1))
+	local CTAlive = css.GetCountLive(team.GetPlayers(2))
+
+	if TAlive == 0 and CTAlive == 0 then EndRound() return end
+
+	if TAlive == 0 then EndRound(2) end
+	if CTAlive == 0 then EndRound(1) end
+end
+
+function css.EndRoundMessage(winner,textNobody)
+	local tbl = TableRound()
+	PrintMessage(3,"Выиграли - " .. ((winner == 1 and tbl.red[1]) or (winner == 2 and tbl.blue[1]) or (textNobody or "Дружба")) .. ".")
+end
+
+function css.EndRound(winner) css.EndRoundMessage(winner) end*/
+
+--
+
 function css.GiveSwep(ply,list,mulClip1)
 	if not list then return end
 
@@ -289,3 +326,5 @@ function css.PlayerDeath(ply,inf,att)
     css.ragdolls[ply:GetNWEntity("Ragdoll")] = true
     return false
 end
+
+--function css.PlayerDeath(ply,inf,att) return false end

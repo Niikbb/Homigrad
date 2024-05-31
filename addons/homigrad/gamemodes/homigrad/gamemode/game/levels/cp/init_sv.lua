@@ -15,7 +15,7 @@ function cp.SpawnVehicle()
         local v2 = ReadPoint(v)
         local contradiction = false
         for k3, v3 in pairs(ents.FindInSphere(v2[1], 128)) do
-            if v3:GetClass() == "gmod_sent_vehicle_fphysics_base" then
+            if v3:GetClass() == "gmod_sent_vehicle_fphysics_base" or v3:GetClass() == "lvs_base" then
                 contradiction = true
             end
         end
@@ -29,7 +29,7 @@ function cp.SpawnVehicle()
         local v2 = ReadPoint(v)
         local contradiction = false
         for k3, v3 in pairs(ents.FindInSphere(v2[1], 128)) do
-            if v3:GetClass() == "gmod_sent_vehicle_fphysics_base" then
+            if v3:GetClass() == "gmod_sent_vehicle_fphysics_base" or v3:GetClass() == "lvs_base" then
                 contradiction = true
             end
         end

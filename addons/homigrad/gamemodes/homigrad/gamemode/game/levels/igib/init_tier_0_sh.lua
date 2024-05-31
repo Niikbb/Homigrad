@@ -1,7 +1,7 @@
 table.insert(LevelList,"igib")
 igib = {}
 igib.Name = "InstaGib"
-igib.LoadScreenTime = 1.5
+igib.LoadScreenTime = 2.5
 igib.RoundRandomDefalut = 1
 igib.NoSelectRandom = true
 
@@ -41,7 +41,7 @@ end
 
 function igib.HUDPaint_RoundLeft(white)
     local lply = LocalPlayer()
-	local startRound = roundTimeStart + 2 - CurTime()
+	local startRound = roundTimeStart + 3 - CurTime()
 
     if startRound > 0 and lply:Alive() then
         if playsound then

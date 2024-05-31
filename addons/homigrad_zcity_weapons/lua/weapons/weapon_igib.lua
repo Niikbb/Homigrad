@@ -44,11 +44,11 @@ function SWEP:PrimaryAttack()
     if ( self.NextShot > CurTime() ) then return end
     if self:Clip1() <= 0 then return end
     self.NextShot = CurTime() + self.ShootWait
-    local shotpos = self:GetOwner():GetPos()+Vector(0,0,50)+self:GetOwner():EyeAngles():Forward()*90+self:GetOwner():EyeAngles():Right()*5
+    local shotpos = self:GetOwner():GetPos()+Vector(0,0,35)+self:GetOwner():EyeAngles():Forward()*90+self:GetOwner():EyeAngles():Right()*5
     if SERVER then 
         local cmm = ents.Create( "ent_hgjack_40mm_contact" )
         cmm:SetPos(shotpos)
-        cmm:SetAngles(self:GetOwner():EyeAngles()+Angle(-7,0,0))
+        cmm:SetAngles(self:GetOwner():EyeAngles()+Angle(0,0,0))
         cmm:Spawn()
         cmm:Arm()
         local cmm2 = cmm:GetPhysicsObject()

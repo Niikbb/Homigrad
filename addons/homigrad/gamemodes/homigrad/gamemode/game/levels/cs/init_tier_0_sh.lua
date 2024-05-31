@@ -54,11 +54,29 @@ function css.StartRound()
 
 	if CLIENT then return end
 
-    timer.Create("CP_ThinkAboutPoints", 1, 0, function()
+    timer.Create("CP_ThinkAboutPoints", 1, 0, function() --подумай о точках... засунул в таймер для оптимизации, ибо там каждый тик игроки в сфере подглядываются, ну и в целом для удобства
         css.PointsThink()
     end)
 
     css.StartRoundSV()
 end
+
+--тот кто это кодил нужно убить нахуй
 css.RoundRandomDefalut = 1
 css.SupportCenter = true
+
+/*function css.StartRound()
+	game.CleanUpMap(false)
+
+	team.SetColor(1,red)
+	team.SetColor(2,blue)
+
+	if CLIENT then
+		css.StartRoundCL()
+		return
+	end
+
+	css.StartRoundSV()
+end
+css.RoundRandomDefalut = 2
+css.SupportCenter = false*/

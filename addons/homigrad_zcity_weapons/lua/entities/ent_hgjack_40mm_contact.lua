@@ -6,7 +6,8 @@ ENT.PrintName = "Контактный Заряд для Гранатомёта"
 ENT.Category = "JModHomigrad"
 ENT.Spawnable = true
 ENT.JModPreferredCarryAngles = Angle(0, -140, 0)
-ENT.Model = "models/pwb/weapons/w_f1_thrown.mdl"
+--ENT.Model = "models/pwb/weapons/w_f1_thrown.mdl"
+ENT.Model = "models/pwb/weapons/w_m320_projectile.mdl"
 ENT.SpoonScale = 2
 
 if SERVER then
@@ -34,8 +35,8 @@ if SERVER then
 		if self.Exploded then return end
 		self.Exploded = true
 		local SelfPos = self:LocalToWorld(self:OBBCenter())
-		--JMod.Sploom(self:GetOwner(), self:GetPos(), math.random(10, 20))
-		JMod.Sploom(self:GetOwner(), self:GetPos(), 0)
+		JMod.Sploom(self:GetOwner(), self:GetPos(), 175) --math.random(150, 250))
+		--JMod.Sploom(self:GetOwner(), self:GetPos(), 0)
 		self:EmitSound("dwr/explosions/indoors/distant/"..math.random(3,8)..".wav", 90, 100)
 		local plooie = EffectData()
 		plooie:SetOrigin(SelfPos)
@@ -45,10 +46,11 @@ if SERVER then
 		--ParticleEffect("pcf_jack_groundsplode_small",SelfPos,vector_up:Angle())
 		--util.ScreenShake(SelfPos, 20, 20, 1, 1000)
 
-		local OnGround = util.QuickTrace(SelfPos + Vector(0, 0, 5), Vector(0, 0, -15), {self}).Hit
-		local Spred = Vector(0, 0, 0)
+		--local OnGround = util.QuickTrace(SelfPos + Vector(0, 0, 5), Vector(0, 0, -15), {self}).Hit
+		--local Spred = Vector(0, 0, 0)
 
-		JMod.FragSplosion(self, SelfPos + Vector(0, 0, 20), 800, 450, 3500, self:GetOwner() or game.GetWorld())
+		--JMod.FragSplosion(self, SelfPos + Vector(0, 0, 20), 800, 450, 3500, self:GetOwner() or game.GetWorld())
+		--JMod.FragSplosion(self, SelfPos + Vector(0, 0, 20), 800, 0, 0, self:GetOwner() or game.GetWorld())
 		self:Remove()
 	end
 
