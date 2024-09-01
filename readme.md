@@ -13,4 +13,3 @@
 [SadSalat](https://github.com/sadsalat)
 [Useless](https://github.com/uzelezz123)
 [Mr. Point](https://github.com/MrPointlezz)
-[Mannytko](https://github.com/magmen3)
