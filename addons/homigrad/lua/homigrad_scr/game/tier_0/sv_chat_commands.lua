@@ -242,7 +242,7 @@ hook.Add("CheckPassword","sync",function(steamID)
 	--if CloseDev then return false,"dev" end
 
 	if MaxPlayers and #getNotDonaters() + 1 > MaxPlayers then
-		return false,"limit players\nСервер заполнен, но есть еще донат слоты!\nМожете их купить здесь http://80.85.241.23"
+		return false,"Server is full\nСервер заполнен."
 	end
 
 	if Sync then return false,"xd" end
@@ -272,7 +272,7 @@ COMMANDS.closedev = {function(ply,args)
 	SData_Set("dev",tostring(CloseDev))
 
 	if CloseDev then
-		PrintMessageChat(3,"Сервер закрыт. fuck you!")
+		PrintMessageChat(3,"Сервер закрыт.")
 	else
 		PrintMessageChat(3,"Сервер открыт")
 	end
