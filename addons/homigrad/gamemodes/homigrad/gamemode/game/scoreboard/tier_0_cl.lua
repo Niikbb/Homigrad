@@ -1,5 +1,3 @@
--- "addons\\homigrad\\gamemodes\\homigrad\\gamemode\\game\\scoreboard\\tier_0_cl.lua"
--- Retrieved by https://github.com/lewisclark/glua-steal
 function SB_PaintButton(self,w,h)
 	surface.SetDrawColor(0,0,0,self:IsDown() and 225 or 200)
 	surface.DrawRect(0,0,w,h)
