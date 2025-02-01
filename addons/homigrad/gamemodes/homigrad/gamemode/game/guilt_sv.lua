@@ -44,8 +44,7 @@ end
 
 local validUserGroup = {
 	superadmin = true,
-	admin = true,
-	megapenis = true
+	admin = true
 }
 
 COMMANDS.noguilt = {function(ply,args)
@@ -73,7 +72,8 @@ function GuiltCheck(att,ply)
 		if not att.noguilt and not att:HasGodMode() then
 			att:Kill()
 
-			if not validUserGroup[att:GetUserGroup()] then
+			--if not validUserGroup[att:GetUserGroup()] then
+			if not ply:IsAdmin() then
 				RunConsoleCommand("ulx","fakeban",att:Name(),"10","Kicked and Banned for RDM")
 			else
 				RunConsoleCommand("ulx","fakeban",att:Name(),"10","Kicked and Banned for RDM")
@@ -93,7 +93,7 @@ end)
 hook.Add("Should Fake Collide","guilt",function(ply,hitEnt,data)
 	if hitEnt == game.GetWorld() then return end
 	hitEnt = RagdollOwner(hitEnt)
-	if not hitEnt:IsPlayer() then return end --Убийство с РПГ = ошибка ))
+	if not hitEnt:IsPlayer() then return end --Убийство с РПГ = ошибка.
 
 	local dmgInfo = DamageInfo()
 	dmgInfo:SetAttacker(hitEnt)

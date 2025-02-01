@@ -1,15 +1,11 @@
 skins = {
-	megapenis = true,
-	meagsponsor = true,
-	donator = true,
 	superadmin = true,
-	microdonater = true,
 	admin = true
 }
 
 local vecZero = Vector(0, 0, 0)
 local angZero = Angle(0, 0, 0)
-SWEP.Base = 'weapon_base' -- base
+SWEP.Base = 'weapon_base'
 SWEP.PrintName = "salat_base"
 SWEP.Author = "Homigrad"
 SWEP.Instructions = ""
@@ -53,7 +49,7 @@ SWEP.vbwPos = false
 SWEP.vbwAng = false
 SWEP.Suppressed = false
 local hg_skins = CreateClientConVar("hg_skins", "1", true, false, "ubrat govno", 0, 1)
-local hg_show_hitposmuzzle = CreateClientConVar("hg_show_hitposmuzzle", "0", false, false, "huy", 0, 1)
+local hg_show_hitposmuzzle = CreateClientConVar("hg_debug_hitposmuzzle", "0", false, false, "Renders HitPos from 'Muzzle' attachment. Debug option for modding.", 0, 1)
 hook.Add("HUDPaint", "admin_hitpos", function()
 	if hg_show_hitposmuzzle:GetBool() and LocalPlayer():IsAdmin() then
 		local wep = LocalPlayer():GetActiveWeapon()
@@ -141,11 +137,9 @@ end
 function SWEP:DrawWorldModel()
 	self:DrawModel()
 	if not hg_skins:GetBool() then return end
-	if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and skins[self:GetOwner():GetUserGroup()] then
-		--self:SetSubMaterial( 0, self:GetNWString( "skin" ) )
-		--для лохов
+	/*if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and skins[self:GetOwner():GetUserGroup()] then
 		self:DrawModel()
-	end
+	end*/
 end
 
 HMCD_SurfaceHardness = {
@@ -376,7 +370,6 @@ if SERVER then
 else
 	net.Receive("shoot_huy", function(len)
 		local tr = net.ReadTable()
-		--snd_jack_hmcd_bc_1.wav
 		local dist, vec, dist2 = util.DistanceToLine(tr.StartPos, tr.HitPos, EyePos())
 		if dist < 128 and dist2 > 128 then EmitSound("snd_jack_hmcd_bc_" .. tostring(math.random(1, 7)) .. ".wav", vec, 1, CHAN_WEAPON, 1, 75, 0, 100) end
 	end)

@@ -30,9 +30,9 @@ local validUserGroupSuperAdmin = {
 	admin = true
 }
 
-local validUserGroup = {
-	megapenis = true,
-	meagsponsor = true
+local validUserGroup = { -- Can be used for donator slots without installing ULX custom modules.
+	--admin = true,
+	--admin = true
 }
 
 function COMMAND_GETASSES(ply)
@@ -148,8 +148,6 @@ COMMANDS.help = {function(ply,args)
 	local text = ""
 
 	if args[1] then
-		if args[1] == "viptest" then ply:Kick("тычо") return end
-
 		local cmd = COMMANDS[args[1]]
 		local argsList = cmd[3]
 		if argsList then argsList = " - " .. argsList else argsList = "" end
@@ -176,23 +174,19 @@ COMMANDS.help = {function(ply,args)
 	ply:ChatPrint(text)
 end,0}
 
-COMMANDS.viptest = {function(ply,args)
-	ply:Kick("xd")
-end}
-
-COMMANDS.sync = {function(ply,args)
+COMMANDS.sync = {function(ply,args) -- maybe something dirty.
 	Sync = tobool(args[1])
 
 	if Sync then
 		hook.Add("PlayerDeath","synchronisation",function(ply)
 			if ply:IsAdmin() or ply:Team() == 1002 then return end
 
-			ply:Kick(tostring(args[2] or "noob"))
+			ply:Kick(tostring(args[2] or "Player Desynced. Please reconnect."))
 		end)
 		hook.Add("PlayerSilentDeath","synchronisation",function(ply)
 			if ply:IsAdmin() or ply:Team() == 1002 then return end
 
-			ply:Kick(tostring(args[2] or "noob"))
+			ply:Kick(tostring(args[2] or "Player Desynced. Please reconnect."))
 		end)
 	else
 		hook.Remove("PlayerDeath","synchronisation")
@@ -201,14 +195,6 @@ COMMANDS.sync = {function(ply,args)
 
 	PrintMessage(3,"Синхра : " .. tostring(Sync))
 end}
-
-local validUserGroup = {
-	superadmin = true,
-	admin = true,
-	meagsponsor = true,
-	viptest = true,
-	donator = true
-}
 
 local function getNotDonaters()
 	local list = player.GetAll()
@@ -242,7 +228,7 @@ hook.Add("CheckPassword","sync",function(steamID)
 	--if CloseDev then return false,"dev" end
 
 	if MaxPlayers and #getNotDonaters() + 1 > MaxPlayers then
-		return false,"Server is full\nСервер заполнен."
+		return false,"Server is full."
 	end
 
 	if Sync then return false,"xd" end
@@ -261,7 +247,7 @@ COMMANDS.setmaxplayers = {function(ply,args)
 
 	RunConsoleCommand("sv_visiblemaxplayers",tostring(MaxPlayers + #getDonaters()))
 
-	PrintMessageChat(3,"Лимит игроков : " .. tostring(MaxPlayers))
+	PrintMessageChat(3,"Current player limit: " .. tostring(MaxPlayers))
 end}
 
 CloseDev = tobool(SData_Get("dev"))
@@ -272,9 +258,9 @@ COMMANDS.closedev = {function(ply,args)
 	SData_Set("dev",tostring(CloseDev))
 
 	if CloseDev then
-		PrintMessageChat(3,"Сервер закрыт.")
+		PrintMessageChat(3,"Server is closed.")
 	else
-		PrintMessageChat(3,"Сервер открыт")
+		PrintMessageChat(3,"Server is now open.")
 	end
 end}
 
@@ -295,9 +281,9 @@ function player.GetListByName(name)
 	return list
 end
 
-COMMANDS.submat = {function(ply,args)
+/*COMMANDS.submat = {function(ply,args) -- probably exploitable...
 	if args[2] == "^" then
 		ply:SetSubMaterial(tonumber(args[1],10),args[2])
 	end
-end}
+end}*/
 end
