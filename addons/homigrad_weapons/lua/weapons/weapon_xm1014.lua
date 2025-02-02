@@ -55,7 +55,8 @@ function SWEP:ApplyEyeSpray()
     self.eyeSpray = self.eyeSpray - Angle(5,math.Rand(-2,2),0)
 end
 
-SWEP.vbwPos = Vector(-2,-4,-4)
+SWEP.vbwPos = Vector(0,-4,-5)
+SWEP.vbwAng = Angle(8,-15,0)
 
 SWEP.CLR_Scope = 0.05
 SWEP.CLR = 0.025

@@ -50,5 +50,6 @@ SWEP.DrawCrosshair			= false
 SWEP.ViewModel				= "models/pwb/weapons/w_aks74u.mdl"
 SWEP.WorldModel				= "models/pwb/weapons/w_aks74u.mdl"
 
-SWEP.vbwPos = Vector(5,-6,-6)
+SWEP.vbwPos = Vector(2,-4,-6)
+SWEP.vbwAng = Angle(7,-30,0)
 end

@@ -50,8 +50,8 @@ SWEP.DrawCrosshair			= false
 SWEP.ViewModel				= "models/pwb2/weapons/w_asval.mdl"
 SWEP.WorldModel				= "models/pwb2/weapons/w_asval.mdl"
 
-SWEP.addAng = Angle(0,0,0)
-SWEP.addPos = Vector(0,0,0)
+SWEP.vbwPos = Vector(-6,-4,2)
+SWEP.vbwAng = Angle(4,-30,0)
 
 SWEP.Supressed = true
 end

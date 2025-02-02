@@ -223,8 +223,8 @@ if CLIENT then
 
 		if (IsValid(_Owner)) then
             -- Specify a good position
-			local offsetVec = Vector(8,-1,0)
-			local offsetAng = Angle(150, 0, 0)
+			local offsetVec = Vector(2.5,-1,4)
+			local offsetAng = Angle(165, 0, 180)
 			
 			local boneid = _Owner:LookupBone("ValveBiped.Bip01_R_Hand") -- Right Hand
 			if !boneid then return end

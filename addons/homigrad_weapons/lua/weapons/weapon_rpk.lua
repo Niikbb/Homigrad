@@ -36,7 +36,7 @@ SWEP.Weight					= 5
 SWEP.AutoSwitchTo			= false
 SWEP.AutoSwitchFrom			= false
 
-SWEP.HoldType = "smg"
+SWEP.HoldType = "ar2"
 
 ------------------------------------------
 
@@ -47,4 +47,7 @@ SWEP.DrawCrosshair			= false
 
 SWEP.ViewModel				= "models/pwb2/weapons/w_rpk.mdl"
 SWEP.WorldModel				= "models/pwb2/weapons/w_rpk.mdl"
+
+SWEP.vbwPos = Vector(-6,-4,4)
+SWEP.vbwAng = Angle(7,-30,0)
 end
