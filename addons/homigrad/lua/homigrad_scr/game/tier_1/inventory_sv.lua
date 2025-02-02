@@ -2,6 +2,7 @@ if not engine.ActiveGamemode() == "homigrad" then return end
 util.AddNetworkString("inventory")
 util.AddNetworkString("ply_take_item")
 util.AddNetworkString("ply_take_ammo")
+local maxDistance = 100
 
 local function send(ply,lootEnt,remove)
 	if ply then
@@ -68,6 +69,9 @@ net.Receive("inventory",function(len,ply)
 	local lootEnt = net.ReadEntity()
 	if not IsValid(lootEnt) then return end
 
+	if lootEnt.fake == nil then return end
+	if ply:GetPos():Distance(lootEnt:GetPos()) >= maxDistance then return end
+
 	lootEnt.UsersInventory[ply] = nil
 	player.Event(ply,"inventory close",lootEnt)
 end)
@@ -78,6 +82,8 @@ net.Receive("ply_take_item",function(len,ply)
 	local lootEnt = net.ReadEntity()
 	if not IsValid(lootEnt) then return end
 
+	if lootEnt.fake == nil then return end
+	if ply:GetPos():Distance(lootEnt:GetPos()) >= maxDistance then return end
 	local wep = net.ReadString()
 	--local takeammo = net.ReadBool()
 
@@ -137,6 +143,8 @@ net.Receive("ply_take_ammo",function(len,ply)
 
 	local lootEnt = net.ReadEntity()
 	if not IsValid(lootEnt) then return end
+	if lootEnt.fake == nil then return end
+	if ply:GetPos():Distance(lootEnt:GetPos()) >= maxDistance then return end
 	local ammo = net.ReadFloat()
 	local lootInfo = lootEnt.Info
 	if not lootInfo.Ammo[ammo] then return end
