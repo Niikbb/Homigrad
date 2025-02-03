@@ -164,6 +164,11 @@ if engine.ActiveGamemode() == "homigrad" then
 					local ang = ply.wep:GetAngles()
 					ang:RotateAroundAxis(ang:Forward(),90)
 					ply.wep:SetAngles(ang)
+				elseif ply.curweapon == "weapon_cmosin" then
+					local ang = ply.wep:GetAngles()
+					ang:RotateAroundAxis(ang:Up(),180)
+					ang:RotateAroundAxis(ang:Right(),0)
+					ply.wep:SetAngles(ang)
 				end
 	
 				--[[local hand = rag:GetBoneMatrix(rag:LookupBone("ValveBiped.Bip01_R_Hand"))

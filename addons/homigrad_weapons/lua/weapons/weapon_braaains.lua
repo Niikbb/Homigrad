@@ -19,13 +19,13 @@ SWEP.UseHands = true
 
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
-SWEP.Primary.Damage = 80
+SWEP.Primary.Damage = 60
 SWEP.Primary.Automatic = true
 SWEP.Primary.Ammo = "none"
 
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
-SWEP.Secondary.Damage = 80
+SWEP.Secondary.Damage = 1
 SWEP.Secondary.Automatic = true
 SWEP.Secondary.Ammo = "none"
 
@@ -145,7 +145,6 @@ function SWEP:DealDamage()
 			dmginfo:SetDamageForce( self.Owner:GetRight() * -4912 * scale + self.Owner:GetForward() * 9989 * scale )
 		elseif ( anim == "fists_uppercut" ) then
 			dmginfo:SetDamageForce( self.Owner:GetUp() * 5158 * scale + self.Owner:GetForward() * 10012 * scale )
-			dmginfo:SetDamage( math.random( 38, 70 ) )
 		else
 			dmginfo:SetDamageForce( self.Owner:GetForward() * 14910 * scale ) -- Yes we need those specific numbers
 		end
@@ -161,7 +160,7 @@ function SWEP:DealDamage()
 	if ( IsValid( tr.Entity ) ) then
 		local phys = tr.Entity:GetPhysicsObject()
 		if ( IsValid( phys ) ) then
-			phys:ApplyForceOffset( self.Owner:GetAimVector() * 80 * phys:GetMass() * scale, tr.HitPos )
+			phys:ApplyForceOffset( self.Owner:GetAimVector() * 14580 * phys:GetMass() * scale, tr.HitPos )
 		end
 	end
 

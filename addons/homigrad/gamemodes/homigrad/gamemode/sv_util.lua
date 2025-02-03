@@ -1,4 +1,4 @@
-if engine.ActiveGamemode() == "homigrad" then
+if not engine.ActiveGamemode() == "homigrad" then return end
 LimitAutoBalance = 1
 function NeedAutoBalance(addT,addCT)
 	addT = addT or 0
@@ -60,5 +60,4 @@ function PlayersInGame()
     for i,ply in pairs(team.GetPlayers(3)) do table.insert(newTbl,ply) end
 
     return newTbl
-end
 end

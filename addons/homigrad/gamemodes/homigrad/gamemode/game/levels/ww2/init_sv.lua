@@ -53,8 +53,8 @@ function ww2.SpawnSimfphys(list,name,func)
 end
 
 function ww2.SpawnVehicle()
-    ww2.SpawnSimfphys(ReadDataMap("car_red"),"sim_fphys_pwvolga")
-    ww2.SpawnSimfphys(ReadDataMap("car_blue"),"sim_fphys_pwhatchback")
+    ww2.SpawnEnt(ReadDataMap("car_red"),"sim_fphys_pwvolga")
+    ww2.SpawnEnt(ReadDataMap("car_blue"),"lvs_wheeldrive_bmw_r75")
 	
 	ww2.SpawnEnt(ReadDataMap("car_red_btr"),"lvs_wheeldrive_dodwillyjeep") -- later
     ww2.SpawnEnt(ReadDataMap("car_blue_btr"),"lvs_wheeldrive_dodwillyjeep")
@@ -63,8 +63,8 @@ function ww2.SpawnVehicle()
 	ww2.SpawnEnt(ReadDataMap("wac_hc_mi28_havoc"),"wac_hc_mi28_havoc")
 	ww2.SpawnEnt(ReadDataMap("wac_hc_blackhawk_uh60"),"wac_hc_blackhawk_uh60")*/
 
-    ww2.SpawnEnt(ReadDataMap("car_red_tank"),"lvs_wheeldrive_t34_57")
-    ww2.SpawnEnt(ReadDataMap("car_blue_tank"),"lvs_wheeldrive_dodsherman")
+    ww2.SpawnEnt(ReadDataMap("car_red_tank"),"lvs_wheeldrive_t34")
+    ww2.SpawnEnt(ReadDataMap("car_blue_tank"),"lvs_wheeldrive_dodtiger")
 end
 
 function ww2.SpawnEnt(list,name,func)
@@ -78,7 +78,7 @@ end
 
 function ww2.SpawnGred()
 	ww2.SpawnEnt(ReadDataMap("gred_emp_breda35"),"gred_emp_breda35")
-    ww2.SpawnEnt(ReadDataMap("gred_emp_dshk"),"gred_emp_dshk")
+    ww2.SpawnEnt(ReadDataMap("gred_emp_dshk"),"gred_emp_rpk")
     ww2.SpawnEnt(ReadDataMap("gred_ammobox"),"gred_ammobox")
     ww2.SpawnEnt(ReadDataMap("gred_emp_2a65"),"gred_emp_2a65")
 	ww2.SpawnEnt(ReadDataMap("gred_emp_pak40"),"gred_emp_pak40")
@@ -263,3 +263,7 @@ function ww2.PlayerDeath(ply,inf,att)
     return false
 end
 function ww2.ShouldSpawnLoot() return false end
+
+function ww2.NoSelectRandom()
+    return string.find( string.lower( game.GetMap() ), "rp_lone_pine" )
+end

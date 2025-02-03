@@ -4,6 +4,8 @@ if engine.ActiveGamemode() == "homigrad" then
     SWEP.Dealy = 0.25
 
     function SWEP:PrimaryAttack()
+        local owner = self:GetOwner()
+        if owner.LeftLeg == 1 or owner.RightLeg == 1 then return PrintMessage(HUD_PRINTTALK, "С моими ногами всё в порядке.") end
         self:SetNextPrimaryFire(CurTime() + self.Dealy)
         self:SetNextSecondaryFire(CurTime() + self.Dealy)
 

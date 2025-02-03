@@ -353,20 +353,3 @@ net.Receive("lasertgg",function(len,ply)
 	net.WriteBool(boolen)
 	net.Broadcast()
 end)
-
-function GM:IsSpawnpointSuitable( ply, spawnpointent, bMakeSuitable )
-	local Pos = spawnpointent:GetPos()
-	local Blockers = 0
-	local Ents = ents.FindInBox( Pos + Vector( -64, -64, 0 ), Pos + Vector( 64, 64, 0 ) )
-	if (ply:Team() == 1 or ply:Team() == 2 or ply:Team() == 3 or ply:Team() == 1002) then return true end
-
-	for k, v in pairs( Ents ) do
-		if ( IsValid( v ) and v:IsPlayer() and v:Alive() ) then
-			Blockers = Blockers + 1
-		end
-	end
-
-	if ( bMakeSuitable ) then return true end
-	if ( Blockers > 0 ) then return false end
-	return true
-end

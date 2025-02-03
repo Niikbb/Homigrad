@@ -56,9 +56,9 @@ function StartRound()
 		SendSpawnPoint()
 	end
 
-	if roundActiveName ~= roundActiveNameNext then
+	/*if roundActiveName ~= roundActiveNameNext then
 		SetActiveRound(roundActiveNameNext)
-	end
+	end*/
 
 	local players = PlayersInGame()
 	for i,ply in pairs(players) do
