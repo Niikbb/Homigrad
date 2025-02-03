@@ -31,7 +31,6 @@ local function makeT(ply)
 
     if homicide.roundType == 1 or homicide.roundType == 2 then
         local wep = ply:Give("weapon_hk_usps")
-        wep:SetClip1(wep:GetMaxClip1())
         ply:Give("weapon_kabar")
         ply:Give("weapon_hg_t_vxpoison")
         ply:Give("weapon_hidebomb")
@@ -39,7 +38,6 @@ local function makeT(ply)
     elseif homicide.roundType == 3 then
         local wep = ply:Give("weapon_hk_arbalet")
         ply:GiveAmmo(8, "XBowBolt", true) -- slots = bolts.
-        wep:SetClip1(wep:GetMaxClip1())
         ply:Give("weapon_kabar")
         ply:Give("weapon_hg_t_syringepoison")
         ply:Give("weapon_hg_t_vxpoison")
@@ -47,7 +45,6 @@ local function makeT(ply)
     else
         local wep = ply:Give("weapon_deagle")
         ply:GiveAmmo(3*8, ".44 Remington Magnum", true) -- slots = bullets.
-        wep:SetClip1(wep:GetMaxClip1())
         ply:Give("weapon_kabar")
         ply:Give("weapon_hg_t_vxpoison")
         ply:Give("weapon_hidebomb")
@@ -69,20 +66,16 @@ local function makeCT(ply)
     table.insert(homicide.ct,ply)
     if homicide.roundType == 1 then
         local wep = ply:Give("weapon_remington870")
-        wep:SetClip1(wep:GetMaxClip1())
         AddNotificate( ply,"Вы невиновный с крупногабаритным огнестрельным оружием.")
     elseif homicide.roundType == 2 then
         local wep = ply:Give("weapon_beretta")
-        wep:SetClip1(wep:GetMaxClip1())
         AddNotificate( ply,"Вы невиновный со скрытым огнестрельным оружием.")
     elseif homicide.roundType == 3 then
         local wep = ply:Give("weapon_taser")
         ply:Give("weapon_police_bat")
-        wep:SetClip1(wep:GetMaxClip1())
         AddNotificate( ply,"Вы полицейский под прикрытием. Вам выдан шокер и дубинка\nВаша задача: связать преступника.")
     elseif homicide.roundType == 4 then
         local wep = ply:Give("weapon_deagle")
-        wep:SetClip1(wep:GetMaxClip1())
         AddNotificate( ply,"Вы невиновный ковбой с револьвером в кобуре.")
     else
     end

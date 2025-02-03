@@ -29,8 +29,6 @@ end
     ["gun-free-zone"] = 3
 }--]]
 
-local homicide_setmode = CreateConVar("homicide_setmode","",FCVAR_LUA_SERVER,"Select a round mode (1 - State of Emergency, 2 - Casual, 3 - Unarmed Zone, 4 - Wild West)")
-
 function homicide.IsMapBig()
     local mins,maxs = game.GetWorld():GetModelBounds()
     local skybox = 0
@@ -46,19 +44,20 @@ function homicide.IsMapBig()
     --Vector(-10000, -2000, -2500) Vector(5000, 10000, 800)
 end
 
+local homicide_setmode = CreateConVar("homicide_setmode", "9999", FCVAR_LUA_SERVER, "Force homicide round mode (1 - State of Emergency, 2 - Casual, 3 - Unarmed Zone, 4 - Wild West)")
+
 function homicide.StartRound(data)
     team.SetColor(1,homicide.red[2])
-
     game.CleanUpMap(false)
 
     if SERVER then
-        local roundType = homicide_setmode:GetInt() == math.random(1,4) or (homicide.IsMapBig() and 1) or false
+        local roundType = homicide_setmode:GetInt()
         if roundType < 1 or roundType > 4 then
-            homicide.roundType = math.random(1,4)
+            roundType = math.random(1, 4)
         end
         homicide.roundType = roundType
         net.Start("roundType")
-        net.WriteInt(homicide.roundType,4)
+        net.WriteInt(homicide.roundType, 4)
         net.Broadcast()
     end
 
