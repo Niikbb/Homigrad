@@ -145,7 +145,6 @@ function homicide.StartRoundSV()
     roundTimeLoot = 5
 
     for i,ply in pairs(team.GetPlayers(2)) do ply:SetTeam(1) end
-    --for i,ply in pairs(team.GetPlayers(2)) do ply:SetTeam(1) end
 
     homicide.ct = {}
     homicide.t = {}
@@ -172,6 +171,13 @@ function homicide.StartRoundSV()
             makeCT(ply)
         end
     end)
+    
+    if homicide.roundType == 4 then -- actual fix by Ce1azz
+        local players = PlayersInGame()
+        for _, ply in ipairs(players) do
+            ply:Give("weapon_deagle")
+        end
+    end
 
     local players = PlayersInGame()
     local count = math.max(math.random(1,math.ceil(#players / 16)),1) - countT

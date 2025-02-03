@@ -354,7 +354,10 @@ local weps = {
 ["weapon_vector"] = true,
 ["weapon_doublebarrel"] = true,
 ["weapon_doublebarrel_dulo"] = true,
-["weapon_awp"] = true,
+["weapon_csmg40"] = true,
+["weapon_cppsh41"] = true,
+["weapon_ck98"] = true,
+["weapon_cmosin"] = true,
 }
 
 local ScopeLerp = 0
@@ -757,6 +760,26 @@ function CalcView(ply,vec,ang,fov,znear,zfar)
 			--Vector(5.3,4,0.78)
 			vecWep = hand.Pos + hand.Ang:Up() * 2.4 - hand.Ang:Forward() * 8 + hand.Ang:Right() * 0.85
 			angWep = hand.Ang + Angle(-24,0,0)
+		end
+		if weaponClass == "weapon_csmg40" then
+			--Vector(3.85,10,1.45)
+			vecWep = hand.Pos + hand.Ang:Up() * 5.3 - hand.Ang:Forward() * 8 + hand.Ang:Right() * 0.25
+			angWep = hand.Ang + Angle(5,10,0)
+		end
+		if weaponClass == "weapon_cppsh41" then
+			--Vector(3.85,10,1.45)
+			vecWep = hand.Pos + hand.Ang:Up() * 4 - hand.Ang:Forward() * 8 + hand.Ang:Right() * 0.45
+			angWep = hand.Ang + Angle(5,10,0)
+		end
+		if weaponClass == "weapon_ck98" then
+			--Vector(5.1,5,0.76)
+			vecWep = hand.Pos + hand.Ang:Up() * 3.5 - hand.Ang:Forward() * 6 + hand.Ang:Right() * 1
+			angWep = hand.Ang + Angle(-8,5,0)
+		end
+		if weaponClass == "weapon_cmosin" then
+			--Vector(5.1,5,0.76)
+			vecWep = hand.Pos + hand.Ang:Up() * 5.5 - hand.Ang:Forward() * 8.5 + hand.Ang:Right() * 0.35
+			angWep = hand.Ang + Angle(-8,5,0)
 		end
 	end
 

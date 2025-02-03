@@ -28,6 +28,14 @@ surface.CreateFont("HomigradFontSmall", {
 	outline = false
 })
 
+surface.CreateFont("TabLarge", {
+	font = "Trebuchet MS",
+    size = 16,
+    weight = 700,
+    antialias = true,
+    shadow = false,
+})
+
 net.Receive("round_active", function(len)
 	roundActive = net.ReadBool()
 	roundTimeStart = net.ReadFloat()
