@@ -120,7 +120,7 @@ net.Receive("play_snd",function(len)
 	--PrintTable(g_station)
 end)
 local stationThink, CurTime = CurTime(), CurTime
-hook.Add("Think","station_think",function()
+/*hook.Add("Think","station_think",function()
 	if stationThink < CurTime() then
 		stationThink = stationThink + 0.25
 		for i,tabl in pairs(g_station) do
@@ -129,4 +129,4 @@ hook.Add("Think","station_think",function()
 			end
 		end
 	end
-end)
+end)*/

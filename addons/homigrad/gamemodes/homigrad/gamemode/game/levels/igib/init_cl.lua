@@ -8,12 +8,11 @@ function igib.HUDPaint_RoundLeft(white)
     local spawn = GetGlobalInt("igib_respawntime", CurTime())
     local time = math.Round(spawn + 15 - CurTime(),0)
     local timerr = string.FormattedTime( time, "%02i:%02i" )
-
-	local startRound = roundTimeStart + 2 - CurTime()
+	local startRound = roundTimeStart + 6 - CurTime()
     if startRound > 0 and lply:Alive() then
         if playsound then
             playsound = false
-            surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
+            surface.PlaySound("homigrad/igib/egor_letov_ubivat.mp3")
         end
         lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),0.5,0.5)
 
