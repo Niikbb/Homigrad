@@ -50,8 +50,12 @@ SWEP.DrawCrosshair			= false
 SWEP.ViewModel				= "models/weapons/w_grub_mosin.mdl"
 SWEP.WorldModel				= "models/weapons/w_grub_mosin.mdl"
 
+function SWEP:ApplyEyeSpray()
+    self.eyeSpray = self.eyeSpray - Angle(1.5,math.Rand(-0.2,0.2),0)
+end
+
 SWEP.vbwPos = Vector(5,-6,-6)
 
-SWEP.addAng = Angle(-0.1,0,0)
-SWEP.addPos = Vector(0,0,0)
+SWEP.addAng = Angle(0,0,0)
+SWEP.addPos = Vector(0,1.5,-.3)
 end
