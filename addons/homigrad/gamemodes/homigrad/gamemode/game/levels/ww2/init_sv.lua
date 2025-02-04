@@ -40,11 +40,6 @@ function ww2.SelectRandomPlayers(list,div,func)
 	end
 end
 
-function ww2.GiveMimomet(ply)
-    ply:Give("weapon_gredmimomet")
-    ply:Give("weapon_gredammo")
-end
-
 function ww2.SpawnSimfphys(list,name,func)
 	for i,point in pairs(list) do
 		local ent = simfphys.SpawnVehicleSimple(name,point[1],point[2])
@@ -55,14 +50,8 @@ end
 function ww2.SpawnVehicle()
     ww2.SpawnEnt(ReadDataMap("car_red"),"sim_fphys_pwvolga")
     ww2.SpawnEnt(ReadDataMap("car_blue"),"lvs_wheeldrive_bmw_r75")
-	
-	ww2.SpawnEnt(ReadDataMap("car_red_btr"),"lvs_wheeldrive_dodwillyjeep") -- later
+	ww2.SpawnEnt(ReadDataMap("car_red_btr"),"lvs_wheeldrive_dodwillyjeep")
     ww2.SpawnEnt(ReadDataMap("car_blue_btr"),"lvs_wheeldrive_dodwillyjeep")
-	/*ww2.SpawnEnt(ReadDataMap("wac_hc_ah1z_viper"),"wac_hc_ah1z_viper")
-	ww2.SpawnEnt(ReadDataMap("wac_hc_littlebird_ah6"),"wac_hc_littlebird_ah6")
-	ww2.SpawnEnt(ReadDataMap("wac_hc_mi28_havoc"),"wac_hc_mi28_havoc")
-	ww2.SpawnEnt(ReadDataMap("wac_hc_blackhawk_uh60"),"wac_hc_blackhawk_uh60")*/
-
     ww2.SpawnEnt(ReadDataMap("car_red_tank"),"lvs_wheeldrive_t34")
     ww2.SpawnEnt(ReadDataMap("car_blue_tank"),"lvs_wheeldrive_dodtiger")
 end
@@ -95,17 +84,10 @@ function ww2.StartRoundSV()
 	OpposingAllTeam()
 	AutoBalanceTwoTeam()
 
-	--local spawnsT,spawnsCT = ww2.SpawnsTwoCommand()
-	--ww2.SpawnCommand(team.GetPlayers(1),spawnsT)
-	--ww2.SpawnCommand(team.GetPlayers(2),spawnsCT)
-
 	ww2.SpawnVehicle()
 	ww2.SpawnGred()
 
 	ww2.oi = false
-
-    ww2.SelectRandomPlayers(team.GetPlayers(1),2,ww2.GiveMimomet)
-    ww2.SelectRandomPlayers(team.GetPlayers(2),2,ww2.GiveMimomet)
 end
 
 function ww2.Think()
@@ -188,7 +170,7 @@ function ww2.PointsThink()
         end
 
         if v.CaptureTeam and v.CaptureTeam != 0 then
-            ww2.WinPoints[v.CaptureTeam] = ww2.WinPoints[v.CaptureTeam] + 7.5 / #SpawnPointsList.controlpoint[3]
+            ww2.WinPoints[v.CaptureTeam] = ww2.WinPoints[v.CaptureTeam] + 3 / #SpawnPointsList.controlpoint[3]
         end
 
         SetGlobalInt(i .. "PointProgress", v.CaptureProgress)
@@ -206,20 +188,27 @@ function ww2.RoundEndCheck()
             EndRound(i)
         end
     end
-    if roundTimeStart + roundTime < CurTime() then EndRound() end
+    if roundTimeStart + roundTime < CurTime() then 
+        EndRound() 
+    end
 end
 
-function ww2.EndRound(winner)
-	print("End round, win '" .. tostring(winner) .. "'")
-
-	for _, ply in ipairs(player.GetAll()) do
-		if !winner then ply:ChatPrint("Победила дружба") continue end
-		if winner == ply:Team() then ply:ChatPrint("Победа") end
-		if winner ~= ply:Team() then ply:ChatPrint("Поражение") end
+function ww2.EndRoundMessage(winner,textNobody)
+	local tbl = TableRound()
+	if winner == 1 and tbl.red[1] then
+	PrintMessage(3,"Красная Армия отстояла свою территорию.")
+	elseif winner == 2 and tbl.blue[1] then
+	PrintMessage(3,"Вермахт успешно окопался на данных территориях.")
+	else
+	PrintMessage(3,"Вермахт уплыл. Красноармейцы засели в окопах.")
 	end
+end
 
+function ww2.EndRound(winner) 
+    print("End round, win '" .. tostring(winner) .. "'")
+    ww2.EndRoundMessage(winner)
     timer.Remove("ww2_NewWave")
-    timer.Remove("ww2_ThinkAboutPoints")
+    timer.Remove("ww2_ThinkAboutPoints") 
 end
 
 function ww2.PlayerInitialSpawn(ply) ply:SetTeam(math.random(1,2)) end
@@ -230,40 +219,39 @@ function ww2.PlayerSpawn(ply,teamID)
 	ply:SetModel(teamTbl.models[math.random(#teamTbl.models)])
 
 	if teamID == 1 then
+		ply:SetBodygroup(0,math.random(1,4))
+	end
+	if teamID == 2 then
+        ply:SetBodygroup(0,3)
 		ply:SetBodygroup(1,math.random(1,6))
-		ply:SetBodygroup(2,math.random(1,3))
+        ply:SetBodygroup(2,math.random(1,2))
+        ply:SetBodygroup(3,math.random(1,2))
+        ply:SetBodygroup(4,math.random(1,2))
+        ply:SetBodygroup(5,math.random(1,2))
+        ply:SetBodygroup(6,math.random(1,2))
+        ply:SetBodygroup(7,math.random(1,2))
+        ply:SetBodygroup(8,math.random(1,2))
+        ply:SetBodygroup(9,math.random(1,4))
 	end
-		if teamID == 2 then
-		ply:SetBodygroup(1,math.random(1,2))
-	end
-
     ply:SetPlayerColor(color:ToVector())
-
-	for i,weapon in pairs(teamTbl.weapons) do ply:Give(weapon) end
-
+	for i,weapon in pairs(teamTbl.weapons) do 
+        ply:Give(weapon) 
+    end
 	tdm.GiveSwep(ply,teamTbl.main_weapon)
-	--tdm.GiveSwep(ply,teamTbl.secondary_weapon)
-	
 	JMod.EZ_Equip_Armor(ply,"Medium-Helmet",color)
-	--local r = math.random(1,2)
-	--JMod.EZ_Equip_Armor(ply,(r == 1 and "Medium-Vest") or (r == 2 and "Light-Vest"),color)
 
 	if roundStarter then
-		ply:Give("weapon_gredmimomet")
-		ply:Give("weapon_gredammo")
 		ply.allowFlashlights = true
 	end
 end
 
 function ww2.PlayerCanJoinTeam(ply,teamID)
-    if teamID == 3 then ply:ChatPrint("Иди нахуй") return false end
+    if teamID == 3 then ply:ChatPrint("Не в этом режиме.") return false end
 end
 function ww2.PlayerDeath(ply,inf,att)
     ww2.ragdolls[ply:GetNWEntity("Ragdoll")] = true
     return false
 end
-function ww2.ShouldSpawnLoot() return false end
 
-function ww2.NoSelectRandom()
-    return string.find( string.lower( game.GetMap() ), "rp_lone_pine" )
-end
+function ww2.ShouldSpawnLoot() return false end
+function ww2.NoSelectRandom() return false end

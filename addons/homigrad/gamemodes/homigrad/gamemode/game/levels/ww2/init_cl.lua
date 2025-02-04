@@ -16,7 +16,7 @@ hook.Add("player_activate","Bamhut_SendData",function(data)
         ww2.WinPoints[i] = GetGlobalInt("ww2_Winpoints" .. i)
     end
 
-    timer.Create("ww2_ThinkAboutPoints", 1, 0, function() --подумай о точках... засунул в таймер для оптимизации, ибо там каждый тик игроки в сфере подглядываются, ну и в целом для удобства
+    timer.Create("ww2_ThinkAboutPoints", 1, 0, function()
         ww2.PointsThink()
     end)
 
@@ -38,9 +38,7 @@ function ww2.PointsThink()
     end
 end
 
-function ww2.StartRoundCL()
-    playsound = true
-end
+function ww2.StartRoundCL() end
 
 function ww2.HUDPaint_RoundLeft(white)
     local lply = LocalPlayer()
@@ -48,11 +46,7 @@ function ww2.HUDPaint_RoundLeft(white)
 
 	local startRound = roundTimeStart + 7 - CurTime()
     if startRound > 0 and lply:Alive() then
-        if playsound then
-            playsound = false
-            surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
-        end
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),0.5,0.5)
+        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),0.5,0.5)
         draw.DrawText( "Ваша команда " .. name, "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( color.r,color.g,color.b,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
         draw.DrawText( "Вторая мировая", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
         draw.DrawText( "Нейтрализуйте вражескую команду... ", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
