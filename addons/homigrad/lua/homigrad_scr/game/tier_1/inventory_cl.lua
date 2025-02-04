@@ -11,10 +11,6 @@ local blackListedAmmo = {
 
 Gunshuy = {
 	"weapon_glock18",
-	"weapon_csmg40",
-	"weapon_cppsh41",
-	"weapon_ck98",
-	"weapon_cmosin",
 	"weapon_p220",
 	"weapon_mp5",
 	"weapon_ar15",
@@ -60,7 +56,11 @@ Gunshuy = {
 	"weapon_knife",
 	"weapon_pipe",
 	"weapon_sar2",
-	"weapon_civil_famas"
+	"weapon_civil_famas",
+	"weapon_csmg40",
+	"weapon_cppsh41",
+	"weapon_ck98",
+	"weapon_cmosin"
 }
 
 local AmmoTypes = {
