@@ -1,5 +1,5 @@
 ### Установка и Настройка
-- Скачай сборку: https://github.com/Niikbb/Homigrad/archive/refs/heads/main.zip
+- Скачай сборку по ссылке: [Нажимай на меня](https://github.com/Niikbb/Homigrad/archive/refs/heads/testing.zip)
 - Перетащи все папки в GarrysMod/garrysmod и запускай игру.
 - Подпишись на коллекцию аддонов: https://s.team/sf/3251006969
 - Ожидайте пока всё установится. Без контента работать не будет. Даже не надейтесь.
