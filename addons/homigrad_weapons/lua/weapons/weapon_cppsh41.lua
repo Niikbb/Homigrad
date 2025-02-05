@@ -11,14 +11,14 @@ SWEP.AdminOnly 				= false
 
 ------------------------------------------
 
-SWEP.Primary.ClipSize		= 35
-SWEP.Primary.DefaultClip	= 35
+SWEP.Primary.ClipSize		= 64
+SWEP.Primary.DefaultClip	= 64
 SWEP.Primary.Automatic		= true
-SWEP.Primary.Ammo			= "9х19 mm Parabellum"
+SWEP.Primary.Ammo			= "7.62x39 mm"
 SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 12
 SWEP.Primary.Spread = 5
-SWEP.Primary.Sound = "pwb2/weapons/mac11/mac10-1.wav"
+SWEP.Primary.Sound = "grub_mp40/smg_mp40_fire_single_0716_m.wav"
 --SWEP.Primary.SoundFar = "weapons/ump45/ump45_dist.wav"
 SWEP.Primary.Force = 320/3
 SWEP.Primary.Recoil = 10
