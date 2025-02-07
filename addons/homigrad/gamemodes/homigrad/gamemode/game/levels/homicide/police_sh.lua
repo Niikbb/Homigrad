@@ -1,21 +1,17 @@
 local CLASS = player.RegClass("police")
 
-CLASS.weapons = {"weapon_radio","med_band_big","medkit","painkiller","weapon_handcuffs","weapon_taser","weapon_hg_flashbang","weapon_police_bat"}
-CLASS.secondary_weapon = {"weapon_glock"}
+CLASS.weapons = {"weapon_radio","med_band_big","medkit","weapon_taser","weapon_hg_flashbang","weapon_police_bat","weapon_glock","weapon_hands"}
 CLASS.models = {}
 
 for i = 1,6 do
 	CLASS.models[#CLASS.models + 1] = "models/monolithservers/mpd/female_0"..i..".mdl"
 end
-
 for i = 1,6 do
 	CLASS.models[#CLASS.models + 1] = "models/monolithservers/mpd/female_0"..i.."_2.mdl"
 end
-
 for i = 1,6 do
 	CLASS.models[#CLASS.models + 1] = "models/monolithservers/mpd/male_0"..i..".mdl"
 end
-
 for i = 1,6 do
 	CLASS.models[#CLASS.models + 1] = "models/monolithservers/mpd/male_0"..i.."_2.mdl"
 end
@@ -25,18 +21,8 @@ CLASS.color = Color(75,75,75)
 function CLASS:Off()
 	if CLIENT then
 		CLASS.CloseMenu()
-
 		return
 	end
-
-	/*local guilt = (self.contrGuilt or 0)
-
-	if guilt >= 40 then
-		self.Guilt = self.Guilt + guilt
-
-		GuiltCheck(ply)
-	end*/
-
 	self.isContr = nil
 end
 
@@ -62,29 +48,14 @@ function CLASS:On()
 	self:SetModel(CLASS.models[math.random(#CLASS.models)])
 	self:SetPlayerColor(color:ToVector())
 
-	self:Give("weapon_hands")
-
 	for i,weapon in pairs(CLASS.weapons or empty) do self:Give(weapon) end
-
-	tdm.GiveSwep(self,CLASS.secondary_weapon)
-
 	JMod.EZ_Equip_Armor(self,"Light-Vest",color)
 
 	self.isContr = true
-
-	local r = math.random(1,3)
-	if r == 1 then
-		--EmitSound(self,"radio/moveout.wav")
-	elseif r == 2 then
-		--EmitSound(self,"radio/com_go.wav")
-	elseif r == 3 then
-		--EmitSound(self,"radio/go.wav")
-	end
 end
 
 function CLASS:EndRound(winner)
 	if roundActiveName == "homicide" and winner == 2 then
-		--EmitSound(self,"radio/ctwin.wav")
 	end
 end
 
@@ -266,12 +237,6 @@ if SERVER then
 		else
 			EmitSound(ply,sound)
 		end
-
-		--[[for i,ply in pairs(getList(ply)) do
-			net.Start("homicide contr")
-			net.WriteString(sound)
-			net.Send()
-		end]]--
 	end)
 
 	return
