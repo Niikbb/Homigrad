@@ -161,8 +161,7 @@ local prekols = {
 	"Get a job",
 	"Get a life",
 	"возможно, команда hg_disable_stoprenderunfocus 1 выключит этот прикол...",
-	"ураааа, ты свернулся... Потрогай траву, играть вечность плохо.",
-	"kys"
+	"ураааа, ты свернулся... Потрогай траву, играть вечность плохо."
 }
 
 local developer = GetConVar("developer")
@@ -357,6 +356,7 @@ local weps = {
 ["weapon_doublebarrel_dulo"] = true,
 ["weapon_csmg40"] = true,
 ["weapon_cppsh41"] = true,
+["weapon_igib"] = true,
 ["weapon_ck98"] = true,
 ["weapon_cmosin"] = true,
 }
@@ -782,6 +782,10 @@ function CalcView(ply,vec,ang,fov,znear,zfar)
 			vecWep = hand.Pos + hand.Ang:Up() * 5.5 - hand.Ang:Forward() * 8.5 + hand.Ang:Right() * 0.35
 			angWep = hand.Ang + Angle(-8,5,0)
 		end
+		if weaponClass == "weapon_igib" then -- for weps with no ironsights
+			vecWep = hand.Pos
+			angWep = hand.Ang
+		end
 	end
 
 
@@ -1069,6 +1073,7 @@ end
 
 hook.Add("RenderScreenspaceEffects","BloomEffect-homigrad",function()
 	if GetConVar("hg_bodycam"):GetInt() == 1 and LocalPlayer():Alive() then
+		--if GetConVar("hg_bodycam"):GetInt() == 1 then
 		local splitTbl = string.Split(util.DateStamp()," ")
 		local date,time = splitTbl[1],splitTbl[2]
 		time = string.Replace(time,"-",":")

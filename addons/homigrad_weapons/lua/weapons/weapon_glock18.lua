@@ -3,7 +3,7 @@ SWEP.Base = 'salat_base' -- base
 
 SWEP.PrintName 				= "Five-Seven"
 SWEP.Author 				= "Homigrad"
-SWEP.Instructions			= "Бронебойный пистолет. Пробьёт даже дыру в твоей жопе."
+SWEP.Instructions			= "Бронебойный пистолет. Пробьёт даже дыру в твоей жопе.\nСтреляет калибром 5.7×28 mm"
 SWEP.Category 				= "Оружие"
 SWEP.WepSelectIcon			= "entities/weapon_insurgencymakarov.png"
 

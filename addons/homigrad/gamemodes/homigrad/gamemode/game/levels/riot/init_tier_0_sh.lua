@@ -3,8 +3,8 @@ riot = {}
 riot.Name = "RIOT"
 
 riot.red = {"Полиция",Color(55,55,150),
-	weapons = {"weapon_hands","weapon_police_bat","med_band_big","med_band_small","weapon_taser","weapon_handcuffs","weapon_radio"},
-	main_weapon = {"weapon_per4ik","medkit","painkiller","weapon_hg_flashbang","weapon_per4ik","medkit","painkiller","weapon_beanbag"},
+	weapons = {"weapon_hands","weapon_police_bat","med_band_big","med_band_small","weapon_handcuffs","weapon_radio"},
+	main_weapon = {"medkit","weapon_hg_flashbang","weapon_per4ik"},
 	secondary_weapon = {""},
 	models = {"models/monolithservers/mpd/male_04.mdl","models/monolithservers/mpd/male_03.mdl","models/monolithservers/mpd/male_05.mdl","models/monolithservers/mpd/male_02.mdl"}
 }
@@ -12,7 +12,7 @@ riot.red = {"Полиция",Color(55,55,150),
 
 riot.blue = {"Бунтующие",Color(75,45,45),
 	weapons = {"weapon_hands","med_band_small"},
-	main_weapon = {"weapon_molotok","med_band_big","med_band_small","weapon_hg_molotov","weapon_per4ik","weapon_molotok","med_band_big","med_band_small","weapon_per4ik"},
+	main_weapon = {"weapon_molotok","weapon_hg_molotov","weapon_molotok","med_band_big","med_band_small"},
 	secondary_weapon = {"weapon_hg_metalbat", "weapon_bat","weapon_pipe"},
 	models = {"models/player/Group01/male_04.mdl","models/player/Group01/male_01.mdl","models/player/Group01/male_02.mdl","models/player/Group01/male_08.mdl"}
 }

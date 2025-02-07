@@ -19,7 +19,7 @@ function dm.StartRoundSV()
 
     roundTimeRespawn = CurTime() + 15
 
-    roundDmType = math.random(1,4)
+    roundDmType = math.random(1,1)
 
     return {roundTimeStart,roundTime}
 end
@@ -60,38 +60,36 @@ function dm.PlayerSpawn(ply,teamID)
 
     ply:Give("weapon_hands")
     if roundDmType == 1 then
-        local r = math.random(1,8)
+        local r = math.random(1,1)
         ply:Give((r==1 and "weapon_mp7") or (r==2 and "weapon_ak74u") or (r==3 and "weapon_akm") or (r==4 and "weapon_rpgg" and "weapon_ump") or (r==5 and "weapon_m4a1") or (r==6 and "weapon_mk18") or (r==7 and "weapon_m4a1") or (r==8 and "weapon_galil"))
         ply:Give("weapon_kabar")
         ply:Give("medkit")
         ply:Give("med_band_big")
-        ply:SetAmmo( 90, (r==1 and 46) or (r==2 and 44) or (r==3 and 47) or (r>=5 and 45))
+        ply:SetAmmo( 90, (r==1 and "4.6×30 mm") or (r==2 and "5.45x39 mm") or (r==3 and "7.62x39 mm") or (r>=5 and "5.56x45 mm"))
     elseif roundDmType == 2 then
         local r = math.random(1,4)
-        local p = math.random(1,4)
+        --local p = math.random(1,4)
         ply:Give((r==1 and "weapon_spas12") or (r==2 and "weapon_xm1014") or (r==3 and "weapon_remington870") or (r==4 and "weapon_minu14"))
-        ply:Give((p==1 and "weapon_ump") or p==2 and ("weapon_fiveseven") or p==3 and ("weapon_glock") or p==4 and ("weapon_glock18"))
+        --ply:Give((p==1 and "weapon_ump") or p==2 and ("weapon_fiveseven") or p==3 and ("weapon_glock") or p==4 and ("weapon_glock18"))
         ply:Give("weapon_kabar")
         ply:Give("medkit")
         ply:Give("med_band_big")
         ply:Give("weapon_hg_rgd5")
-        ply:SetAmmo( 90, (p<=3 and 49) or (p==4 and "5.7×28 mm"))
-        ply:SetAmmo( 90, 41 )
+        ply:SetAmmo( 90, "12/70 gauge" )
     elseif roundDmType == 3 then
-        local r = math.random(1,5)
         ply:Give("weapon_deagle")
         ply:Give("weapon_kabar")
         ply:Give("medkit")
         ply:Give("med_band_big")
         ply:SetAmmo( 90,("weapon_deagle" and ".44 Remington Magnum"))
         elseif roundDmType == 4 then
-        local r = math.random(1,3)
-        ply:Give((r==1 and "weapon_hk_usp") or (r==2 and "weapon_fiveseven") or (r==3 and "weapon_beretta"))
+        local r = math.random(1,6)
+        ply:Give((r==1 and "weapon_fiveseven") or (r==2 and "weapon_hk_usp") or (r==3 and "weapon_beretta") or (r==4 and "weapon_glock18") or (r==5 and "weapon_p220") or (r==6 and "weapon_glock"))
         ply:Give("weapon_kabar")
         ply:Give("med_band_big")
         ply:Give("weapon_hg_rgd5")
         ply:Give("weapon_hidebomb")
-        ply:SetAmmo( 50, 49 )
+        ply:SetAmmo( 90, (r==1 and "5.7×28 mm") or (r>=2 and "9х19 mm Parabellum"))
         else
         local r = math.random(1,3)
         ply:Give((r==1 and "weapon_hk_usp") or (r==2 and "weapon_fiveseven") or (r==3 and "weapon_beretta"))
@@ -99,7 +97,7 @@ function dm.PlayerSpawn(ply,teamID)
         ply:Give("med_band_big")
         ply:Give("weapon_hg_rgd5")
         ply:Give("weapon_hidebomb")
-        ply:SetAmmo( 50, 49 )
+        ply:SetAmmo( 50, "9х19 mm Parabellum" )
     end
     ply:Give("weapon_radio")
 

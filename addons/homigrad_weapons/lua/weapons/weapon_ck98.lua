@@ -1,4 +1,4 @@
-if not engine.ActiveGamemode() == "homigrad" then return end
+if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = 'salat_base'
 
 -- заготовка для поддержки не только Русского, но и других языков вроде Английского. 🤔😁🤔
@@ -61,4 +61,5 @@ SWEP.addPos = Vector(0,3,1.2)
 
 function SWEP:ApplyEyeSpray()
     self.eyeSpray = self.eyeSpray - Angle(1.25,math.Rand(-0.2,0.2),0)
+end
 end

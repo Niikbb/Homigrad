@@ -46,7 +46,7 @@ function ww2.HUDPaint_RoundLeft(white)
 
 	local startRound = roundTimeStart + 7 - CurTime()
     if startRound > 0 and lply:Alive() then
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),0.5,0.5)
+        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
         draw.DrawText( "Ваша команда " .. name, "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( color.r,color.g,color.b,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
         draw.DrawText( "Вторая мировая", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
         draw.DrawText( "Нейтрализуйте вражескую команду... ", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )

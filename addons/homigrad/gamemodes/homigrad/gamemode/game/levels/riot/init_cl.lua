@@ -13,8 +13,9 @@ function riot.HUDPaint_RoundLeft(white)
 	local startRound = roundTimeStart + 5 - CurTime()
     if startRound > 0 and lply:Alive() then
         if playsound then
+            surface.PlaySound("gbombs_5/tvirus_infection/infection_sign.mp3")
+            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
         end
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),0.5,0.5)
         draw.DrawText( "Ваша команда " .. name, "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( color.r,color.g,color.b,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
         draw.DrawText( "RIOT", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,155,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
         if name == "Полиция" then

@@ -18,10 +18,10 @@ if engine.ActiveGamemode() == "homigrad" then
 	
 	Vectors = {
 	["weapon_glock18"]=Vector(4,-1,2.5),
-	["weapon_csmg40"]=Vector(-14, -3,-2),
-	["weapon_cppsh41"]=Vector(13,-2,2),
+	["weapon_csmg40"]=Vector(-3,-1,0),
+	["weapon_cppsh41"]=Vector(13,-1,2),
 	["weapon_ck98"]=Vector(13,-2,2),
-	["weapon_cmosin"]=Vector(13,-2,2),
+	["weapon_cmosin"]=Vector(16,-2,2),
 	["weapon_p220"]=Vector(13.5,-0.5,4),
 	["weapon_mp5"]=Vector(0.5,-1,0),
 	["weapon_ar15"]=Vector(-3,-1,0),
@@ -63,10 +63,10 @@ if engine.ActiveGamemode() == "homigrad" then
 	
 	Vectors2 = {
 	["weapon_mp5"]=Vector(11,-2	,-2.5),
-	["weapon_csmg40"]=Vector(-32,-4 , -5),
-	["weapon_cppsh41"]=Vector(12,-4,-5),
+	["weapon_csmg40"]=Vector(9,-2,-3),
+	["weapon_cppsh41"]=Vector(10,-3,-5),
 	["weapon_ck98"]=Vector(12,-4,-5),
-	["weapon_cmosin"]=Vector(12,-4,-5),
+	["weapon_cmosin"]=Vector(12,-2,2),
 	["weapon_ar15"]=Vector(9,-2,-3),
 	["weapon_act3_m249"]=Vector(10,-1,-6),
 	["weapon_ak74"]=Vector(12,-3,-2),
@@ -155,7 +155,7 @@ if engine.ActiveGamemode() == "homigrad" then
 	
 				ply.wep:SetAngles(rag:GetPhysicsObjectNum(rag:TranslateBoneToPhysBone(rag:LookupBone( "ValveBiped.Bip01_R_Hand" ))):GetAngles()-Angle(0,0,180))
 	
-				if ply.curweapon == "weapon_sar2" then
+				if ply.curweapon == "weapon_sar2" or ply.curweapon == "weapon_cmosin" then
 					local ang = ply.wep:GetAngles()
 					ang:RotateAroundAxis(ang:Up(),180)
 					ang:RotateAroundAxis(ang:Right(),10)
@@ -164,13 +164,11 @@ if engine.ActiveGamemode() == "homigrad" then
 					local ang = ply.wep:GetAngles()
 					ang:RotateAroundAxis(ang:Forward(),90)
 					ply.wep:SetAngles(ang)
-				elseif ply.curweapon == "weapon_cmosin" then
-					local ang = ply.wep:GetAngles()
-					ang:RotateAroundAxis(ang:Up(),180)
-					ang:RotateAroundAxis(ang:Right(),0)
-					ply.wep:SetAngles(ang)
+				elseif ply.curweapon == "weapon_csmg40" then
+					ply.wep:SetModel("models/pwb2/weapons/w_ace23.mdl")
+				elseif ply.curweapon == "weapon_cppsh41" then
+					ply.wep:SetModel("models/pwb/weapons/w_aks74u.mdl")
 				end
-	
 				--[[local hand = rag:GetBoneMatrix(rag:LookupBone("ValveBiped.Bip01_R_Hand"))
 				local handPos,handAng = hand:GetTranslation(),hand:GetAngles()
 	

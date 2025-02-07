@@ -128,8 +128,8 @@ function homicide.HUDPaint_RoundLeft(white2)
         if playsound then
             playsound = false
             surface.PlaySound(roundSound[homicide.roundType])
+            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
         end
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),3,0.5)
 
 
         --[[surface.SetFont("HomigradFontBig")

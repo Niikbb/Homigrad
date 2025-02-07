@@ -53,11 +53,23 @@ function riot.PlayerSpawn(ply,teamID)
 		JMod.EZ_Equip_Armor(ply,"Riot-Helmet",Color(65,65,65))
 		local r = math.random(1,2)
 		JMod.EZ_Equip_Armor(ply,(r == 1 and "Medium-Light-Vest") or (r == 2 and "Light-Vest"),Color(65,65,65))
+		if math.random(1,3) == 3 then ply:Give("weapon_taser") end
+		if #player.GetAll() >= 8 and math.random(1,5) == 5 then ply:Give("weapon_beanbag") end
 	else
 		local r = math.random(1,10)
 		if r == 10 then
 			JMod.EZ_Equip_Armor(ply,"Metal Pot",Color(255,255,255))
 		end
+	end
+
+	if teamID == 1 then
+		if math.random(1,3) == 3 then ply:Give("adrinaline") end
+		if math.random(1,3) == 3 then ply:Give("morphine") end
+		if math.random(1,4) == 4 then ply:Give("weapon_hg_hl2") end
+
+		JMod.EZ_Equip_Armor(ply,"Medium-Helmet",color)
+		local r = math.random(1,2)
+		JMod.EZ_Equip_Armor(ply,"Light-Vest",Color(0,0,0,0))
 	end
 
 	if roundStarter then
@@ -69,13 +81,13 @@ function riot.PlayerCanJoinTeam(ply,teamID)
     if teamID == 3 then ply:ChatPrint("Иди нахуй") return false end
 end
 
-local common = {"food_lays","weapon_pipe","weapon_bat","medkit","food_monster","food_fishcan","food_spongebob_home"}
-local uncommon = {"weapon_molotok","painkiller"}
+local common = {"food_lays","weapon_pipe","weapon_bat","food_fishcan","food_spongebob_home","med_band_big","med_band_small","shina"}
+local uncommon = {"weapon_hg_sleagehammer","weapon_hg_fireaxe","medkit","food_monster","weapon_hg_smokenade"}
 
 function riot.ShouldSpawnLoot()
 	local chance = math.random(100)
 
-	if chance < 30 then
+	if chance < 25 then
 		return true,uncommon[math.random(#uncommon)]
 	elseif chance < 70 then
 		return true,common[math.random(#common)]

@@ -18,17 +18,16 @@ tdm.models = models
 tdm.red = {
 	"Красные",Color(255,75,75),
 	weapons = {"weapon_binokle","weapon_radio","weapon_gurkha","weapon_hands","med_band_big","med_band_small","medkit","painkiller"},
-	main_weapon = {"weapon_ak74u","weapon_akm","weapon_remington870","weapon_galil","weapon_rpk","weapon_galilsar","weapon_mp40"},
-	secondary_weapon = {"weapon_p220","weapon_deagle","weapon_glock"},
+	main_weapon = {"weapon_ak74u","weapon_m1a1","weapon_vector","weapon_akm","weapon_minu14","weapon_ak74u","weapon_remington870","weapon_galil","weapon_rpk","weapon_galilsar","weapon_cppsh41"},
+	secondary_weapon = {"weapon_p220","weapon_deagle","weapon_glock","weapon_glock18"},
 	models = models
 }
 
-
 tdm.blue = {
 	"Синие",Color(75,75,255),
-	weapons = {"weapon_binokle","weapon_radio","weapon_hands","weapon_kabar","med_band_big","med_band_small","medkit","painkiller","weapon_handcuffs","weapon_taser"},
-	main_weapon = {"weapon_mk18","weapon_m4a1","weapon_m3super","weapon_mp7","weapon_xm1014","weapon_fal","weapon_galilsar","weapon_m249","weapon_mp40"},
-	secondary_weapon = {"weapon_beretta","weapon_fiveseven","weapon_hk_usp"},
+	weapons = {"weapon_binokle","weapon_radio","weapon_hands","weapon_kabar","med_band_big","med_band_small","medkit","painkiller"},
+	main_weapon = {"weapon_mk18","weapon_m1a1","weapon_vector","weapon_mp5","weapon_m4a1","weapon_m3super","weapon_mp7","weapon_xm1014","weapon_fal","weapon_l1a1","weapon_m249","weapon_csmg40"},
+	secondary_weapon = {"weapon_beretta","weapon_fiveseven","weapon_hk_usp","weapon_ump"},
 	models = models
 }
 

@@ -1,7 +1,7 @@
-
+if engine.ActiveGamemode() == "homigrad" then
 AddCSLuaFile()
 
-SWEP.PrintName = "Кулаки Зомби"
+SWEP.PrintName = "Зомбо"
 SWEP.Author = "Kilburn, robotboy655, MaxOfS2D & Tenrys"
 SWEP.Purpose = "Зомбо мозги ням ням"
 
@@ -240,4 +240,5 @@ function SWEP:Think()
 
 	end
 
+end
 end

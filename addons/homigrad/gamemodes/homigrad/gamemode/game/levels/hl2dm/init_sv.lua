@@ -51,13 +51,13 @@ function hl2dm.PlayerSpawn(ply,teamID)
 		ply:SetPlayerClass("combine")
 		if math.random(1,2) == 2 then ply:Give("weapon_hg_hl2") end
 		--JMod.EZ_Equip_Armor(ply,"Medium-Helmet",Color(0,0,0,0))
-		JMod.EZ_Equip_Armor(ply,"Light-Vest",Color(0,0,0,0))
+		JMod.EZ_Equip_Armor(ply,"Medium-Vest",Color(0,0,0,0))
 	end
 
 	if teamID == 1 then
-		if math.random(1,4) == 4 then ply:Give("adrinaline") end
-		if math.random(1,4) == 4 then ply:Give("morphine") end
-		if math.random(1,3) == 3 then ply:Give("weapon_hg_hl2") end
+		if math.random(1,3) == 3 then ply:Give("adrinaline") end
+		if math.random(1,3) == 3 then ply:Give("morphine") end
+		if math.random(1,4) == 4 then ply:Give("weapon_hg_hl2") end
 
 		JMod.EZ_Equip_Armor(ply,"Medium-Helmet",color)
 		local r = math.random(1,2)

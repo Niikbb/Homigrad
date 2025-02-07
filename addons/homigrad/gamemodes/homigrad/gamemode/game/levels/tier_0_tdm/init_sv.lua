@@ -79,7 +79,7 @@ changeClass = {
 	["weapon_frag"]="weapon_hg_f1",
 	["weapon_slam"]="weapon_hg_molotov",
 
-	["weapon_rpg"]="ent_ammo_46×30mm",
+	["weapon_rpg"]="weapon_rpgg",
 	["item_ammo_ar2_altfire"]="ent_ammo_762x39mm",
 	["item_ammo_357"]="ent_ammo_.44magnum",
 	["item_ammo_357_large"]="ent_ammo_.44magnum",
@@ -200,11 +200,15 @@ function tdm.PlayerSpawn(ply,teamID)
 	--local r = math.random(1,3)
 	--ply:Give(r == 1 and "food_fishcan" or r == 2 and "food_spongebob_home" or r == 3 and "food_lays")
 
-	if math.random(1,3) == 3 then if ply:Team() == 1 then ply:Give("weapon_hg_f1") else ply:Give("weapon_hg_rgd5") end end
-
-	JMod.EZ_Equip_Armor(ply,"Medium-Helmet",color)
-	local r = math.random(1,2)
-	JMod.EZ_Equip_Armor(ply,(r == 1 and "Medium-Vest") or (r == 2 and "Light-Vest"),color)
+	if math.random(1,3) == 3 then 
+		ply:Give("weapon_hg_f1") 
+	else 
+		ply:Give("weapon_hg_rgd5") 
+	end
+	local h = math.random(1,3)
+	local r = math.random(1,3)
+	JMod.EZ_Equip_Armor(ply,(h == 1 and "Medium-Helmet") or (h == 2 and "Light-Helmet") or (h == 3 and "Heavy-Helmet"),color)
+	JMod.EZ_Equip_Armor(ply,(r == 1 and "Medium-Vest") or (r == 2 and "Light-Vest") or (r == 3 and "Heavy-Vest"),color)
 end
 
 function tdm.PlayerInitialSpawn(ply) ply:SetTeam(math.random(2)) end

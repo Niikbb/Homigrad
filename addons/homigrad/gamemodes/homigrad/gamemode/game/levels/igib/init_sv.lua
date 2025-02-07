@@ -78,6 +78,7 @@ function igib.PlayerSpawn(ply,teamID)
     ply:SetLadderClimbSpeed(100)
     ply:SetWalkSpeed(350)
     ply:SetRunSpeed(700)
+    ply.nopain = true
 end
 
 function igib.PlayerInitialSpawn(ply)

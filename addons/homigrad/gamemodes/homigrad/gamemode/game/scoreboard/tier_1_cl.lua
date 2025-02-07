@@ -134,7 +134,7 @@ local function ToggleScoreboard(toggle)
 			draw.SimpleText("HOMIGRADED","HomigradFontLarge",w / 2,h / 2,Color(155,155,165,5),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 			--draw.SimpleText("HOMIGRADED","HomigradFontLarge",w / 2,h / 2,Color(155,155,165,5),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 			
-			draw.SimpleText("Frags | Deaths","HomigradFont",w - 300,15,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+			draw.SimpleText("Смертей","HomigradFont",w - 300,15,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 			--draw.SimpleText("Дни Часы Минуты","HomigradFont",w - 300,20,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 			--draw.SimpleText("M","HomigradFont",w - 300 + 15,15,white,TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER)
 			
@@ -291,9 +291,8 @@ local function ToggleScoreboard(toggle)
 				draw.SimpleText(name1,"HomigradFont",w / 2,h / 2,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 				
 				-- if not ply.TimeStart then
-					local kd = ply:Deaths() .. " | " .. ply:Frags()
 
-					draw.SimpleText(kd,"HomigradFont",w - 300,h / 2,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+					draw.SimpleText(ply:Deaths(),"HomigradFont",w - 300,h / 2,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 				-- else
 				-- 	local time = math.floor(CurTime() - ply.TimeStart + (ply.Time or 0))
 				-- 	local dTime,hTime,mTime = math.floor(time / 60 / 60 / 24),tostring(math.floor(time / 60 / 60) % 24),tostring(math.floor(time / 60) % 60)
@@ -317,9 +316,8 @@ local function ToggleScoreboard(toggle)
 			end
 
 			if ply ~= LocalPlayer() then
-				local button = vgui.Create("DButton",playerPanel)
+				local button = vgui.Create("DImageButton",playerPanel)
 				button:SetSize(32,32)
-				button:SetText("")
 				local h = playerPanel:GetTall() / 2 - 32 / 2
 				button:SetPos(playerPanel:GetWide() - playerPanel:GetTall() / 2 - 32 / 2,h)
 

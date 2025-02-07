@@ -1,4 +1,4 @@
-if not engine.ActiveGamemode() == "homigrad" then return end
+if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = 'salat_base' -- base
 
 SWEP.PrintName 				= "Винтовка Мосина"
@@ -57,4 +57,5 @@ SWEP.addPos = Vector(0,1.5,-.3)
 
 function SWEP:ApplyEyeSpray()
     self.eyeSpray = self.eyeSpray - Angle(1.5,math.Rand(-0.2,0.2),0)
+end
 end
