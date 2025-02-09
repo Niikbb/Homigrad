@@ -1,121 +1,112 @@
 function dm.StartRoundSV()
     tdm.RemoveItems()
-
-	roundTimeStart = CurTime()
-	roundTime = 60 * (1 + math.min(#player.GetAll() / 8,2))
-
+    roundTimeStart = CurTime()
+    roundTime = 60 * (1 + math.min(#player.GetAll() / 8, 2))
     local players = PlayersInGame()
-    for i,ply in pairs(players) do ply:SetTeam(1) end
+    for i, ply in pairs(players) do
+        ply:SetTeam(1)
+    end
 
     local aviable = ReadDataMap("dm")
     aviable = #aviable ~= 0 and aviable or homicide.Spawns()
-    tdm.SpawnCommand(team.GetPlayers(1),aviable,function(ply)
-        ply:Freeze(true)
-    end)
-
+    tdm.SpawnCommand(team.GetPlayers(1), aviable, function(ply) ply:Freeze(true) end)
     freezing = true
-
     RTV_CountRound = RTV_CountRound - 1
-
     roundTimeRespawn = CurTime() + 15
-
-    roundDmType = math.random(1,4)
-
-    return {roundTimeStart,roundTime}
+    roundDmType = math.random(1, 4)
+    return {roundTimeStart, roundTime}
 end
 
 function dm.RoundEndCheck()
     local Alive = 0
-
-    for i,ply in pairs(team.GetPlayers(1)) do
+    for i, ply in pairs(team.GetPlayers(1)) do
         if ply:Alive() then Alive = Alive + 1 end
     end
 
     if freezing and roundTimeStart + dm.LoadScreenTime < CurTime() then
         freezing = nil
-
-        for i,ply in pairs(team.GetPlayers(1)) do
+        for i, ply in pairs(team.GetPlayers(1)) do
             ply:Freeze(false)
         end
     end
 
-    if Alive <= 1 then EndRound() return end
-
-end
-
-function dm.EndRound(winner)
-    for i, ply in ipairs( player.GetAll() ) do
-	    if ply:Alive() then
-            PrintMessage(3,ply:GetName() .. " победил в данном раунде.")
-        end
+    if Alive <= 1 then
+        EndRound()
+        return
     end
 end
 
-local red = Color(255,0,0)
+function dm.EndRound(winner)
+    for i, ply in ipairs(player.GetAll()) do
+        if ply:Alive() then PrintMessage(3, ply:GetName() .. " победил в данном раунде.") end
+    end
+end
 
-function dm.PlayerSpawn(ply,teamID)
-	ply:SetModel(tdm.models[math.random(#tdm.models)])
-    ply:SetPlayerColor(Vector(0,0,0.6))
-
-
+local red = Color(255, 0, 0)
+function dm.PlayerSpawn(ply, teamID)
+    ply:SetModel(tdm.models[math.random(#tdm.models)])
+    ply:SetPlayerColor(Vector(0, 0, 0.6))
     ply:Give("weapon_hands")
     if roundDmType == 1 then
-        local r = math.random(1,8)
-        ply:Give((r==1 and "weapon_mp7") or (r==2 and "weapon_ak74u") or (r==3 and "weapon_akm") or (r==4 and "weapon_rpgg" and "weapon_ump") or (r==5 and "weapon_m4a1") or (r==6 and "weapon_mk18") or (r==7 and "weapon_m4a1") or (r==8 and "weapon_galil"))
+        local r = math.random(1, 8)
+        ply:Give((r == 1 and "weapon_mp7") or (r == 2 and "weapon_ak74u") or (r == 3 and "weapon_akm") or (r == 4 and "weapon_rpgg" and "weapon_ump") or (r == 5 and "weapon_m4a1") or (r == 6 and "weapon_mk18") or (r == 7 and "weapon_m4a1") or (r == 8 and "weapon_galil"))
         ply:Give("weapon_kabar")
         ply:Give("medkit")
         ply:Give("med_band_big")
-        ply:SetAmmo( 90, (r==1 and "4.6×30 mm") or (r==2 and "5.45x39 mm") or (r==3 and "7.62x39 mm") or (r>=5 and "5.56x45 mm"))
+        ply:SetAmmo(90, (r == 1 and "4.6×30 mm") or (r == 2 and "5.45x39 mm") or (r == 3 and "7.62x39 mm") or (r >= 5 and "5.56x45 mm"))
     elseif roundDmType == 2 then
-        local r = math.random(1,4)
+        local r = math.random(1, 4)
         --local p = math.random(1,4)
-        ply:Give((r==1 and "weapon_spas12") or (r==2 and "weapon_xm1014") or (r==3 and "weapon_remington870") or (r==4 and "weapon_minu14"))
+        ply:Give((r == 1 and "weapon_spas12") or (r == 2 and "weapon_xm1014") or (r == 3 and "weapon_remington870") or (r == 4 and "weapon_minu14"))
         --ply:Give((p==1 and "weapon_ump") or p==2 and ("weapon_fiveseven") or p==3 and ("weapon_glock") or p==4 and ("weapon_glock18"))
         ply:Give("weapon_kabar")
         ply:Give("medkit")
         ply:Give("med_band_big")
         ply:Give("weapon_hg_rgd5")
-        ply:SetAmmo( 90, "12/70 gauge" )
+        ply:SetAmmo(90, "12/70 gauge")
     elseif roundDmType == 3 then
         ply:Give("weapon_deagle")
         ply:Give("weapon_kabar")
         ply:Give("medkit")
         ply:Give("med_band_big")
-        ply:SetAmmo( 90,("weapon_deagle" and ".44 Remington Magnum"))
-        elseif roundDmType == 4 then
-        local r = math.random(1,6)
-        ply:Give((r==1 and "weapon_fiveseven") or (r==2 and "weapon_hk_usp") or (r==3 and "weapon_beretta") or (r==4 and "weapon_glock18") or (r==5 and "weapon_p220") or (r==6 and "weapon_glock"))
+        ply:SetAmmo(90, "weapon_deagle" and ".44 Remington Magnum")
+    elseif roundDmType == 4 then
+        local r = math.random(1, 6)
+        ply:Give((r == 1 and "weapon_fiveseven") or (r == 2 and "weapon_hk_usp") or (r == 3 and "weapon_beretta") or (r == 4 and "weapon_glock18") or (r == 5 and "weapon_p220") or (r == 6 and "weapon_glock"))
         ply:Give("weapon_kabar")
         ply:Give("med_band_big")
         ply:Give("weapon_hg_rgd5")
         ply:Give("weapon_hidebomb")
-        ply:SetAmmo( 90, (r==1 and "5.7×28 mm") or (r>=2 and "9х19 mm Parabellum"))
-        else
-        local r = math.random(1,3)
-        ply:Give((r==1 and "weapon_hk_usp") or (r==2 and "weapon_fiveseven") or (r==3 and "weapon_beretta"))
+        ply:SetAmmo(90, (r == 1 and "5.7×28 mm") or (r >= 2 and "9х19 mm Parabellum"))
+    else
+        local r = math.random(1, 3)
+        ply:Give((r == 1 and "weapon_hk_usp") or (r == 2 and "weapon_fiveseven") or (r == 3 and "weapon_beretta"))
         ply:Give("weapon_kabar")
         ply:Give("med_band_big")
         ply:Give("weapon_hg_rgd5")
         ply:Give("weapon_hidebomb")
-        ply:SetAmmo( 50, "9х19 mm Parabellum" )
+        ply:SetAmmo(50, "9х19 mm Parabellum")
     end
+
     ply:Give("weapon_radio")
-
     ply:SetLadderClimbSpeed(100)
-
 end
 
 function dm.PlayerInitialSpawn(ply)
     ply:SetTeam(1)
 end
 
-function dm.PlayerCanJoinTeam(ply,teamID)
-	if teamID == 2 or teamID == 3 then ply:ChatPrint("пашол нахуй") return false end
-
+function dm.PlayerCanJoinTeam(ply, teamID)
+    if teamID == 2 or teamID == 3 then
+        ply:ChatPrint("пашол нахуй")
+        return false
+    end
     return true
 end
 
-function dm.GuiltLogic() return false end
+function dm.GuiltLogic()
+    return false
+end
 
 util.AddNetworkString("dm die")
 function dm.PlayerDeath()

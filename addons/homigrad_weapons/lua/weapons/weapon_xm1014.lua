@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "XM1014"
 SWEP.Author 				= "Homigrad"
@@ -15,8 +15,8 @@ SWEP.Primary.ClipSize		= 8
 SWEP.Primary.DefaultClip	= 8
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "12/70 gauge"
-SWEP.Primary.Cone = 0.05
-SWEP.Primary.Damage = 35
+SWEP.Primary.Cone = 0.1
+SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb/weapons/xm1014/shoot.wav"
 SWEP.Primary.SoundFar = "snd_jack_hmcd_snp_far.wav"

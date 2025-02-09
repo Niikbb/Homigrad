@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "M4 Super 90"
 SWEP.Author 				= "Homigrad"
@@ -16,15 +16,15 @@ SWEP.Primary.ClipSize		= 8
 SWEP.Primary.DefaultClip	= 8
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "12/70 gauge"
-SWEP.Primary.Cone = 0.02
-SWEP.Primary.Damage = 35
+SWEP.Primary.Cone = .1
+SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "rifle_win1892/win1892_fire_01.wav"
 SWEP.Primary.SoundFar = "toz_shotgun/toz_dist.wav"
 SWEP.Primary.Force = 15
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.4
-SWEP.NumBullet = 8
+SWEP.NumBullet = 12
 SWEP.Sight = true
 SWEP.TwoHands = true
 SWEP.shotgun = true

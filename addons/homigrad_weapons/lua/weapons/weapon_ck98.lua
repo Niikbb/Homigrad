@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base'
+SWEP.Base = "salat_base"
 
 -- заготовка для поддержки не только Русского, но и других языков вроде Английского. 🤔😁🤔
 -- можно будет и в Воркшоп заливать потом. Запара лютая конечно...
@@ -28,7 +28,7 @@ SWEP.Primary.Damage = 60
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "zcitysnd/sound/weapons/sks/sks_fp.wav"
 SWEP.Primary.SoundFar = "zcitysnd/sound/weapons/sks/sks_dist.wav"
-SWEP.Primary.Force = 240/3
+SWEP.Primary.Force = 60
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 1.5
 SWEP.ReloadSound = "weapons/ar2/ar2_reload.wav"

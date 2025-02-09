@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base 
+SWEP.Base = "salat_base" -- base 
 
 SWEP.PrintName 				= "M590"
 SWEP.Instructions			= ""
@@ -14,8 +14,8 @@ SWEP.Primary.ClipSize		= 8
 SWEP.Primary.DefaultClip	= 8
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12/70 gauge"
-SWEP.Primary.Cone = 0.05
-SWEP.Primary.Damage = 35
+SWEP.Primary.Cone = 0.1
+SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb2/weapons/ithaca37stakeout/fire.wav"
 --SWEP.Primary.SoundFar = "weapons/mini14/mini14_dist.wav"
@@ -23,10 +23,9 @@ SWEP.Primary.Force = 25
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.5
 SWEP.ReloadSound = "weapons/ar2/ar2_reload.wav"
-SWEP.NumBullet = 8
+SWEP.NumBullet = 12
 SWEP.Sight = true
 SWEP.TwoHands = true
-							
 SWEP.Secondary.ClipSize		= -1
 SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic	= false

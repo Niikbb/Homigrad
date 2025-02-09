@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base 
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "ППШ-41"
 SWEP.Author 				= "Homigrad"
@@ -20,12 +20,11 @@ SWEP.Primary.Damage = 12
 SWEP.Primary.Spread = 5
 SWEP.Primary.Sound = "grub_mp40/smg_mp40_fire_single_0716_m.wav"
 --SWEP.Primary.SoundFar = "weapons/ump45/ump45_dist.wav"
-SWEP.Primary.Force = 320/3
+SWEP.Primary.Force = 20
 SWEP.Primary.Recoil = 10
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.07
 SWEP.TwoHands = true
-							
 SWEP.Secondary.ClipSize		= -1
 SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic	= false

@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Mateba Autorevolver HP"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 35
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb2/weapons/matebahomeprotection/deagle-1.wav"
 SWEP.Primary.SoundFar = "snd_jack_hmcd_smp_far.wav"
-SWEP.Primary.Force = 105/40
+SWEP.Primary.Force = 35
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.12
 
@@ -55,7 +55,6 @@ end
 
 local function rolldrum(ply,wpn)
     local wep = type(wpn) == "string" and ply:GetActiveWeapon() or wpn
-    
     if not IsValid(ply) or not IsValid(wep) or wep:GetClass() != "weapon_deagle" then return end
 
     wep.tries = math.random(math.max(7 - wep:Clip1(),1))
@@ -109,13 +108,9 @@ if SERVER then
 
     function SWEP:Deploy()
         self:SetHoldType("normal")
-        
         self:GetOwner():EmitSound("snd_jack_hmcd_pistoldraw.wav", 65, 100, 1, CHAN_AUTO)
-    
         self.NextShot = CurTime() + 0.5
-    
         self:SetHoldType( self.HoldType )
-
         self.tries = self.tries or math.random(math.max(7 - self:Clip1(),1))
 
         net.Start("real_bul")
@@ -126,9 +121,7 @@ if SERVER then
 else
     function SWEP:Deploy()
         self:SetHoldType("normal")
-    
         self.NextShot = CurTime() + 0.5
-    
         self:SetHoldType( self.HoldType )
     end
 

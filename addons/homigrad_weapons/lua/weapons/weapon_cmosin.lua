@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Винтовка Мосина"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 60
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "zcitysnd/sound/weapons/mosin/mosin_fp.wav"
 SWEP.Primary.SoundFar = "zcitysnd/sound/weapons/mosin/mosin_dist.wav"
-SWEP.Primary.Force = 240/3
+SWEP.Primary.Force = 60
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 1.5
 SWEP.ReloadSound = "weapons/ar2/ar2_reload.wav"

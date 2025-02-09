@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "ИЖ-43"
 SWEP.Author 				= "Homigrad"
@@ -16,7 +16,7 @@ SWEP.Primary.ClipSize		= 2
 SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "12/70 gauge"
-SWEP.Primary.Cone = 0.02
+SWEP.Primary.Cone = 0.06
 SWEP.Primary.Damage = 45
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "weapons/tfa_ins2/doublebarrel_sawnoff/doublebarrelsawn_fire.wav"
@@ -65,11 +65,11 @@ SWEP.dwmAUp = 0
 SWEP.dwmARight = -15
 SWEP.dwmAForward = 180
 
-function SWEP:ApplyEyeSpray()
+function SWEP:ApplyEyeSpray()  -- recoil
     self.eyeSpray = self.eyeSpray - Angle(4,math.Rand(-1.5,1.5),0)
-end 
+end
 
-local model 
+local model
 if CLIENT then
     model = GDrawWorldModel or ClientsideModel(SWEP.WorldModel,RENDER_GROUP_OPAQUE_ENTITY)
     GDrawWorldModel = model
@@ -81,7 +81,6 @@ if SERVER then
         local owner = self:GetOwner()
         local Pos,Ang = owner:GetBonePosition(owner:LookupBone("ValveBiped.Bip01_R_Hand"))
         if not Pos then return end
-        
         Pos:Add(Ang:Forward() * self.dwmForward)
         Pos:Add(Ang:Right() * self.dwmRight)
         Pos:Add(Ang:Up() * self.dwmUp)
@@ -106,7 +105,6 @@ function SWEP:DrawWorldModel()
     local owner = self:GetOwner()
     if not IsValid(owner) then
         self:DrawModel()
-
         return
     end
 
@@ -114,23 +112,16 @@ function SWEP:DrawWorldModel()
 
     local Pos,Ang = owner:GetBonePosition(owner:LookupBone("ValveBiped.Bip01_R_Hand"))
     if not Pos then return end
-    
     Pos:Add(Ang:Forward() * self.dwmForward)
     Pos:Add(Ang:Right() * self.dwmRight)
     Pos:Add(Ang:Up() * self.dwmUp)
-
-
     Ang:RotateAroundAxis(Ang:Up(),self.dwmAUp)
     Ang:RotateAroundAxis(Ang:Right(),self.dwmARight)
     Ang:RotateAroundAxis(Ang:Forward(),self.dwmAForward)
-    
     self:SetPosAng(Pos,Ang)
-
     model:SetPos(Pos)
     model:SetAngles(Ang)
-
     model:SetModelScale(self.dwmModeScale)
-
     model:DrawModel()
 end
 

@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "АКС-74У"
 SWEP.Author 				= "Homigrad"
@@ -16,12 +16,12 @@ SWEP.Primary.ClipSize		= 30
 SWEP.Primary.DefaultClip	= 30
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "5.45x39 mm"
-SWEP.Primary.Cone = 0
+SWEP.Primary.Cone = 0.01
 SWEP.Primary.Damage = 40
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "ak74/ak74_fp.wav"
 SWEP.Primary.SoundFar = "ak74/ak74_dist.wav"
-SWEP.Primary.Force = 140/3
+SWEP.Primary.Force = 40
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.075
 SWEP.ReloadSound = "weapons/ar2/ar2_reload.wav"

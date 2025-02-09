@@ -190,7 +190,14 @@ JMod.ArmorTable = {
 			eyes = .8,
 			mouthnose = .8
 		},
-		def = BasicArmorProtectionProfile,
+		def = {
+			[DMG_BUCKSHOT] = .6,
+			[DMG_CLUB] = .7,
+			[DMG_SLASH] = .7,
+			[DMG_BULLET] = .6,
+			[DMG_BLAST] = .7,
+			[DMG_CRUSH] = .7
+		},
 		bon = "ValveBiped.Bip01_Head1",
 		siz = Vector(1, 1, 1),
 		pos = Vector(0, 4, 0),
@@ -911,7 +918,157 @@ JMod.ArmorTable = {
 		wgt = 15,
 		dur = 8,
 		ent = "ent_jack_gmod_ezarmor_hazmat"
-	}
+	},
+	["Shotgunner Suit"] = {
+		PrintName = "Солдат Нова Проспект",
+		Category = "Homigrad (GM)",
+		mdl = "models/player/armor_paca/paca.mdl",
+		lbl = "",
+		slots = {
+			head = 1,
+			chest = 1,
+			abdomen = 1,
+			pelvis = 1,
+			leftthigh = 1,
+			leftcalf = 1,
+			rightthigh = 1,
+			rightcalf = 1,
+			rightshoulder = 1,
+			rightforearm = 1,
+			leftshoulder = 1,
+			leftforearm = 1
+		},
+		def = {
+			[DMG_BUCKSHOT] = .65,
+			[DMG_CLUB] = .65,
+			[DMG_SLASH] = .65,
+			[DMG_BULLET] = .65,
+			[DMG_BLAST] = .65,
+			[DMG_CRUSH] = .65,
+			[DMG_BURN] = .65
+		},
+		bon = "ValveBiped.Bip01_Spine2",
+		siz = Vector(.1, .1, .1),
+		pos = Vector(-2.5, -4.5, 0),
+		ang = Angle(-90, 0, 90),
+		wgt = 50,
+		dur = 800,
+		ent = "ent_jack_gmod_ezarmor_combine_prison_guard",
+		gayPhysics = true
+	},
+	["Soldier Suit"] = {
+		PrintName = "Солдат",
+		Category = "Homigrad (GM)",
+		mdl = "models/player/armor_paca/paca.mdl",
+		lbl = "",
+		slots = {
+			head = 1,
+			chest = 1,
+			abdomen = 1,
+			pelvis = 1,
+			leftthigh = 1,
+			leftcalf = 1,
+			rightthigh = 1,
+			rightcalf = 1,
+			rightshoulder = 1,
+			rightforearm = 1,
+			leftshoulder = 1,
+			leftforearm = 1
+		},
+		def = {
+			[DMG_BUCKSHOT] = .8,
+			[DMG_CLUB] = .8,
+			[DMG_SLASH] = .8,
+			[DMG_BULLET] = .8,
+			[DMG_BLAST] = .8,
+			[DMG_CRUSH] = .8,
+			[DMG_BURN] = .8
+		},
+		bon = "ValveBiped.Bip01_Spine2",
+		siz = Vector(.1, .1, .1),
+		pos = Vector(-2.5, -4.5, 0),
+		ang = Angle(-90, 0, 90),
+		wgt = 30,
+		dur = 800,
+		ent = "ent_jack_gmod_ezarmor_combine_soldier",
+		gayPhysics = true
+	},
+	["Super-Soldier-Suit"] = {
+		PrintName = "Элитный Солдат",
+		Category = "Homigrad (GM)",
+		mdl = "models/player/armor_paca/paca.mdl",
+		lbl = "",
+		slots = {
+			head = 1,
+			chest = 1,
+			abdomen = 1,
+			pelvis = 1,
+			leftthigh = 1,
+			leftcalf = 1,
+			rightthigh = 1,
+			rightcalf = 1,
+			rightshoulder = 1,
+			rightforearm = 1,
+			leftshoulder = 1,
+			leftforearm = 1
+		},
+		def = {
+			[DMG_BUCKSHOT] = .5,
+			[DMG_CLUB] = .5,
+			[DMG_SLASH] = .5,
+			[DMG_BULLET] = .5,
+			[DMG_BLAST] = .5,
+			[DMG_CRUSH] = .5,
+			[DMG_BURN] = .5
+		},
+		clr = {
+			r = 255,
+			g = 0,
+			b = 0
+		},
+		clrForced = true,
+		bon = "ValveBiped.Bip01_Spine2",
+		siz = Vector(.1, .1, .1),
+		pos = Vector(-2.5, -4.5, 0),
+		ang = Angle(-90, 0, 90),
+		wgt = 70,
+		dur = 800,
+		ent = "ent_jack_gmod_ezarmor_combine_super_soldier",
+		gayPhysics = true
+	},
+	["Ballistic-Mask-Kolhoz-Edition"] = {
+		PrintName = "Самопальная Маска Повстанцев",
+		Category = "Homigrad (GM)",
+		mdl = "models/jmod/ballistic_mask.mdl", -- csgo misc
+		slots = {
+			eyes = 1,
+			mouthnose = 1
+		},
+		def = {
+			[DMG_BUCKSHOT] = .7,
+			[DMG_CLUB] = .85,
+			[DMG_SLASH] = .85,
+			[DMG_BULLET] = .7,
+			[DMG_CRUSH] = .7
+		},
+		bon = "ValveBiped.Bip01_Head1",
+		siz = Vector(1, 1, 1),
+		pos = Vector(0, 4, 0),
+		ang = Angle(100, 180, 90),
+		wgt = 5,
+		dur = 200,
+		mskmat = "mats_jack_gmod_sprites/vignette_gray.png",
+		ent = "ent_jack_gmod_ezarmor_balmask",
+		tgl = {
+			pos = Vector(-2, 4, 0),
+			ang = Angle(170, 180, 90),
+			mskmat = "",
+			slots = {
+				eyes = 0,
+				mouthnose = 0
+			}
+		}
+	},
 }
 
 -- Dynamically generate armor ents

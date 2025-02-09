@@ -740,13 +740,12 @@ function PlayerMeta:CreateRagdoll(attacker,dmginfo,force) --изменение �
 			RagdollOwner(rag):KillSilent()
 		end
 	end)
-	
-	rag:AddEFlags(EFL_NO_DAMAGE_FORCES)
+
 	if IsValid(rag:GetPhysicsObject()) then
 		rag:GetPhysicsObject():SetMass(CustomWeight[rag:GetModel()] or 20)
+		rag:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+		rag:AddEFlags(EFL_NO_DAMAGE_FORCES)
 	end
-	rag:Activate()
-	rag:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 	rag:SetNWEntity("RagdollOwner", self)
 	local vel = self:GetVelocity()/1 + (force or Vector(0,0,0))
 	for i = 0, rag:GetPhysicsObjectCount() - 1 do

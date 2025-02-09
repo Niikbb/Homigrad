@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Remington 870"
 SWEP.Author 				= "Homigrad"
@@ -16,14 +16,15 @@ SWEP.Primary.DefaultClip	= 6
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo			= "12/70 gauge"
 SWEP.Primary.Cone = 0.05
-SWEP.Primary.Damage = 35
+SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "snd_jack_hmcd_sht_close.wav"
 SWEP.Primary.SoundFar = "snd_jack_hmcd_sht_far.wav"
 SWEP.Primary.Force = 15
+
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.5
-SWEP.NumBullet = 8
+SWEP.NumBullet = 12
 SWEP.Sight = true
 SWEP.TwoHands = true
 SWEP.shotgun = true
