@@ -1,5 +1,5 @@
 ### Установка и Настройка
-- Скачайте сборку по ссылке: [Нажимай на меня](https://github.com/Niikbb/Homigrad/archive/refs/heads/homigrad-harrison.zip)
+- Скачайте сборку по ссылке: [Нажимай на меня](https://github.com/Niikbb/Homigrad/archive/refs/heads/hmg-hsn-test.zip)
 - Перетащите все папки в GarrysMod/garrysmod и запускайте игру.
 - Подпишитесь на коллекцию аддонов: [Коллекция аддонов в Стиме](https://s.team/sf/3251006969)
 - Ожидайте пока всё установится. Без контента работать не будет.
