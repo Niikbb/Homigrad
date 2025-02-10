@@ -2,6 +2,18 @@ function tdm.SpawnsTwoCommand()
 	local spawnsT = ReadDataMap("spawnpointst")
 	local spawnsCT = ReadDataMap("spawnpointsct")
 
+	if #spawnsT == 0 then
+		for i, ent in RandomPairs(ents.FindByClass("info_player_terrorist")) do
+			table.insert(spawnsT,ent:GetPos())
+		end
+	end
+
+	if #spawnsCT == 0 then
+		for i, ent in RandomPairs(ents.FindByClass("info_player_counterterrorist")) do
+			table.insert(spawnsCT,ent:GetPos())
+		end
+	end
+
 	return spawnsT, spawnsCT
 end
 
@@ -223,13 +235,6 @@ function tdm.PlayerSpawn2(ply, teamID)
 	end
 	-- local r = math.random(1, 3)
 	-- ply:Give(r == 1 and "food_fishcan" or r == 2 and "food_spongebob_home" or r == 3 and "food_lays")
-
-	if ply:IsUserGroup("sponsor") or ply:IsUserGroup("supporterplus") or ply:IsAdmin() then
-		if math.random(1, 5) == 5 then ply:Give("weapon_gear_bloxycola") end
-		if math.random(1, 5) == 5 then ply:Give("weapon_gear_cheezburger") end
-
-		ply:Give("weapon_vape")
-	end
 
 	local r = math.random(1, 2)
 	JMod.EZ_Equip_Armor(ply, "Medium-Helmet", color)

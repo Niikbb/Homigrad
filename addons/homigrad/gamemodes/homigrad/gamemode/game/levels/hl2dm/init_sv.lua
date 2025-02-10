@@ -28,7 +28,7 @@ function hl2dm.EndRound(winner)
 end
 
 function hl2dm.PlayerInitialSpawn(ply)
-	ply:SetTeam(math.random(1, 2))
+	ply:SetTeam(math.random(2))
 end
 
 function hl2dm.PlayerSpawn2(ply, teamID)
@@ -50,13 +50,10 @@ function hl2dm.PlayerSpawn2(ply, teamID)
 		if r == 1 then
 			ply:Give("weapon_hg_hl2")
 			JMod.EZ_Equip_Armor(ply, "Super-Soldier-Suit", Color(255, 255, 255, 255))
-			ply:SetModel("models/player/combine_super_soldier.mdl")
 		elseif r == 2 then
 			JMod.EZ_Equip_Armor(ply, "Shotgunner Suit", Color(255, 255, 255, 255))
-			ply:SetModel("models/player/combine_soldier_prisonguard.mdl")
 		elseif r == 3 then
 			JMod.EZ_Equip_Armor(ply, "Soldier Suit", Color(255, 255, 255, 255))
-			ply:SetModel("models/player/combine_soldier.mdl")
 		end
 	end
 

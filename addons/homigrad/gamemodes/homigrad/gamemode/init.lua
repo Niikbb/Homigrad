@@ -102,24 +102,7 @@ function GM:PlayerSpawn(ply)
 	end
 
 	ply:PlayerClassEvent("On")
-
 	ply:Give("weapon_hands")
-
-	if ply:IsUserGroup("sponsor") or ply:IsUserGroup("supporterplus") or ply:IsAdmin() then
-		if math.random(1, 5) == 5 then ply:Give("weapon_gear_bloxycola") end
-		if math.random(1, 5) == 5 then ply:Give("weapon_gear_cheezburger") end
-
-		ply:Give("weapon_vape")
-	end
-
-	-- actually terrible code, but we need it for the time being to make sure that players who havent donated aren't reaping the benefits.
-	-- We can remove this line of code in late Jan / early feb
-	--[[
-	if ply:GetUserGroup() == "user" or ply:GetUserGroup() == "regular" or ply:GetUserGroup() == "supporter" or ply:GetUserGroup() == "supporterplus" then
-		RunConsoleCommand("hg_usecustommodel", "false")
-		RunConsoleCommand("cl_playermodel", "none")
-	end --]]
-
 	TableRound().PlayerSpawn2(ply, ply:Team())
 end
 

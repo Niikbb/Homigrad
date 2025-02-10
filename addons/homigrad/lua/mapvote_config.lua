@@ -89,8 +89,9 @@ SolidMapVote["Config"]["Show Map Play Count"] = true
 -- Setting the option below to true will allow you to manually set the
 -- map pool using the table below. Only the maps inside the table will
 -- be able to be chosen for the vote.
-SolidMapVote["Config"]["Manual Map Pool"] = true
-SolidMapVote["Config"]["Map Pool"] = {
+SolidMapVote["Config"]["Manual Map Pool"] = false
+SolidMapVote["Config"]["Map Pool"] = {}
+/*SolidMapVote["Config"]["Map Pool"] = {
 	"cs_insertion2_dusk",
 	"cs_office-unlimited",
 	"freeway_thicc_v3",
@@ -129,7 +130,7 @@ SolidMapVote["Config"]["Map Pool"] = {
 	-- Maps that need fixing
 	-- "gm_church", -- Requires Checks for info_player spawns to be removed
 	-- "ttt_pizzeria", -- Buggy NPCs and Players
-}
+}*/
 
 SolidMapVote["Config"]["Construct Map Pool"] = {"gm_construct", "gm_flatgrass", "gm_bigcity_winter_day"}
 
@@ -270,13 +271,6 @@ SolidMapVote["Config"]["Specific Maps"] = {
 		width = 1920,
 		height = 1080
 	},
-	-- {
-	-- 	filename = "ttt_clue_xmas",
-	-- 	displayname = "Clue (Christmas)",
-	-- 	image = "materials/levels/minecraftb5.jpg",
-	-- 	width = 1920,
-	-- 	height = 1080
-	-- },
 	{
 		filename = "ttt_minecraftcity_v4",
 		displayname = "Minecraft City",

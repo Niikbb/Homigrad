@@ -949,6 +949,7 @@ JMod.ArmorTable = {
 		wgt = 50,
 		dur = 800,
 		ent = "ent_jack_gmod_ezarmor_combine_prison_guard",
+		plymdl = "models/player/combine_soldier_prisonguard.mdl",
 		gayPhysics = true
 	},
 	["Soldier Suit"] = {
@@ -988,6 +989,7 @@ JMod.ArmorTable = {
 		wgt = 30,
 		dur = 800,
 		ent = "ent_jack_gmod_ezarmor_combine_soldier",
+		plymdl = "models/player/combine_soldier.mdl",
 		gayPhysics = true
 	},
 	["Super-Soldier-Suit"] = {
@@ -1033,6 +1035,7 @@ JMod.ArmorTable = {
 		wgt = 70,
 		dur = 800,
 		ent = "ent_jack_gmod_ezarmor_combine_super_soldier",
+		plymdl = "models/player/combine_super_soldier.mdl",
 		gayPhysics = true
 	},
 	["Ballistic-Mask-Kolhoz-Edition"] = {
