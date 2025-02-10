@@ -15,22 +15,16 @@ end
 
 COMMANDS.homicide_get = {
 	function(ply, args)
-		if not (ply:IsAdmin() or (ply:GetUserGroup() == "operator") or (ply:GetUserGroup() == "tmod")) then return end
-		-- if ply:Alive() then return end
-		-- if ply:Team() ~= 1002 then return end
-
+		if not ply:IsAdmin() then return end
 		local role = {{}, {}}
-
 		for _, ply in pairs(team.GetPlayers(1)) do
 			if ply.roleT then
 				table.insert(role[1], ply)
 			end
-
 			if ply.roleCT then
 				table.insert(role[2], ply)
 			end
 		end
-
 		net.Start("homicide_roleget")
 			net.WriteTable(role)
 		net.Send(ply)
@@ -39,9 +33,7 @@ COMMANDS.homicide_get = {
 
 local function makeT(ply)
 	if not IsValid(ply) then return end
-
 	ply.roleT = true
-
 	table.insert(homicide.t, ply)
 
 	if homicide.roundType == 1 or homicide.roundType == 2 then
@@ -53,8 +45,8 @@ local function makeT(ply)
 		ply:Give("weapon_hidebomb")
 		ply:Give("weapon_hg_rgd5")
 		ply:Give("weapon_radar")
-
 		ply:GiveAmmo(wep:GetMaxClip1(), wep:GetPrimaryAmmoType(), true)
+
 	elseif homicide.roundType == 3 then
 		local wep = ply:Give("weapon_hg_crossbow")
 		wep:SetClip1(wep:GetMaxClip1())
@@ -64,8 +56,8 @@ local function makeT(ply)
 		ply:Give("weapon_hidebomb")
 		ply:Give("weapon_hg_t_vxpoison")
 		ply:Give("weapon_radar")
-
 		ply:GiveAmmo(8, "XBowBolt", true)
+
 	elseif homicide.roundType == 5 then
 		local wep
 
@@ -298,13 +290,6 @@ function homicide.StartRoundSV()
 			countCT = countCT + 1
 
 			makeCT(ply)
-		end
-
-		if ply:IsUserGroup("sponsor") or ply:IsUserGroup("supporterplus") or ply:IsAdmin() then
-			if math.random(1, 5) == 5 then ply:Give("weapon_gear_bloxycola") end
-			if math.random(1, 5) == 5 then ply:Give("weapon_gear_cheezburger") end
-
-			ply:Give("weapon_vape")
 		end
 	end)
 

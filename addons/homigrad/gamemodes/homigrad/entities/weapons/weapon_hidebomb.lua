@@ -57,7 +57,7 @@ if SERVER then
 	local function Bomb(ent)
 		local SelfPos, PowerMult, Model = ent:LocalToWorld(ent:OBBCenter()), 6, ent:GetModel()
 
-		ent:EmitSound("bomb_raw.wav")
+		ent:EmitSound("snds_jack_gmod/plunger.wav")
 
 		timer.Simple(math.Rand(1.02, 1.04), function()
 			if not IsValid(ent) then return end
@@ -182,7 +182,7 @@ if SERVER then
 
 			ent:CallOnRemove("hg_hidebombremove", Bomb)
 
-			ent:EmitSound("buttons/button24.wav", 60, 50)
+			ent:EmitSound("snds_jack_gmod/ezsentry_engage.wav", 60, 50)
 
 			self:SetNWBool("hasbomb", true)
 		else
