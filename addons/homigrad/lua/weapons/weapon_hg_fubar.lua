@@ -1,12 +1,13 @@
-if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = "weapon_hg_melee_base"
 
-SWEP.PrintName = "Фубар"
-SWEP.Category = "Ближний Бой"
-SWEP.Instructions = "Ручное рычажно-клиновое приспособление для вытаскивания (выдирания) вбитых в материал (дерево, пластик и др.) гвоздей."
+if CLIENT then
+	SWEP.PrintName = language.GetPhrase("hg.fubar.name")
+	SWEP.Instructions = language.GetPhrase("hg.fubar.inst")
+	SWEP.Category = language.GetPhrase("hg.category.melee")
+end
 
-SWEP.Spawnable= true
-SWEP.AdminSpawnable= true
+SWEP.Spawnable = true
+SWEP.AdminSpawnable = true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
@@ -22,7 +23,7 @@ SWEP.SlotPos = 2
 
 SWEP.UseHands = true
 
----SWEP.HoldType = "knife"
+-- SWEP.HoldType = "knife"
 
 SWEP.FiresUnderwater = false
 
@@ -49,4 +50,3 @@ SWEP.FlashHitSound = "weapons/melee/flesh_impact_blunt_03.wav"
 SWEP.ShouldDecal = false
 SWEP.HoldTypeWep = "melee2"
 SWEP.DamageType = DMG_CLUB
-end

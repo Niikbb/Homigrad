@@ -1,29 +1,3 @@
-/*css.GetTeamName = tdm.GetTeamName
-
-local playsound = false
-
-function css.StartRoundCL()
-    playsound = true
-end
-
-function css.HUDPaint_RoundLeft(white)
-    local lply = LocalPlayer()
-	local name,color = css.GetTeamName(lply)
-
-	local startRound = roundTimeStart + 7 - CurTime()
-    if startRound > 0 and lply:Alive() then
-        if playsound then
-            playsound = false
-            surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
-        end
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),0.5,0.5)
-        draw.DrawText( "Ваша команда " .. name, "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( color.r,color.g,color.b,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "Командный Бой", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,255,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-
-        draw.DrawText( "Нейтрализуйте вражескую команду...", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        return
-    end
-end*/
 
 css.GetTeamName = tdm.GetTeamName
 
@@ -67,12 +41,12 @@ function css.HUDPaint_RoundLeft(white2) --позиции точек и счёт
     local lply = LocalPlayer()
 	local name,color = css.GetTeamName(lply)
 
-	local startRound = roundTimeStart + 7 - CurTime()
+	local startRound = roundTimeStart + 5 - CurTime()
     if startRound > 0 and lply:Alive() then
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
-        draw.DrawText( "Ваша команда " .. name, "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( color.r,color.g,color.b,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "Захват точек", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,55,155,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "Захватите точки, наберайте очки для победы", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 155,155,155,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,220),0.5,4)
+        draw.DrawText( "You are on team: " .. name, "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( color.r,color.g,color.b,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        draw.DrawText( "Захват точек", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,55,155,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        draw.DrawText( "Захватите точки, наберайте очки для победы", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 155,155,155,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
         return
     end
 
@@ -108,14 +82,14 @@ function css.HUDPaint_RoundLeft(white2) --позиции точек и счёт
 
     --время раунда
     local time = math.Round(roundTimeStart + roundTime - CurTime())
-    local acurcetime = string.FormattedTime( time, "%02i:%02i" )
-	if time < 0 then acurcetime = "Иди нахуй" end
+    local ftime = string.FormattedTime( time, "%02i:%02i" )
+	if time < 0 then ftime = "Иди нахуй" end
 
-	draw.SimpleText(acurcetime,"HomigradFont",ScrW()/2,ScrH()-25,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+	draw.SimpleText(ftime,"HomigradFont",ScrW()/2,ScrH()-25,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 
     local respawntime = GetGlobalInt("CSS_respawntime", CurTime())
     
     local time2 = math.Round(respawntime + 60 - CurTime(),0)
-    local acurcetime2 = string.FormattedTime( time2, "%02i:%02i" )
-    draw.SimpleText("Время до респавна: " .. acurcetime2,"HomigradFont",ScrW()/2,ScrH()-55,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+    local ftime2 = string.FormattedTime( time2, "%02i:%02i" )
+    draw.SimpleText("Время до респавна: " .. ftime2,"HomigradFont",ScrW()/2,ScrH()-55,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 end

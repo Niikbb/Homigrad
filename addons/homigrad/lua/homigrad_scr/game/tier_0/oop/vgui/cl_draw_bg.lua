@@ -1,11 +1,9 @@
-if engine.ActiveGamemode() == "homigrad" then
 local SetMaterial = surface.SetMaterial
 local DrawTexturedRectUV = surface.DrawTexturedRectUV
-
 local pngParametrs = "mips noclamp"
 
 local constructManual = {
-    "brick",
+	"brick",
 	"brick_i",
 	"brick_d",
 	"brick_d_i",
@@ -105,50 +103,48 @@ local constructManual = {
 
 	"zigzag",
 	"zigzag_i"
-}--сука здохни 79 обоев я в ахуе
-
+}
 
 local materials = {}
 
-for i,name in pairs(constructManual) do
-	materials[name] = Material("homigrad/vgui/bg/" .. name .. ".png",pngParametrs)
+for _, name in pairs(constructManual) do
+	materials[name] = Material("homigrad/vgui/bg/" .. name .. ".png", pngParametrs)
 end
 
 function surface.SetBG(name)
-    SetMaterial(materials[name])
+	SetMaterial(materials[name])
 end
 
-function draw.BG(x,y,w,h)
-	DrawTexturedRectUV(x,y,w,h,0,0,w / 16,h / 16)
+function draw.BG(x, y, w, h)
+	DrawTexturedRectUV(x, y, w, h, 0, 0, w / 16, h / 16)
 end
 
-function draw.BG2(x,y,w,h)
-	DrawTexturedRectUV(x,y,w,h,0,0,w / 32,h / 32)
+function draw.BG2(x, y, w, h)
+	DrawTexturedRectUV(x, y, w, h, 0, 0, w / 32, h / 32)
 end
 
-function draw.BG05(x,y,w,h)
-	DrawTexturedRectUV(x,y,w,h,0,0,w / 8,h / 8)
+function draw.BG05(x, y, w, h)
+	DrawTexturedRectUV(x, y, w, h, 0, 0, w / 8, h / 8)
 end
 
-function draw.BGScale(x,y,w,h,scale)
-	DrawTexturedRectUV(x,y,w,h,0,0,w / scale,h / scale)
+function draw.BGScale(x, y, w, h, scale)
+	DrawTexturedRectUV(x, y, w, h, 0, 0, w / scale, h / scale)
 end
 
-function draw.BGEx(x,y,w,h,sx,sy,scale)
+function draw.BGEx(x, y, w, h, sx, sy, scale)
 	scale = 4096 * scale
-
 	sx = sx and sx / 4096 or 0
 	sy = sy and sy / 4096 or 0
-
-	DrawTexturedRectUV(x,y,w,h,sx,sy,w / scale + sx,h / scale + sy)
-end
+	DrawTexturedRectUV(x, y, w, h, sx, sy, w / scale + sx, h / scale + sy)
 end
 
-/*local size = 64
+--[[
+local size = 64
 
-hook.Add("HUDPaint","дубинапрям",function()
-	local x,y = 0,0
-	for i,name in pairs(constructManual) do
+hook.Add("HUDPaint", "test", function()
+	local x, y = 0, 0
+
+	for _, name in pairs(constructManual) do
 		x = x + 1
 
 		if size * x > ScrW() then
@@ -157,6 +153,6 @@ hook.Add("HUDPaint","дубинапрям",function()
 		end
 
 		surface.SetBG(name)
-		draw.BGScale(size * x,size * y,size,size,size)
+		draw.BGScale(size * x, size * y, size, size, size)
 	end
-end)*/
+end) --]]

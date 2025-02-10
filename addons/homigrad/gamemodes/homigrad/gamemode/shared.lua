@@ -1,41 +1,42 @@
 DeriveGamemode("sandbox")
 
 GM.Name = "Homigrad"
-GM.Author = "loh"
+GM.Author = "loh / Harrison"
 GM.Email = "N/A"
 GM.Website = "N/A"
 GM.TeamBased = true
 
---hg.includeDir("gamemodes/homigrad/game/")ебланы
-
 include("loader.lua")
 
+print("Loading Homigrad.")
+
 local start = SysTime()
-print("	start homigrad gamemode.")
 
-GM.includeDir("homigrad/gamemode/game/")--все файлы запускает, когда обновляем один.. можно из этого даже чо-то сделать.нахуй
+GM.includeDir("homigrad/gamemode/game/")
 
-print("	end homigrad gamemode for " .. math.Round(SysTime() - start,4) .. "s")
+hg.LoadModes()
+
+print("Homigrad loaded! Time taken: " .. math.Round(SysTime() - start, 4) .. "s")
 
 function GM:CreateTeams()
-	team.SetUp(1,"Terrorists",Color(255,0,0))
-	team.SetUp(2,"Counter Terrorists",Color(0,0,255))
-	team.SetUp(3,"Other",Color(0,255,0))
+	team.SetUp(1, "Join Game", Color(255, 0, 0))
+	team.SetUp(2, "#######", Color(0, 0, 255))
+	team.SetUp(3, "#######", Color(0, 255, 0))
 
 	team.MaxTeams = 3
 end
 
 function OpposingTeam(team)
-	if team == 1 then return 2 elseif team == 2 then return 1 end
+	return (team == 1 and 2) or 1
 end
 
 function ReadPoint(point)
 	if TypeID(point) == TYPE_VECTOR then
-		return {point,Angle(0,0,0)}
+		return {point, Angle(0, 0, 0)}
 	elseif type(point) == "table" then
 		if type(point[2]) == "number" then
 			point[3] = point[2]
-			point[2] = Angle(0,0,0)
+			point[2] = Angle(0, 0, 0)
 		end
 
 		return point
@@ -45,11 +46,46 @@ end
 local team_GetPlayers = team.GetPlayers
 
 function PlayersInGame()
-    local newTbl = {}
+	local newTbl = {}
 
-    for i,ply in pairs(team_GetPlayers(1)) do newTbl[i] = ply end
-    for i,ply in pairs(team_GetPlayers(2)) do newTbl[#newTbl + 1] = ply end
-    for i,ply in pairs(team_GetPlayers(3)) do newTbl[#newTbl + 1] = ply end
+	for _, ply in pairs(team_GetPlayers(1)) do
+		table.insert(newTbl, ply)
+	end
 
-    return newTbl
+	for _, ply in pairs(team_GetPlayers(2)) do
+		table.insert(newTbl, ply)
+	end
+
+	for _, ply in pairs(team_GetPlayers(3)) do
+		table.insert(newTbl, ply)
+	end
+
+	return newTbl
+end
+
+function PlayersDead(noTraitors)
+	local newTbl = PlayersInGame()
+	local tbl2 = {}
+
+	for _, ply in pairs(newTbl) do
+		if noTraitors and ply.roleT then continue end
+		if ply:Alive() then continue end
+
+		table.insert(tbl2, ply)
+	end
+
+	return tbl2
+end
+
+function PlayersAlive()
+	local newTbl = PlayersInGame()
+	local tbl2 = {}
+
+	for _, ply in pairs(newTbl) do
+		if not ply:Alive() then continue end
+
+		table.insert(tbl2, ply)
+	end
+
+	return tbl2
 end

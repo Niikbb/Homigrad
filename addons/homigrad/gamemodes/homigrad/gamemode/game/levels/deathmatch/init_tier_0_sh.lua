@@ -1,79 +1,66 @@
-table.insert(LevelList,"dm")
+table.insert(LevelList, "dm")
+
 dm = {}
-dm.Name = "DeathMatch"
+dm.Name = "hg.dm.name"
 dm.LoadScreenTime = 5.5
 dm.CantFight = dm.LoadScreenTime
+dm.NoSelectRandom = false
 
-dm.RoundRandomDefalut = 1
-dm.NoSelectRandom = true
-
-local red = Color(155,155,255)
+local red = Color(155, 155, 255)
 
 function dm.GetTeamName(ply)
-    local teamID = ply:Team()
-
-     if teamID == 1 then return "Боец",red end
+	local teamID = ply:Team()
+	if teamID == 1 then return "#hg.dm.team1", red end
 end
 
 function dm.StartRound(data)
-    team.SetColor(1,red)
-    team.SetColor(2,blue)
-    team.SetColor(1,green)
+	game.CleanUpMap(false)
 
-    game.CleanUpMap(false)
+	team.SetColor(1, red)
+	team.SetColor(2, red)
+	team.SetColor(3, red)
 
-    if CLIENT then
-        roundTimeStart = data[1]
-        roundTime = data[2]
-        dm.StartRoundCL()
+	if CLIENT then
+		roundTimeStart = data[1]
+		roundTime = data[2]
 
-        return
-    end
+		return dm.StartRoundCL()
+	end
 
-    return dm.StartRoundSV()
+	return dm.StartRoundSV()
 end
 
 if SERVER then return end
 
-local nigger = Color(0,0,0)
-local red = Color(255,0,0)
-
-local kill = 4
-
-local white,red = Color(255,255,255),Color(255,0,0)
-
-local fuck,fuckLerp = 0,0
-
-
 local playsound = false
+
 function dm.StartRoundCL()
-    playsound = true
+	playsound = true
 end
 
 function dm.HUDPaint_RoundLeft(white)
-    local lply = LocalPlayer()
+	local lply = LocalPlayer()
+	local startRound = roundTimeStart + 5 - CurTime()
 
-	local startRound = roundTimeStart + 7 - CurTime()
-    if startRound > 0 and lply:Alive() then
-        if playsound then
-            playsound = false
-            surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
-            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
-        end
-        
-        draw.DrawText( "Ты боец", "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( 155,155,255,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "Бой Насмерть", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,255,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "У тебя есть оружие, устрой резню", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        return
-    end
+	if startRound > 0 and lply:Alive() then
+		if playsound then
+			playsound = false
+
+			surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
+
+			lply:ScreenFade(SCREENFADE.IN, Color(0, 0, 0, 220), 0.5, 4)
+		end
+
+		draw.DrawText(language.GetPhrase("hg.dm.name"), "HomigradRoundFont", ScrW() / 2, ScrH() / 8, Color(red.r, red.g, red.b, math.Clamp(startRound, 0, 1) * 255), TEXT_ALIGN_CENTER)
+		draw.DrawText(language.GetPhrase("hg.dm.desc1"), "HomigradRoundFont", ScrW() / 2, ScrH() / 2, Color(red.r, red.g, red.b, math.Clamp(startRound, 0, 1) * 255), TEXT_ALIGN_CENTER)
+		draw.DrawText(language.GetPhrase("hg.dm.desc2"), "HomigradRoundFont", ScrW() / 2, ScrH() / 1.2, Color(red.r, red.g, red.b, math.Clamp(startRound, 0, 1) * 255), TEXT_ALIGN_CENTER)
+
+		return
+	end
 end
-
-net.Receive("dm die",function()
-    timeStartAnyDeath = CurTime()
-end)
 
 function dm.CanUseSpectateHUD()
-    return false
+	return false
 end
 
-dm.RoundRandomDefalut = 3
+dm.RoundRandomDefalut = 2

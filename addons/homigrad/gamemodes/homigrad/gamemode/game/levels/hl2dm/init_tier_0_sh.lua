@@ -1,25 +1,26 @@
 table.insert(LevelList, "hl2dm")
+
 hl2dm = {}
-hl2dm.Name = "HL2 DM"
+hl2dm.Name = "hg.hl2dm.name"
+
 local models = {}
+
 for i = 1, 9 do
 	table.insert(models, "models/player/group03/male_0" .. i .. ".mdl")
 end
 
 hl2dm.red = {
-	"Повстанцы",
-	Color(125, 95, 60),
-	weapons = {"weapon_hands", "weapon_radio", "med_band_big", "med_band_small"},
-	main_weapon = {"weapon_mk18", "weapon_spas12", "weapon_akm", "weapon_mp7"},
+	"#hg.hl2dm.team1", Color(125, 95, 60), weapons = {"weapon_hands", "med_band_big", "med_band_small", "weapon_radio"},
+	main_weapon = {"weapon_sar2", "weapon_spas12", "weapon_akm", "weapon_mp7", "weapon_scout", "weapon_barrett"},
 	secondary_weapon = {"weapon_hk_usp", "weapon_p220"},
 	models = models
 }
 
 hl2dm.blue = {
-	"Комбайны",
-	Color(75, 75, 125),
-	weapons = {"weapon_hands"}, -- выдача оружия в init.sv
-	models = {"models/player/combine_soldier.mdl"},
+	"#hg.hl2dm.team2", Color(75, 75, 125), weapons = {"weapon_hands"},
+	main_weapon = {"weapon_sar2", "weapon_spas12", "weapon_mp7", "weapon_scout", "weapon_barrett"},
+	secondary_weapon = {"weapon_hk_usp"},
+	models = {"models/player/combine_soldier.mdl"}
 }
 
 hl2dm.teamEncoder = {
@@ -29,12 +30,11 @@ hl2dm.teamEncoder = {
 
 function hl2dm.StartRound()
 	game.CleanUpMap(false)
+
 	team.SetColor(1, hl2dm.red[2])
 	team.SetColor(2, hl2dm.blue[2])
-	if CLIENT then
-		hl2dm.StartRoundCL()
-		return
-	end
+
+	if CLIENT then return hl2dm.StartRoundCL() end
 
 	hl2dm.StartRoundSV()
 end

@@ -1,18 +1,15 @@
-if engine.ActiveGamemode() == "homigrad" then
+local function SendFiles(path)
+	local files, dirs = file.Find("addons/homigrad/materials/" .. path .. "*", "GAME")
 
-local function add(path)
-    local files,dirs = file.Find("addons/homigrad/materials/" .. path .. "*","GAME")
+	for _, v in pairs(files) do
+		if string.sub(v, #v - 2, #v) == "png" then
+			resource.AddSingleFile("materials/" .. path .. v)
+		end
+	end
 
-    for i,file in pairs(files) do
-        if string.sub(file,#file - 2,#file) == "png" then
-            resource.AddSingleFile("materials/" .. path .. file)
-        end
-    end
-
-    for i,dir in pairs(dirs) do
-        add(path .. dir .. "/")
-    end
+	for _, dir in pairs(dirs) do
+		SendFiles(path .. dir .. "/")
+	end
 end
 
-add("")
-end
+SendFiles("")

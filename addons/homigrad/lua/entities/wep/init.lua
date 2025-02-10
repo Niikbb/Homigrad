@@ -1,64 +1,58 @@
-if engine.ActiveGamemode() == "homigrad" then
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
 
 include("shared.lua")
 include("weps.lua")
 
-
 function ENT:Initialize()
-	self:SetUseType( SIMPLE_USE )
-	local ply = self:GetOwner()
-
+	self:SetUseType(SIMPLE_USE)
 	self:PhysicsInit(SOLID_VPHYSICS)
 	self:SetMoveType(MOVETYPE_VPHYSICS)
 	self:SetSolid(SOLID_VPHYSICS)
 
 	local phys = self:GetPhysicsObject()
-
-	if(IsValid(phys))then
+	if IsValid(phys) then
 		phys:Wake()
-		--phys:SetMass(150)
+		-- phys:SetMass(150)
 	end
 
 	self:GetOwner().wep = self
+end
 
+function ENT:Clip1()
+	self.Clip1 = IsValid(lootInfo.Weapons[self.Class]) and lootInfo.Weapons[self.Class]:Clip1() or self.Clip1 or 0
+
+	return self.Clip1
+end
+
+function ENT:SetClip1(val)
+	if IsValid(lootInfo.Weapons[self.Class]) then lootInfo.Weapons[self.Class]:SetClip1(val) end
+end
+
+function ENT:GetPrimaryAmmoType()
+	self.AmmoType = IsValid(lootInfo.Weapons[self.Class]) and lootInfo.Weapons[self.Class]:GetPrimaryAmmoType() or self.AmmoType or weapons.Get(self.Class):GetPrimaryAmmoType()
+
+	return self.AmmoType
 end
 
 function ENT:Use(taker)
+	local ply = RagdollOwner(self:GetOwner()) or self:GetOwner()
 
-	local ply = self:GetOwner()
-	local phys = self:GetPhysicsObject()
-	
-	local lootInfo = IsValid(ply) and ply.Info or IsValid(self.rag) and self.rag.Info
-	if (ply.Otrub or not ply:IsPlayer() or not ply:Alive()) then
-		local rag = self.rag
-		
-		if taker:HasWeapon(self.curweapon) then
-			if lootInfo then
-				taker:GiveAmmo(lootInfo.Weapons[self.curweapon].Clip1, lootInfo.Weapons[self.curweapon].AmmoType)
-				lootInfo.Weapons[self.curweapon].Clip1 = 0
-			else
-				taker:GiveAmmo(self.Clip, self.AmmoType)
-				self.Clip = 0
-			end
-		else
-			--taker.slots = taker.slots or {}
-			--if not taker.slots[weapons.Get(self.curweapon).TwoHands and 3 or 2] then
+	SavePlyInfo(ply)
+
+	if not ply:IsPlayer() or ply.unconscious then
+		local weapon = ply.ActiveWeapon
+
+		if IsValid(weapon) then
+			local can = hook.Run("PlayerCanPickupWeapon", taker, weapon)
+
+			if can then
+				if ply:IsPlayer() then ply:DropWeapon(weapon) end
+
+				timer.Simple(0, function() taker:PickupWeapon(weapon) end)
+
 				self:Remove()
-				taker:Give(self.curweapon, true):SetClip1(lootInfo and lootInfo.Weapons[self.curweapon].Clip1 or self.Clip or 0)
-				if lootInfo then lootInfo.Weapons[self.curweapon] = nil end
-				if IsValid(ply) then ply:StripWeapon(ply.curweapon) SavePlyInfo(ply) end
-			--end
-		end
-
-		if self.Clip == 0 then
-			if self:IsPlayerHolding() then
-				taker:DropObject()
-			else
-				taker:PickupObject(self)
 			end
 		end
 	end
-
-end end
+end

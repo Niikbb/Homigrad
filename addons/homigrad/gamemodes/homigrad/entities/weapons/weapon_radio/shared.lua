@@ -1,11 +1,12 @@
+--[[
 AddCSLuaFile()
 
 SWEP.Base                   = "weapon_base"
 
 SWEP.PrintName 				= "Рация"
-SWEP.Author 				= "0oa"
+SWEP.Author 				= "DarkRP"
 SWEP.Instructions			= "Общение со своей командой"
-SWEP.Category 				= "Разное"
+SWEP.Category 				= "Miscellaneous"
 
 SWEP.Spawnable 				= true
 SWEP.AdminOnly 				= false
@@ -59,4 +60,4 @@ function SWEP:DrawHUD()
     draw.SimpleText("Сидя в машине нужно просто говорить","DebugFixedSmall",ScrW() / 2 ,ScrH() - 125,white,TEXT_ALIGN_CENTER)
 
     draw.SimpleText("Убрать подсказки hg_hint 0","DebugFixedSmall",ScrW() / 2,ScrH() - 100,white,TEXT_ALIGN_CENTER)
-end
+end --]]

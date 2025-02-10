@@ -1,10 +1,5 @@
 AddCSLuaFile()
-local NameLang
-if GetConVar("gmod_language"):GetString() == "ru" or GetConVar("gmod_language"):GetString() == "uk" then
-	NameLang = "УАЗ-452"
-else
-	NameLang = "UAZ-452"
-end
+local NameLang = "UAZ-452"
 
 local light_table = {
 	ModernLights = false,
@@ -119,7 +114,7 @@ local light_table = {
 				[4] = {0}
 			}
 		},
-		---
+		--
 		{
 			pos = Vector(36.46, -88.27, 46.6),
 			size = 10,
@@ -230,7 +225,7 @@ local light_table = {
 				[4] = {0}
 			}
 		},
-		---
+		--
 		{
 			pos = Vector(37.56, -88.14, 42.5),
 			size = 20,
@@ -314,7 +309,7 @@ local light_table = {
 					[4] = {0}
 				}
 			},
-			---
+			--
 			{
 				pos = Vector(37.6, -88.12, 48.44),
 				size = 20,
@@ -368,7 +363,7 @@ local light_table = {
 					[4] = {0}
 				}
 			},
-			---
+			--
 			{
 				pos = Vector(-37.6, -88.12, 48.44),
 				size = 20,
@@ -383,12 +378,13 @@ local light_table = {
 }
 
 list.Set("simfphys_lights", "uaz_452", light_table)
+
 local V = {
 	Name = NameLang,
 	Model = "models/negleb/uaz_452_wagner.mdl",
 	Category = "Willi302's Cars",
 	Members = {
-		Mass = 2000, -- масса авто
+		Mass = 2000,
 		OnTick = function(ent)
 			if ent:GetLightsEnabled() then
 				ent:SetSubMaterial(2, "sim_fphys_uaz_452/guages")
@@ -489,4 +485,6 @@ local V = {
 	}
 }
 
-if file.Exists("models/negleb/uaz_452_wagner.mdl", "GAME") then list.Set("simfphys_vehicles", "sim_fphys_uaz-452_wagner", V) end
+if file.Exists("models/negleb/uaz_452_wagner.mdl", "GAME") then
+	list.Set("simfphys_vehicles", "sim_fphys_uaz-452_wagner", V)
+end

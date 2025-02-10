@@ -114,8 +114,8 @@ end
 
 function basedefence.RoundEndCheck()
     tdm.Center()
-    
-    local Alive = tdm.GetCountLive(team.GetPlayers(1))
+
+    local Alive = tdm.GetCountAlive(team.GetPlayers(1))
 
     if Alive == 0 then EndRound() return end
 
@@ -139,7 +139,7 @@ local wepeno = {
     "weapon_sar2"
 }
 
-function basedefence.PlayerSpawn(ply,teamID)
+function basedefence.PlayerSpawn2(ply,teamID)
     if teamID == 2 then return end
 
 	ply:SetModel(basedefence.models[math.random(#basedefence.models)])
@@ -156,9 +156,9 @@ function basedefence.PlayerSpawn(ply,teamID)
     wep:SetClip1(wep:GetMaxClip1())
     ply:SetAmmo(wep:GetMaxClip1() * 3,wep:GetPrimaryAmmoType())
 
-    if math.random(3) == 3 then ply:Give("weapon_molotok") end
+    if math.random(3) == 3 then ply:Give("weapon_hammer") end
 
-	if math.random(1,4) == 4 then ply:Give("adrinaline") end
+	if math.random(1,4) == 4 then ply:Give("adrenaline") end
 	if math.random(1,4) == 4 then ply:Give("painkiller") end
 	if math.random(1,4) == 4 then ply:Give("medkit") end
 	if math.random(1,4) == 4 then ply:Give("med_band_big") end

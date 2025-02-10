@@ -1,11 +1,10 @@
+--[[
 include("shared.lua")
-
-homigrad_weapons = homigrad_weapons or {}
 
 function SWEP:Initialize()
     self:SetHoldType("normal")
 
-    homigrad_weapons[self] = true
+    AddHomigradWeapon(self)
 
     self.voiceSpeak = 0
     self.lisens = {}
@@ -16,7 +15,7 @@ function SWEP:BippSound(ent,pitch)
 end
 
 function SWEP:CanLisen(output,input,isChat)
-    if not output:Alive() or output.Otrub or not input:Alive() or input.Otrub then return false end
+    if not output:Alive() or output.unconscious or not input:Alive() or input.unconscious then return false end
     if output:InVehicle() and output:IsSpeaking() then self.voiceSpeak = CurTime() + 0.5 end
 
     if not input:HasWeapon("weapon_radio") then return end
@@ -51,7 +50,7 @@ function SWEP:Step()
                 end
             elseif not lisens[input] then
                 lisens[input] = true
-                input:ChatPrint("Вещает : " .. output:Nick())
+                --input:ChatPrint("Вещает : " .. output:Nick())
                 self:BippSound(input,100)
             end
         end
@@ -84,4 +83,4 @@ hook.Add("Player Can Lisen","radio",function(output,input,isChat)
 
         return true,false
     end
-end)
+end) --]]

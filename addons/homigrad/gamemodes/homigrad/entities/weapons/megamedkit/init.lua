@@ -1,25 +1,29 @@
 include("shared.lua")
 
-local healsound = Sound("snd_jack_bandage.wav")
+local healsound = "snd_jack_bandage.wav"
 
 function SWEP:Heal(ent)
-    local usses
+	local used
 
-    if ent.pain > 50 then
-        ent.painlosing = math.Clamp(ent.painlosing + 2.5,1,15)
-        ent.pain = math.max(ent.pain - 700,0)
-        usses = true
-    end
+	if ent.pain > 50 then
+		ent.painlosing = 0
+		ent.pain = 0
+		used = true
+	end
 
-    if ent.Bloodlosing > 0 then
-        ent.Bloodlosing = math.max(ent.Bloodlosing - 200,0)
-        usses = true
-    end
+	if ent.Bloodlosing > 0 then
+		ent.Bloodlosing = 0
+		used = true
+	end
 
-    if ent:Health() < 100 then
-        ent:SetHealth(math.Clamp(self:GetOwner():Health() + 75,0,100))
-        usses = true
-    end
+	if ent:Health() < 100 then
+		ent:SetHealth(math.Clamp(ent + 75, 0, 100))
+		used = true
+	end
 
-    if usses then sound.Play(healsound,ent:GetPos(),75,100,0.5) self:Remove() end
+	if used then
+		sound.Play(healsound, ent:GetPos(), nil, nil, 0.5)
+
+		self:Remove()
+	end
 end

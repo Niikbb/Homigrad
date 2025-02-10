@@ -1,12 +1,14 @@
-AddCSLuaFile()
+AddCSLuaFile() -- TODO: Replace code with weapon_medkit
 
 SWEP.Base = "medkit"
 
-SWEP.PrintName = "Мега Аптечка"
-SWEP.Author = "First AID"
-SWEP.Instructions = "на себя не юзается"
+if CLIENT then
+	SWEP.PrintName = language.GetPhrase("hg.megamedkit.name")
+	SWEP.Author = "First AID"
+	SWEP.Instructions = language.GetPhrase("hg.megamedkit.inst")
+	SWEP.Category = language.GetPhrase("hg.category.medicine")
+end
 
-SWEP.Category = "Медицина"
 SWEP.Spawnable = true
 
 SWEP.Slot = 3
@@ -19,9 +21,9 @@ SWEP.UseHands = true
 SWEP.DrawWeaponSelection = DrawWeaponSelection
 SWEP.OverridePaintIcon = OverridePaintIcon
 
-SWEP.dwsPos = Vector(15,15,15)
+SWEP.dwsPos = Vector(15, 15, 15)
 
 SWEP.vbw = false
-SWEP.vbwPos = Vector(0,-2,7)
-SWEP.vbwAng = Angle(0,90,180)
+SWEP.vbwPos = Vector(0, -2, 7)
+SWEP.vbwAng = Angle(0, 90, 180)
 SWEP.vbwModelScale = 1.7

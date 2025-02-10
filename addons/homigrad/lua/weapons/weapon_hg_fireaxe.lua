@@ -1,12 +1,13 @@
-if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = "weapon_hg_melee_base"
 
-SWEP.PrintName = "Пожарный топор"
-SWEP.Category = "Ближний Бой"
-SWEP.Instructions = "Массивный топор для вскрытия и разборки конструкций при тушении пожара."
+if CLIENT then
+	SWEP.PrintName = language.GetPhrase("hg.fireaxe.name")
+	SWEP.Instructions = language.GetPhrase("hg.fireaxe.inst")
+	SWEP.Category = language.GetPhrase("hg.category.melee")
+end
 
-SWEP.Spawnable= true
-SWEP.AdminSpawnable= true
+SWEP.Spawnable = true
+SWEP.AdminSpawnable = true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
@@ -22,7 +23,7 @@ SWEP.SlotPos = 2
 
 SWEP.UseHands = true
 
----SWEP.HoldType = "knife"
+-- SWEP.HoldType = "knife"
 
 SWEP.FiresUnderwater = false
 
@@ -49,4 +50,3 @@ SWEP.FlashHitSound = "snd_jack_hmcd_axehit.wav"
 SWEP.ShouldDecal = true
 SWEP.HoldTypeWep = "melee2"
 SWEP.DamageType = DMG_SLASH
-end

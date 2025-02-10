@@ -1,12 +1,13 @@
-if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = "weapon_hg_melee_base"
 
-SWEP.PrintName = "Топорик"
-SWEP.Category = "Ближний Бой"
-SWEP.Instructions = "Одноручный ударный инструмент с острым лезвием с одной стороны, используемым для рубки и колки дерева, и наконечником молота с другой стороны."
+if CLIENT then
+	SWEP.PrintName = language.GetPhrase("hg.hatchet.name")
+	SWEP.Instructions = language.GetPhrase("hg.hatchet.inst")
+	SWEP.Category = language.GetPhrase("hg.category.melee")
+end
 
-SWEP.Spawnable= true
-SWEP.AdminSpawnable= true
+SWEP.Spawnable = true
+SWEP.AdminSpawnable = true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
@@ -22,7 +23,7 @@ SWEP.SlotPos = 2
 
 SWEP.UseHands = true
 
----SWEP.HoldType = "knife"
+-- SWEP.HoldType = "knife"
 
 SWEP.FiresUnderwater = false
 
@@ -49,4 +50,3 @@ SWEP.FlashHitSound = "snd_jack_hmcd_axehit.wav"
 SWEP.ShouldDecal = true
 SWEP.HoldTypeWep = "melee"
 SWEP.DamageType = DMG_SLASH
-end

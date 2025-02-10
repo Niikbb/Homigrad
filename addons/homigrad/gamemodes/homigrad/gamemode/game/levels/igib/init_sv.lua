@@ -30,7 +30,7 @@ function igib.Think()
     if CurTime() >= igib.LastWave then
         SetGlobalInt("igib_respawntime", CurTime())
     
-        for _, v in pairs(player.GetAll()) do
+        for _, v in player.Iterator() do
             local players = {}
             if !v:Alive() and v:Team() != 1002 then
                 v:Spawn()
@@ -71,14 +71,13 @@ end
 
 local red = Color(255,0,0)
 
-function igib.PlayerSpawn(ply,teamID)
+function igib.PlayerSpawn2(ply,teamID)
 	ply:SetModel(tdm.models[math.random(#tdm.models)])
     ply:SetPlayerColor(Vector(0,0,0.6))
     ply:Give("weapon_igib")
     ply:SetLadderClimbSpeed(100)
     ply:SetWalkSpeed(350)
     ply:SetRunSpeed(700)
-    ply.nopain = true
 end
 
 function igib.PlayerInitialSpawn(ply)

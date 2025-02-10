@@ -1,12 +1,13 @@
-if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = "weapon_hg_melee_base"
 
-SWEP.PrintName = "Металическая Бита"
-SWEP.Category = "Ближний Бой"
-SWEP.Instructions = "Часть спортивного инвентаря, предназначенная для нанесения ударов по мячу, выполненная из металлического материала, благодаря чему урон от данной биты будет в разы сильнее, чем от её деревянного аналога. Особенности конструкции биты позволяют наносить ею тяжёлые и мощные удары, но отличается от деревянной битой тем."
+if CLIENT then
+	SWEP.PrintName = language.GetPhrase("hg.metalbat.name")
+	SWEP.Instructions = language.GetPhrase("hg.metalbat.inst")
+	SWEP.Category = language.GetPhrase("hg.category.melee")
+end
 
-SWEP.Spawnable= true
-SWEP.AdminSpawnable= true
+SWEP.Spawnable = true
+SWEP.AdminSpawnable = true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
@@ -22,7 +23,7 @@ SWEP.SlotPos = 2
 
 SWEP.UseHands = true
 
----SWEP.HoldType = "knife"
+-- SWEP.HoldType = "knife"
 
 SWEP.FiresUnderwater = false
 
@@ -49,4 +50,3 @@ SWEP.FlashHitSound = "weapons/melee/flesh_impact_blunt_04.wav"
 SWEP.ShouldDecal = false
 SWEP.HoldTypeWep = "melee2"
 SWEP.DamageType = DMG_CLUB
-end

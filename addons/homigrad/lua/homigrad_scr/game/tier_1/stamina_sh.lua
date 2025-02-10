@@ -1,45 +1,38 @@
-if not engine.ActiveGamemode() == "homigrad" then return end
-local value,gg
+local value = 1
 
 if CLIENT then
-	value = 1
-
-	net.Receive("info_staminamul",function()
+	net.Receive("info_staminamul", function()
 		value = net.ReadFloat()
 	end)
 end
 
-local jmod
-if CLIENT then
-	hook.Add("Move","homigrad",function(ply,mv)
-		gg(ply,mv,value)
-	end)
-else
-	hook.Add("Move","homigrad",function(ply,mv)
-		gg(ply,mv,(ply.staminamul or 1))
-	end)
-end
+local function gg(ply, mv, mul)
+	local maxSpeed = mv:GetMaxSpeed() * mul
 
+	mv:SetMaxSpeed(maxSpeed)
+	mv:SetMaxClientSpeed(maxSpeed)
 
-gg = function(ply,mv,value)
-	value = mv:GetMaxSpeed() * value
+	local isSprinting = ply:IsSprinting() and mv:GetForwardSpeed() > 1
+	local runSpeed = isSprinting and 450 or ply:GetWalkSpeed()
 
-	ply:SetRunSpeed(Lerp((ply:IsSprinting() and mv:GetForwardSpeed() > 1) and 0.05 or 1,ply:GetRunSpeed(),(ply:IsSprinting() and mv:GetForwardSpeed() > 1) and 450 or ply:GetWalkSpeed()))
-
-	mv:SetMaxSpeed(value)
-	mv:SetMaxClientSpeed(value)
-
+	ply:SetRunSpeed(Lerp(isSprinting and 0.05 or 1, ply:GetRunSpeed(), runSpeed))
 
 	if ply.IsProne and ply:IsProne() then return end
 
-	local value = ply.EZarmor
-	value = value and ply.EZarmor.speedfrac
+	local armorSpeedFrac = ply.EZarmor and ply.EZarmor.speedfrac
 
-	if value and value ~= 1 then
-		value = mv:GetMaxSpeed() * math.max(value,0.75)
-		mv:SetMaxSpeed(value)
-		mv:SetMaxClientSpeed(value)
+	if armorSpeedFrac and armorSpeedFrac ~= 1 then
+		local adjustedSpeed = maxSpeed * math.max(armorSpeedFrac, 0.75)
+
+		mv:SetMaxSpeed(adjustedSpeed)
+		mv:SetMaxClientSpeed(adjustedSpeed)
 	end
 end
 
-hook.Remove("Move","JMOD_ARMOR_MOVE")
+hook.Add("Move", "homigrad", function(ply, mv)
+	local mul = CLIENT and value or ply.staminamul or 1
+
+	gg(ply, mv, mul)
+end)
+
+hook.Remove("Move", "JMOD_ARMOR_MOVE")

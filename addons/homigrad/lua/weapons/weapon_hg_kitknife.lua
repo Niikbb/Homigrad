@@ -1,12 +1,13 @@
-if engine.ActiveGamemode() == "homigrad" then
 SWEP.Base = "weapon_hg_melee_base"
 
-SWEP.PrintName = "Кухонный ножик"
-SWEP.Category = "Ближний Бой"
-SWEP.Instructions = "Колющий, а также рубящий, режущий инструмент, рабочей частью которого является клинок — полоса, выполненная из твёрдого материала."
+if CLIENT then
+	SWEP.PrintName = language.GetPhrase("hg.kitknife.name")
+	SWEP.Instructions = language.GetPhrase("hg.kitknife.inst")
+	SWEP.Category = language.GetPhrase("hg.category.melee")
+end
 
-SWEP.Spawnable= true
-SWEP.AdminSpawnable= true
+SWEP.Spawnable = true
+SWEP.AdminSpawnable = true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
@@ -22,7 +23,7 @@ SWEP.SlotPos = 2
 
 SWEP.UseHands = true
 
----SWEP.HoldType = "knife"
+-- SWEP.HoldType = "knife"
 
 SWEP.FiresUnderwater = false
 
@@ -47,6 +48,5 @@ SWEP.DrawSound = "snd_jack_hmcd_knifedraw.wav"
 SWEP.HitSound = "snd_jack_hmcd_knifehit.wav"
 SWEP.FlashHitSound = "snd_jack_hmcd_slash.wav"
 SWEP.ShouldDecal = true
-SWEP.HoldTypeWep = "melee"
-SWEP.DamageType = DMG_SLASH 
-end
+SWEP.HoldTypeWep = "knife"
+SWEP.DamageType = DMG_SLASH

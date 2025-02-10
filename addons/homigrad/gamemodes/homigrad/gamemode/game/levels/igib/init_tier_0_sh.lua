@@ -1,8 +1,7 @@
-table.insert(LevelList,"igib")
+--table.insert(LevelList,"igib")
 igib = {}
 igib.Name = "InstaGib"
 igib.LoadScreenTime = 2.5
-igib.RoundRandomDefalut = 1
 igib.NoSelectRandom = true
 
 local red = Color(155,155,255)
@@ -41,17 +40,17 @@ end
 
 function igib.HUDPaint_RoundLeft(white)
     local lply = LocalPlayer()
-	local startRound = roundTimeStart + 3 - CurTime()
+	local startRound = roundTimeStart + 5 - CurTime()
 
     if startRound > 0 and lply:Alive() then
         if playsound then
             playsound = false
             surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
-            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
         end
-        draw.DrawText( "SHOOT & RUN", "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( 155,155,255,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "InstaGib", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,255,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound - 0.5,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,220),0.5,4)
+        draw.DrawText( "SHOOT & RUN", "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( 155,155,255,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        draw.DrawText( "InstaGib", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,255,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        draw.DrawText( "УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
         return
     end
 end
