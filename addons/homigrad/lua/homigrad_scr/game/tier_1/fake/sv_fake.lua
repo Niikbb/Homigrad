@@ -1083,7 +1083,7 @@ hook.Add("Player Think","FakeControl",function(ply,time) --управление 
 					ang:RotateAroundAxis(eyeangs:Forward(),90)
 					ang:RotateAroundAxis(eyeangs:Right(),75)
 					local shadowparams = {
-						secondstoarrive=0.4,
+						secondstoarrive=0.3,
 						pos=head:GetPos()+eyeangs:Forward()*50+eyeangs:Right()*-5,
 						angle=ang,
 						maxangular=670,
@@ -1117,8 +1117,8 @@ hook.Add("Player Think","FakeControl",function(ply,time) --управление 
 				local pos = ply:EyePos()
 				pos[3] = head:GetPos()[3]
 				local shadowparams = {
-					secondstoarrive=0.4,
-					pos=head:GetPos()+eyeangs:Forward()*50+eyeangs:Right()*15,
+					secondstoarrive=0.3,
+					pos=head:GetPos()+eyeangs:Forward()*50+eyeangs:Right()*25,
 					angle=ang,
 					maxangular=670,
 					maxangulardamp=100,
@@ -1140,7 +1140,7 @@ hook.Add("Player Think","FakeControl",function(ply,time) --управление 
 
 						shadowparams.pos=shadowparams.pos
 						phys:ComputeShadowControl(shadowparams)
-						shadowparams.pos=shadowparams.pos+eyeangs:Forward()*-50+eyeangs:Right()*-15
+						shadowparams.pos=shadowparams.pos+eyeangs:Forward()*-50+eyeangs:Right()*-25
 						physa:ComputeShadowControl(shadowparams)
 
 					elseif IsValid(ply.wep) and IsValid(ply.wep:GetPhysicsObject())then
@@ -1173,7 +1173,7 @@ hook.Add("Player Think","FakeControl",function(ply,time) --управление 
 				local angs = ply:EyeAngles()
 				angs:RotateAroundAxis(angs:Forward(),90)
 				local shadowparams = {
-					secondstoarrive=0.5,
+					secondstoarrive=0.25,
 					pos=head:GetPos()+vector_up*(20/math.Clamp(rag:GetVelocity():Length()/300,1,12)),
 					angle=angs,
 					maxangulardamp=10,

@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Automatic Rifle 2"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 46
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "weapons/arccw/fire1.wav"
 SWEP.Primary.SoundFar = "snd_jack_hmcd_snp_far.wav"
-SWEP.Primary.Force = 270/3
+SWEP.Primary.Force = 75
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.1
 SWEP.ReloadSound = "weapons/arccw/npc_ar2_reload.wav"

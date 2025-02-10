@@ -17,10 +17,8 @@ BleedingEntities = BleedingEntities or {}
 
 hook.Add("HomigradDamage","phildcorn",function(ply,hitGroup,dmginfo,rag,armorMul)
 	if armorMul <= 0.75 or not dmginfo:IsDamageType(DMG_BULLET+DMG_SLASH+DMG_BLAST+DMG_ENERGYBEAM+DMG_NEVERGIB+DMG_ALWAYSGIB+DMG_PLASMA+DMG_AIRBOAT+DMG_SNIPER+DMG_BUCKSHOT) then return end
-	
 	local dmg
 	if dmginfo:IsDamageType(DMG_BUCKSHOT+DMG_SLASH) then dmg = dmginfo:GetDamage() * 2 else dmg = dmginfo:GetDamage() * 0.8 end
-
 	ply.Bloodlosing = ply.Bloodlosing + dmg
 end)
 
@@ -34,7 +32,6 @@ end)
 
 local tr = {filter = {}}
 local math_Clamp = math.Clamp
-
 local util_TraceHull = util.TraceHull
 local math_Rand = math.Rand
 local util_Decal = util.Decal
@@ -57,18 +54,17 @@ hook.Add("Player Think","homigrad-blood",function(ply,time)
 	local nextPulse,heartstop = homigradPulse(ply)
 
 	ply.heartstop = heartstop
-	ply.nextPulse = not heartstop and nextPulse or Lerp(0.1,(ply.nextPulse or 0),5)
+	ply.nextPulse = not heartstop and nextPulse or Lerp(0.1,ply.nextPulse or 0,5)
 
 	if (ply.CPRThink or 0) < time then
 		ply.CPRThink = time + 1
 		ply.CPR = math.max((ply.CPR or 0) - 5,0)
-		ply.o2 = (ply.heartstop) and math.max((ply.o2 or 1) - 0.1,-3) or math.min((ply.o2 or 1) + 0.1,1)
+		ply.o2 = ply.heartstop and math.max((ply.o2 or 1) - 0.1,-3) or math.min((ply.o2 or 1) + 0.1,1)
 	end
 
 	local ent = IsValid(ply.fakeragdoll) and ply.fakeragdoll or ply
-
 	local neck = ent:GetBoneMatrix(ent:LookupBone("ValveBiped.Bip01_Neck1")):GetTranslation()
-	
+
 	if ply.Organs["artery"] == 0 and (ply.arteriaThink or 0) < time and ply.Blood > 0 then
 		ply.arteriaThink = time + 0.1
 		if not ply.holdingartery then
@@ -89,11 +85,8 @@ hook.Add("Player Think","homigrad-blood",function(ply,time)
 
 	ply.pulseStart = time
 
-	--ply:EmitSound("snd_jack_hmcd_heartpound.wav",70,100,0.05 / ply.nextPulse,CHAN_AUTO)
-	
 	if ply.Bloodlosing > 0 then
 		ply.Bloodlosing = ply.Bloodlosing - 0.5
-		
 		ply.Blood = math.max(ply.Blood - ply.Bloodlosing / 2,0)
 
 		BloodParticle(ent:GetPos() + ent:OBBCenter(),VectorRand(-15,15))
@@ -114,7 +107,6 @@ local CurTime = CurTime
 local time
 
 local tr = {}
-
 local randVec = Vector(0,0,-1)
 
 hook.Add("Think","homigrad-bleeding-ents",function()
@@ -139,7 +131,7 @@ hook.Add("PlayerSpawn","homigrad-blood",function(ply)
 
 	ply.IsBleeding = false
 	ply.Blood = 5000
-	ply.Bloodlosing=0
+	ply.Bloodlosing = 0
 
 	ply.stamina = 100
 	ply.LeftLeg = 1
@@ -204,28 +196,24 @@ util.AddNetworkString("organism_info")
 
 concommand.Add("hg_organisminfo",function(ply,cmd,args)
 	if not ply:IsAdmin() then return end
-	
 	local huyply = args[1] and player.GetListByName(args[1])[1] or ply
-
 	net.Start("organism_info")
 	net.WriteTable(huyply.Organs)
 	net.WriteString(
-	"Кровь (мл): "..tostring(huyply.Blood).."\n"..
-	"Кровотечение (мл/удар): "..tostring(huyply.Bloodlosing).."\n"..
-	"СЛР: "..tostring(huyply.CPR).."\n"..
-	"Боль: "..tostring(huyply.pain).."\n"..
-	"Остановка сердца: "..tostring(huyply.heartstop).."\n"..
-	"o2 (1 = полный запас кислорода): "..tostring(huyply.o2).."\n"..
-	"Удары в минуту: "..tostring(huyply.heartstop and 0 or 1 / huyply.nextPulse * 60).."\n"..
-	"Игрок: "..huyply:Name()
+	"Кровь (мл): " .. tostring(huyply.Blood) .. "\n" ..
+	"Кровотечение (мл/удар): " .. tostring(huyply.Bloodlosing) .. "\n" ..
+	"СЛР: " .. tostring(huyply.CPR) .. "\n" ..
+	"Боль: " .. tostring(huyply.pain) .. "\n" ..
+	"Остановка сердца: " .. tostring(huyply.heartstop) .. "\n" ..
+	"o2 (1 = полный запас кислорода): " .. tostring(huyply.o2) .. "\n" ..
+	"Удары в минуту: " .. tostring(huyply.heartstop and 0 or 1 / huyply.nextPulse * 60) .. "\n" ..
+	"Игрок: " .. huyply:Name()
 	)
 	net.Send(ply)
 end)
 
 concommand.Add("hg_organism_setvalue",function(ply,cmd,args)
 	if not ply:IsAdmin() then return end
-	
 	local huyply = args[3] and player.GetListByName(args[3])[1] or ply
-	
 	huyply.Organs[args[1]] = args[2]
 end)

@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base 
+SWEP.Base = "salat_base" -- base 
 
 SWEP.PrintName 				= "РПК"
 SWEP.Instructions			= "Пулемёт под калибр 7,62х39"
@@ -19,12 +19,12 @@ SWEP.Primary.Damage = 45
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb2/weapons/rpk/rpk-1.wav"
 --SWEP.Primary.SoundFar = "ak74/ak74_dist.wav"
-SWEP.Primary.Force = 240/3
+SWEP.Primary.Force = 60
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.08
 SWEP.ReloadSound = "weapons/ar2/ar2_reload.wav"
 SWEP.TwoHands = true
-							
+
 SWEP.Secondary.ClipSize		= -1
 SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic	= false

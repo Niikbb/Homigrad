@@ -20,7 +20,7 @@ SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "snd_jack_hmcd_sht_close.wav"
 SWEP.Primary.SoundFar = "snd_jack_hmcd_sht_far.wav"
-SWEP.Primary.Force = 15
+SWEP.Primary.Force = 40
 
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.5

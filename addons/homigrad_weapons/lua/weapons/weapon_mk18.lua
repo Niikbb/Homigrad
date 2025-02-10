@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "HK416"
 SWEP.Instructions			= "Автоматическая винтовка под калибр 5,56х45"
@@ -19,7 +19,7 @@ SWEP.Primary.Damage = 40
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb/weapons/hk416/shoot.wav"
 --SWEP.Primary.SoundFar = "m16a4/m16a4_dist.wav"
-SWEP.Primary.Force = 160/3
+SWEP.Primary.Force = 55
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.07
 SWEP.ReloadSound = "weapons/ar2/ar2_reload.wav"

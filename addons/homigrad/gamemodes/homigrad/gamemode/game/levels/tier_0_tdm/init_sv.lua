@@ -113,7 +113,7 @@ function tdm.RemoveItems()
 end
 
 function tdm.StartRoundSV()
-    tdm.RemoveItems()
+	tdm.RemoveItems()
 
 	roundTimeStart = CurTime()
 	roundTime = 60 * (2 + math.min(#player.GetAll() / 4,2))
@@ -129,8 +129,8 @@ function tdm.StartRoundSV()
 
 	tdm.CenterInit()
 
-    bahmut.SelectRandomPlayers(team.GetPlayers(1),2,bahmut.GiveAidPhone)
-    bahmut.SelectRandomPlayers(team.GetPlayers(2),2,bahmut.GiveAidPhone)
+	bahmut.SelectRandomPlayers(team.GetPlayers(1),2,bahmut.GiveAidPhone)
+	bahmut.SelectRandomPlayers(team.GetPlayers(2),2,bahmut.GiveAidPhone)
 end
 
 function tdm.GetCountLive(list,func)
@@ -141,6 +141,7 @@ function tdm.GetCountLive(list,func)
 		if not IsValid(ply) then continue end
 
 		result = func and func(ply)
+		if (ply.Blood < 2500 or ply.heartstop) and ply.unconscious then continue end
 		if result == true then count = count + 1 continue elseif result == false then continue end
 		if not PlayerIsCuffs(ply) and ply:Alive() then count = count + 1 end
 	end

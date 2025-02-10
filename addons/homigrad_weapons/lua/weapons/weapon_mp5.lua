@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base 
+SWEP.Base = "salat_base" -- base 
 
 SWEP.PrintName 				= "HK MP5a3"
 SWEP.Author 				= "Homigrad"
@@ -20,11 +20,11 @@ SWEP.Primary.Damage = 25
 SWEP.Primary.Spread = 5
 SWEP.Primary.Sound = "mp5k/mp5k_fp.wav"
 SWEP.Primary.SoundFar = "mp5k/mp5k_dist.wav"
-SWEP.Primary.Force = 85/3
+SWEP.Primary.Force = 30
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.06
 SWEP.TwoHands = true
-							
+
 SWEP.Secondary.ClipSize		= -1
 SWEP.Secondary.DefaultClip	= -1
 SWEP.Secondary.Automatic	= false

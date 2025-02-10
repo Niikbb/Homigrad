@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "HK USP-S"
 SWEP.Author 				= "Homigrad"
@@ -19,7 +19,7 @@ SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 25
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb/weapons/tmp/shoot.wav"
-SWEP.Primary.Force = 70/3
+SWEP.Primary.Force = 15
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.14
 
@@ -62,7 +62,7 @@ SWEP.dwmAForward = -90
 SWEP.addAng = Angle(1.1,1.3,0)
 SWEP.addPos = Vector(0,4,-0.7)
 
-local model 
+local model
 if CLIENT then
     model = GDrawWorldModel or ClientsideModel(SWEP.WorldModel,RENDER_GROUP_OPAQUE_ENTITY)
     GDrawWorldModel = model
@@ -74,12 +74,10 @@ if SERVER then
         local owner = self:GetOwner()
         local Pos,Ang = owner:GetBonePosition(owner:LookupBone("ValveBiped.Bip01_R_Hand"))
         if not Pos then return end
-        
+
         Pos:Add(Ang:Forward() * self.dwmForward)
         Pos:Add(Ang:Right() * self.dwmRight)
         Pos:Add(Ang:Up() * self.dwmUp)
-
-
         Ang:RotateAroundAxis(Ang:Up(),self.dwmAUp)
         Ang:RotateAroundAxis(Ang:Right(),self.dwmARight)
         Ang:RotateAroundAxis(Ang:Forward(),self.dwmAForward)
@@ -107,23 +105,19 @@ function SWEP:DrawWorldModel()
 
     local Pos,Ang = owner:GetBonePosition(owner:LookupBone("ValveBiped.Bip01_R_Hand"))
     if not Pos then return end
-    
+
     Pos:Add(Ang:Forward() * self.dwmForward)
     Pos:Add(Ang:Right() * self.dwmRight)
     Pos:Add(Ang:Up() * self.dwmUp)
-
-
     Ang:RotateAroundAxis(Ang:Up(),self.dwmAUp)
     Ang:RotateAroundAxis(Ang:Right(),self.dwmARight)
     Ang:RotateAroundAxis(Ang:Forward(),self.dwmAForward)
-    
+
     self:SetPosAng(Pos,Ang)
 
     model:SetPos(Pos)
     model:SetAngles(Ang)
-
     model:SetModelScale(self.dwmModeScale)
-
     model:DrawModel()
 end
 end

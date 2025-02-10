@@ -5,7 +5,7 @@ skins = {
 
 local vecZero = Vector(0, 0, 0)
 local angZero = Angle(0, 0, 0)
-SWEP.Base = 'weapon_base'
+SWEP.Base = "weapon_base"
 SWEP.PrintName = "salat_base"
 SWEP.Author = "Homigrad"
 SWEP.Instructions = ""
@@ -137,9 +137,9 @@ end
 function SWEP:DrawWorldModel()
 	self:DrawModel()
 	if not hg_skins:GetBool() then return end
-	/*if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and skins[self:GetOwner():GetUserGroup()] then
+	--[[if IsValid(self:GetOwner()) and self:GetOwner():IsPlayer() and skins[self:GetOwner():GetUserGroup()] then
 		self:DrawModel()
-	end*/
+	end]]--
 end
 
 HMCD_SurfaceHardness = {
