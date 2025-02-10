@@ -80,7 +80,7 @@ hook.Add("HUDPaint", "homigrad-roundstate", function()
 		showRoundInfoColor.a = k * 255
 		yellow.a = showRoundInfoColor.a
 		local name, nextName = TableRound().Name, TableRound(roundActiveNameNext).Name
-		draw.RoundedBox(5, ScrW() - 270 - math.max(#nextName, #name) * 4, ScrH() - 65, 800, 70, Color(0, 0, 0, showRoundInfoColor.a - 30))
+		draw.RoundedBox(5, ScrW() - 270 - math.max(#nextName, #name) * 6, ScrH() - 65, 800, 70, Color(0, 0, 0, showRoundInfoColor.a - 30))
 		draw.SimpleText(language.GetPhrase("hg.levels.current"):format(language.GetPhrase(name)), "HomigradFont", ScrW() - 15, ScrH() - 40, showRoundInfoColor, TEXT_ALIGN_RIGHT)
 
 		if roundTimeStart and math.Round(roundTimeStart + roundTime - CurTime()) > 0 then
