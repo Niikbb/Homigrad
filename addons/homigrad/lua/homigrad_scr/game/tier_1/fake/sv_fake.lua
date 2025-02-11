@@ -1308,7 +1308,7 @@ hook.Add("Player Think", "hgVelocityPlayerFallOnPlayerCheck", function(ply, time
 	local speed = ply:GetVelocity():Length()
 
 	if ply:GetMoveType() ~= MOVETYPE_NOCLIP and not IsValid(ply.FakeRagdoll) and not ply:HasGodMode() and ply:Alive() then
-		if speed < 600 then return end
+		if speed < 450 then return end
 		if hook.Run("Should Fake Velocity", ply, speed) ~= nil then return end
 
 		Faking(ply)

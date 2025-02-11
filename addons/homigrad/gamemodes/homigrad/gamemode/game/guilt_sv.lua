@@ -53,36 +53,7 @@ end)
 local validUserGroup = {
 	superadmin = true,
 	admin = true,
-	megapenis = true,
-	servermanager = true,
-	owner = true,
 }
-
---[[
-COMMANDS.noguilt = {
-	function(ply, args)
-		if not ply:IsAdmin() then return end
-		local value = (tonumber(args[2]) == 1 and true) or false
-		local plrs = player.GetListByName(args[1], ply)
-
-		for _, plr in pairs(plrs) do
-			plr.noguilt = value
-			plr:ChatPrint("NoGuilt for " .. table.concat(plrs, ", ") .. " currently: " .. tostring(value))
-		end
-	end,
-	1
-}
-
-COMMANDS.fake = {
-	function(ply, args)
-		if not ply:IsAdmin() then return end
-
-		for _, plr in pairs(player.GetListByName(args[1], ply)) do
-			Faking(plr)
-		end
-	end,
-	1
-} --]]
 
 function GuiltCheck(att, ply)
 	guiltVal = 100
@@ -91,17 +62,15 @@ function GuiltCheck(att, ply)
 		att.Guilt = 0
 
 		if not att:HasGodMode() and att:Alive() then
-			-- RunConsoleCommand("ulx", "asay", "[AUTOMATED] " .. att:Name() .. " has exceeded their guilt of 100%. They are on team " .. tostring(att:Team()))
-			-- print("[GUILT CHECK] " .. att:Name() .. " has exceeded their guilt of 100%. They are on team " .. tostring(att:Team()))
-			if not validUserGroup[att:GetUserGroup()] then
+			att:Kill()
+			RunConsoleCommand("ulx", "tsay", ":<clr:red>[GUILT] " .. att:Name() .. " has been slayed for exceeding their guilt of 100%.")
+			--[[if not validUserGroup[att:GetUserGroup()] then
 				att:Kill()
-
 				RunConsoleCommand("ulx", "tsay", ":<clr:red>[GUILT] " .. att:Name() .. " has been slayed for exceeding their guilt of 100%.")
-
 				return
 			else
 				return
-			end
+			end--]]
 		end
 	end
 end

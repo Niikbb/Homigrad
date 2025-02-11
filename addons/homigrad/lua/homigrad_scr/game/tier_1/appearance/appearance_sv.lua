@@ -15,11 +15,10 @@ net.Receive("EasyAppearance_SendData", function(len, ply)
 	-- print(ply.bRandomAppearance)
 end)
 
---[[
-local tDefaultAppearance = {
+--[[local tDefaultAppearance = {
 	strModel = "Male 01",
 	strColthesStyle = "Casual 1"
-} --]]
+}--]]
 
 function EasyAppearance.GetRandomAppearance()
 	local tRandomAppearance = {}

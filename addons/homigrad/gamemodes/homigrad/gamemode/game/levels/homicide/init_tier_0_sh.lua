@@ -41,26 +41,12 @@ else
 	end)
 end
 
---[[
-local turnTable = {
-	["standard"] = 2,
-	["soe"] = 1,
-	["wild-west"] = 4,
-	["gun-free-zone"] = 3
-}--]]
-
 CreateConVar("homicide_setmode", "", FCVAR_LUA_SERVER, "")
 CreateClientConVar("homicide_get", 0, true, true, "Show traitors and stuff while you're spectating", 0, 1)
 
 function homicide.IsMapBig()
 	local mins, maxs = game.GetWorld():GetModelBounds()
 	local skybox = 0
-
-	--[[ huh?
-	for _, ent in pairs(ents.FindByClass("sky_camera")) do
-		skybox = 0
-	end --]]
-
 	return (mins:Distance(maxs) - skybox) > 5000
 end
 
@@ -136,7 +122,6 @@ function homicide.Scoreboard_Status(ply)
 	return "#hg.modes.team.unknown", ScoreboardSpec
 end
 
-local red, blue = Color(200, 0, 10), Color(75, 75, 255)
 local roundSound = {"snd_jack_hmcd_disaster.mp3", "snd_jack_hmcd_shining.mp3", "snd_jack_hmcd_panic.mp3", "snd_jack_hmcd_wildwest.mp3", "snd_jack_hmcd_disaster.mp3"}
 
 function homicide.HUDPaint_RoundLeft(white2)

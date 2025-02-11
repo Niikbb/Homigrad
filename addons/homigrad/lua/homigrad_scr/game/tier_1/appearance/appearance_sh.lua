@@ -91,9 +91,9 @@ local Models = {
 	["Female 06"] = {strPatch = "models/player/group01/female_06.mdl", intSubMat = 4},
 }
 
-local Attachmets = {}
+--local Attachmets = {}
 
-EasyAppearance.Attachmets = Attachmets
+--EasyAppearance.Attachmets = Attachmets
 EasyAppearance.Models = Models
 EasyAppearance.Appearances = Appearances
 
@@ -144,7 +144,7 @@ end
 	}
 --]]
 
-function EasyAppearance.AddAttachmet(strName, strModel, strMaterial, strBone, bDrawOnLocal, vPos, vFPos, aAng, aFAng, iSkin, strBodyGroups)
+--[[function EasyAppearance.AddAttachmet(strName, strModel, strMaterial, strBone, bDrawOnLocal, vPos, vFPos, aAng, aFAng, iSkin, strBodyGroups)
 	EasyAppearance.Attachmets[strName] = {
 		strModel = strModel,
 		strMaterial = strMaterial,
@@ -159,9 +159,9 @@ function EasyAppearance.AddAttachmet(strName, strModel, strMaterial, strBone, bD
 	}
 
 	return true
-end
+end--]]
 
-local AddAttach = EasyAppearance.AddAttachmet
+--local AddAttach = EasyAppearance.AddAttachmet
 -- AddAttach("Hat", "ModelPath", "MaterialPath" or nil, Vector(0, 0, 0), Vector(0, 0, 0), Angle(0, 0, 0), Angle(0, 0, 0), 0, "00000")
 
 --[[
@@ -173,10 +173,10 @@ local AddAttach = EasyAppearance.AddAttachmet
 
 
 -- uniName, modelPath, materialPath, Bone, ShoulDraw in localPlayer, PosMale, PosFemale, AngMale, AngFemale, Skin, Bodygroups
-AddAttach("Gray Cap", "models/modified/hat07.mdl", nil, "ValveBiped.Bip01_Head1", false, Vector(5, 0, 0), Vector(4, 0.1, 0), Angle(0, -80, -90), Angle(0, -80, -90), 0, "00000")
+--[[AddAttach("Gray Cap", "models/modified/hat07.mdl", nil, "ValveBiped.Bip01_Head1", false, Vector(5, 0, 0), Vector(4, 0.1, 0), Angle(0, -80, -90), Angle(0, -80, -90), 0, "00000")
 AddAttach("Red Headphones", "models/modified/headphones.mdl", nil, "ValveBiped.Bip01_Head1", false, Vector(2.8, -.2, 0), Vector(1.3, -1, 0), Angle(0, -80, -90), Angle(0, -80, -90), 0, "00000")
 AddAttach("Pinkman Hat", "models/modified/hat03.mdl", nil, "ValveBiped.Bip01_Head1", false, Vector(5, 0, 0), Vector(4, 0.1, 0), Angle(0, -80, -90), Angle(0, -80, -90), 0, "00000")
 AddAttach("Gray Hat", "models/modified/hat01_fix.mdl", nil, "ValveBiped.Bip01_Head1", false, Vector(5, 0, 0), Vector(4, 0.1, 0), Angle(0, -80, -90), Angle(0, -80, -90), 0, "00000")
 AddAttach("Bandana", "models/modified/bandana.mdl", nil, "ValveBiped.Bip01_Head1", false, Vector(-1, -1, 0), Vector(-2, -.9, 0), Angle(0, -80, -90), Angle(0, -80, -90), 0, "00000")
 AddAttach("Small Backpack", "models/modified/backpack_3.mdl", nil, "ValveBiped.Bip01_Spine4", false, Vector(-7.5, 4, 0), Vector(-9, 3, 0), Angle(180, -100, -90), Angle(180, -90, -90), 0, "00000")
-AddAttach("Big Backpack", "models/modified/backpack_1.mdl", nil, "ValveBiped.Bip01_Spine2", false, Vector(0.4, 3.6, 0), Vector(-1.5, 3.6, 0), Angle(180, -90, -90), Angle(180, -90, -90), 0, "00000")
+AddAttach("Big Backpack", "models/modified/backpack_1.mdl", nil, "ValveBiped.Bip01_Spine2", false, Vector(0.4, 3.6, 0), Vector(-1.5, 3.6, 0), Angle(180, -90, -90), Angle(180, -90, -90), 0, "00000")--]]

@@ -109,14 +109,14 @@ function EasyAppearance.Menu()
 		Appearance.strColthesStyle = text
 	end
 
-	DPanel.CombAttBox = vgui.Create("DComboBox", DPanel)
+	--[[DPanel.CombAttBox = vgui.Create("DComboBox", DPanel)
 	local CombAttBox = DPanel.CombAttBox
 	CombAttBox:Dock(TOP)
 	CombAttBox:DockMargin(15, 10, 15, 0)
 
 	for k in pairs(EasyAppearance.Attachmets) do
 		CombAttBox:AddChoice(k, k)
-	end
+	end--]]
 
 	--[[
 	function CombAttBox:OnSelect(index, text, data)
@@ -198,7 +198,7 @@ CreateClientConVar("hg_appearance_dis", "6000", true, false)
 	}
 --]]
 
-function EasyAppearance.DrawAttachment(eEnt, strAtt, ply)
+--[[function EasyAppearance.DrawAttachment(eEnt, strAtt, ply)
 	local att = EasyAppearance.Attachmets[strAtt]
 	if not IsValid(eEnt) or not att then return end
 
@@ -258,4 +258,4 @@ hook.Add("HG_PostPlayerDraw", "EA_AttachmentsRender", function(ent, ply)
 	ent:SetupBones()
 
 	EasyAppearance.DrawAttachment(ent, Attachmets, ply)
-end)
+end)--]]
