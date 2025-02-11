@@ -57,9 +57,13 @@ if SERVER then
 	local function Bomb(ent)
 		local SelfPos, PowerMult, Model = ent:LocalToWorld(ent:OBBCenter()), 6, ent:GetModel()
 
-		ent:EmitSound("snds_jack_gmod/plunger.wav")
+		if math.random(1,25) == 12 then
+			ent:EmitSound("snds_jack_gmod/oof.wav")
+		else
+			ent:EmitSound("snds_jack_gmod/plunger.wav")
+		end
 
-		timer.Simple(math.Rand(1.02, 1.04), function()
+		timer.Simple(math.Rand(.3, .5), function()
 			if not IsValid(ent) then return end
 
 			ParticleEffect("pcf_jack_groundsplode_large", SelfPos, vector_up:Angle())
@@ -182,7 +186,7 @@ if SERVER then
 
 			ent:CallOnRemove("hg_hidebombremove", Bomb)
 
-			ent:EmitSound("snds_jack_gmod/ezsentry_engage.wav", 60, 50)
+			ent:EmitSound("snds_jack_gmod/ezsentry_engage.wav", 60, 150)
 
 			self:SetNWBool("hasbomb", true)
 		else

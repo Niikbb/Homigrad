@@ -39,10 +39,8 @@ SWEP.dwsPos = Vector(10, 10, 10)
 
 SWEP.vbw = true
 SWEP.vbwPistol = true
-SWEP.vbwPos = Vector(-6, 0, 6)
-SWEP.vbwAng = Angle(0, 150, 0)
--- SWEP.vbwPos = Vector(47, -6, 10)
--- SWEP.vbwAng = Angle(-180, 90, 0)
+SWEP.vbwPos = Vector(-3, 0, 6)
+SWEP.vbwAng = Angle(0, 20, 0)
 SWEP.vbwModelScale = 0.8
 
 SWEP.DrawWeaponSelection = DrawWeaponSelection
@@ -68,10 +66,7 @@ function SWEP:Step()
 	if SERVER then self:SetNWBool("Focus", owner:KeyDown(IN_ATTACK2)) end
 
 	local isFocus = self:GetNWBool("Focus")
-
 	self:SetHoldType(isFocus and "camera" or "slam")
-
-	-- if CLIENT or SERVER then self:SetWeaponHoldType(isFocus and "camera" or "slam") end
 end
 
 if SERVER then return end
@@ -128,9 +123,9 @@ SWEP.dwmAUp = 0
 SWEP.dwmARight = 190
 SWEP.dwmAForward = -10
 
--- local model = GDrawWorldModel or ClientsideModel(SWEP.WorldModel, RENDER_GROUP_OPAQUE_ENTITY)
--- GDrawWorldModel = model
--- model:SetNoDraw(true)
+local model = GDrawWorldModel or ClientsideModel(SWEP.WorldModel, RENDER_GROUP_OPAQUE_ENTITY)
+GDrawWorldModel = model
+model:SetNoDraw(true)
 
 function SWEP:DrawWorldModel()
 	local owner = self:GetOwner()

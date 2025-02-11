@@ -140,8 +140,7 @@ local function ToggleScoreboard(toggle)
 
 			draw.SimpleText("#hg.scoreboard.status", "HomigradFont", 100, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.nick", "HomigradFont", w / 2, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			draw.SimpleText("homigrad", "HomigradFontLarge", w / 2, h / 2, Color(155, 155, 165, 50), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			--draw.SimpleText("HOMIGRADED","HomigradFontLarge",w / 2,h / 2,Color(155,155,165,5),TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+			draw.SimpleText("HOMIGRADED", "HomigradFontLarge", w / 2, h / 2, Color(155, 155, 165, 50), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.role", "HomigradFont", w - 300, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			--draw.SimpleText("Дни Часы Минуты","HomigradFont",w - 300,20,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
 			--draw.SimpleText("M","HomigradFont",w - 300 + 15,15,white,TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER)
@@ -249,7 +248,7 @@ local function ToggleScoreboard(toggle)
 					ply:ShowProfile()
 				end)
 
-				if LocalPlayer():GetUserGroup("moderator") or LocalPlayer():IsAdmin() then
+				if LocalPlayer():IsAdmin() then
 					playerMenu:AddOption("Go To", function()
 						LocalPlayer():ConCommand("ulx goto $" .. ply:UserID())
 					end)
@@ -319,14 +318,6 @@ local function ToggleScoreboard(toggle)
 
 				--Table for usergroup names and corresponding display names and colors
 				local userGroupDisplay = {
-					owner = {
-						name = "Owner",
-						color = Color(0, 242, 255)
-					},
-					servermanager = {
-						name = "Server Manager",
-						color = Color(255, 233, 0)
-					},
 					superadmin = {
 						name = "Super Admin",
 						color = Color(255, 0, 0)
@@ -334,30 +325,6 @@ local function ToggleScoreboard(toggle)
 					admin = {
 						name = "Administrator",
 						color = Color(50, 255, 50)
-					},
-					operator = {
-						name = "Moderator",
-						color = Color(75, 200, 75)
-					},
-					tmod = {
-						name = "Trial Mod",
-						color = Color(75, 150, 70)
-					},
-					sponsor = {
-						name = "Sponsor",
-						color = Color(77, 201, 255)
-					},
-					supporterplus = {
-						name = "Supporter+",
-						color = Color(255, 159, 62)
-					},
-					supporter = {
-						name = "Supporter",
-						color = Color(241, 196, 15)
-					},
-					regular = {
-						name = "Regular",
-						color = Color(0, 150, 220)
 					},
 					user = {
 						name = "User",
