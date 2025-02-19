@@ -44,24 +44,24 @@ local function DoInvalid(ply)
 end
 
 function EasyAppearance.SetAppearance(ply)
-	if not ply:IsBot() and ply:GetInfo("hg_usecustommodel") == "false" then
+	if !ply:IsBot() and ply:GetInfo("hg_usecustommodel") == "false" then
 		EasyAppearance.SendRequest(ply)
 
 		if ply.bRandomAppearance then ply.tAppearance = EasyAppearance.GetRandomAppearance() end
 
 		local tAppearance = ply.tAppearance
-		if not tAppearance then
+		if !tAppearance then
 			ply.tAppearance = EasyAppearance.GetRandomAppearance()
 			tAppearance = ply.tAppearance
 		end
 
-		if not EasyAppearance.Models[tAppearance.strModel] then tAppearance = DoInvalid(ply) end
+		if !EasyAppearance.Models[tAppearance.strModel] then tAppearance = DoInvalid(ply) end
 
 		local tModelParms = EasyAppearance.Models[tAppearance.strModel]
 		ply:SetModel(tModelParms.strPatch)
 
 		local sex = EasyAppearance.Sex[ply:GetModelSex()]
-		if not EasyAppearance.Appearances[sex][tAppearance.strColthesStyle] or tAppearance.strColthesStyle == "Random" then tAppearance.strColthesStyle = table.Random(table.GetKeys(EasyAppearance.Appearances[sex])) end
+		if !EasyAppearance.Appearances[sex][tAppearance.strColthesStyle] or tAppearance.strColthesStyle == "Random" then tAppearance.strColthesStyle = table.Random(table.GetKeys(EasyAppearance.Appearances[sex])) end
 
 		ply:SetSubMaterial()
 		ply:SetSubMaterial(tModelParms.intSubMat, EasyAppearance.Appearances[sex][tAppearance.strColthesStyle])
