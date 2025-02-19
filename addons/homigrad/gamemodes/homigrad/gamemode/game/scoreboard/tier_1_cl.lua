@@ -137,13 +137,11 @@ local function ToggleScoreboard(toggle)
 		HomigradScoreboard.Paint = function(self, w, h)
 			surface.SetDrawColor(15, 15, 15, 200)
 			surface.DrawRect(0, 0, w, h)
-
+			draw.SimpleText("HOMIGRADED", "HomigradFontLarge", w / 2, h / 2, Color(155, 155, 165, 50), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			
 			draw.SimpleText("#hg.scoreboard.status", "HomigradFont", 100, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.nick", "HomigradFont", w / 2, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			draw.SimpleText("HOMIGRADED", "HomigradFontLarge", w / 2, h / 2, Color(155, 155, 165, 50), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.role", "HomigradFont", w - 300, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			--draw.SimpleText("Дни Часы Минуты","HomigradFont",w - 300,20,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-			--draw.SimpleText("M","HomigradFont",w - 300 + 15,15,white,TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.ping", "HomigradFont", w - 200, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.team", "HomigradFont", w - 100, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText(language.GetPhrase("#hg.scoreboard.players") .. #player.GetAll(), "HomigradFont", 15, h - 25, green, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
@@ -290,7 +288,7 @@ local function ToggleScoreboard(toggle)
 					alive = language.GetPhrase("#hg.scoreboard.spectator")
 					alivecol = colorSpec
 				else
-					alive = language.GetPhrase("#hg.modes.unknownteam")
+					alive = language.GetPhrase("#hg.modes.team.unknown")
 					alivecol = colorSpec
 					colorAdd = colorSpec
 				end
@@ -309,7 +307,7 @@ local function ToggleScoreboard(toggle)
 					draw.RoundedBox(0, 0, 0, w, h, whiteAdd)
 				end
 
-				if alive ~= language.GetPhrase("hg.modes.unknownteam") and ply.last then
+				if alive ~= language.GetPhrase("#hg.modes.team.unknown") and ply.last then
 					draw.SimpleText(ply.last, "HomigradFont", 25, h / 2, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 				end
 
@@ -340,13 +338,6 @@ local function ToggleScoreboard(toggle)
 				-- Example of how to draw the text with the display name and color
 				local displayName, displayColor = GetDisplayNameAndColor(ply:GetUserGroup())
 				draw.SimpleText(displayName, "HomigradFont", w - 300, h / 2, displayColor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-				-- else
-				-- 	local time = math.floor(CurTime() - ply.TimeStart + (ply.Time or 0))
-				-- 	local dTime,hTime,mTime = math.floor(time / 60 / 60 / 24),tostring(math.floor(time / 60 / 60) % 24),tostring(math.floor(time / 60) % 60)
-				-- 	draw.SimpleText(dTime,"HomigradFont",w - 300 - 15,h / 2,white,TEXT_ALIGN_RIGHT,TEXT_ALIGN_CENTER)
-				-- 	draw.SimpleText(hTime,"HomigradFont",w - 300,h / 2,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
-				-- 	draw.SimpleText(mTime,"HomigradFont",w - 300 + 15,h / 2,white,TEXT_ALIGN_LEFT,TEXT_ALIGN_CENTER)
-				-- end
 				draw.SimpleText(ply:Ping(), "HomigradFont", w - 200, h / 2, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 				local name, color = ply:PlayerClassEvent("TeamName")
 
