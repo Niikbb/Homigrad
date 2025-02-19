@@ -111,17 +111,11 @@ hook.Add("DoPlayerDeath", "hgDoPlayerDeath", function(ply)
 
 		ent:Spawn()
 		ent:SetMaterial("null")
-
 		ent.Spawned = true
-
-		-- ent:SetRenderMode(RENDERMODE_NONE)
-		-- ent:SetMaterial("")
-		-- ent:SetNoDraw(true)
 		ent:DrawShadow(false)
 		ent:AddSolidFlags(FSOLID_NOT_SOLID)
 
 		if IsValid(wep) then wep:Remove() end
-
 		ply.weps[class] = ent
 	end
 
@@ -177,7 +171,6 @@ net.Receive("ply_take_item", function(len, ply)
 
 		weapon:SetRenderMode(RENDERMODE_NORMAL)
 		weapon:DrawShadow(true)
-		-- weapon:RemoveSolidFlags(FSOLID_NOT_SOLID)
 		weapon:SetMaterial("")
 
 		lootInfo.Weapons[wep] = nil
@@ -189,8 +182,6 @@ net.Receive("ply_take_item", function(len, ply)
 end)
 
 net.Receive("ply_take_ammo", function(len, ply)
-	--if ply:Team() ~= 1002 then return end
-
 	local lootEnt = net.ReadEntity()
 	if not IsValid(lootEnt) then return end
 	if lootEnt:IsPlayer() and not IsValid(lootEnt.FakeRagdoll) then return end

@@ -1,7 +1,5 @@
 local validUserGroup = {
-	superadmin = true,
-	owner = true,
-	servermanager = true
+	superadmin = true
 }
 
 if SERVER then

@@ -139,10 +139,10 @@ local angZero = Angle(0, 0, 0)
 local playing = false
 local deathtracks = {
 	-- format: multiline
-	"https://cdn.discordapp.com/attachments/1144224221334097974/1144224389970272388/death1.mp3",
-	"https://cdn.discordapp.com/attachments/1144224221334097974/1144226357967065180/death2.mp3",
-	"https://cdn.discordapp.com/attachments/1144224221334097974/1144230250465734797/death3.mp3",
-	"https://cdn.discordapp.com/attachments/1144224221334097974/1144238942862979142/death4.mp3",
+	--"https://cdn.discordapp.com/attachments/1144224221334097974/1144224389970272388/death1.mp3",
+	"",
+	"",
+	"",
 }
 local deathtexts = {
 	-- format: multiline
@@ -298,20 +298,6 @@ function CalcView(ply, vec, ang, fov, znear, zfar)
 		result.angles[3] = result.angles[3] + ADDROLL
 		return result
 	end
-
-	--[[
-	if lply:InVehicle() then
-		local diffvel = lply:GetVehicle():GetPos() - vel
-		local view = {
-			origin = lply:EyePos() + diffvel * 10,
-			angles = lply:EyeAngles(),
-			fov = fov
-		}
-
-		vel = lply:GetVehicle():GetPos()
-
-		return view
-	end --]]
 
 	firstPerson = GetViewEntity() == lply
 
@@ -502,20 +488,6 @@ hide = {
 }
 
 hook.Add("HUDShouldDraw", "HideHUD", function(name) if hide[name] then return false end end)
-
---[[ Scopes (don't use)
-hook.Add("PostDrawOpaqueRenderables", "example", function()
-	local hand = LocalPlayer():GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
-	local eye = LocalPlayer():GetAttachment(ply:LookupAttachment("eyes"))
-	possight = hand.Pos + hand.Ang:Up() * 4.4 - hand.Ang:Forward() * -1 + hand.Ang:Right() * -0.15
-	angle = hand.Ang + Angle(-90, 0, 0)
-
-	cam.Start3D2D(possight, angle, 1)
-		surface.SetDrawColor(255, 0, 0, 200)
-		draw.NoTexture()
-		draw.Circle(0, 0, 0.05, 25)
-	cam.End3D2D()
-end) --]]
 
 hook.Add("InputMouseApply", "asdasd2", function(cmd, x, y, angle)
 	if not IsValid(LocalPlayer()) or not LocalPlayer():Alive() then return end
@@ -856,22 +828,3 @@ hook.Add("HUDPaint", "ShowSpeakingIconWithSpin", function()
 		surface.DrawTexturedRectUV(x - offsetX, y - height / 2, dynamicWidth, height, u1, v1, u2, v2)
 	end
 end)
-
---[[
-local colred = Color(255,0,0)
-hook.Add("PostDrawTranslucentRenderables", "fuck_off", function()
-	local lply = LocalPlayer()
-	if lply == Entity(1) then
-		local ent = lply:GetEyeTrace().Entity
-		ent = ent:IsPlayer() and ent
-		if ent then
-			local pos, ang = ent:GetBonePosition(ent:LookupBone("ValveBiped.Bip01_Head1"))
-			local vec1 = Vector(3, -4, -2.5)
-			local vec2 = Vector(7, 3, 2.5)
-			local dmgpos = ply:GetEyeTrace().HitPos
-			local penetration = ply:GetAimVector() * 100
-			local raycast = util.IntersectRayWithOBB(dmgpos, penetration, pos, ang, vec1, vec2)
-			render.DrawBox(pos, ang, vec1, vec2, raycast and colred or color_white)
-		end
-	end
-end) --]]

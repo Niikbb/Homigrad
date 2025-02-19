@@ -128,17 +128,6 @@ hook.Add("Player Death", "SetHull", function(ply, attacker)
 	end)
 end)
 
---[[
-if CLIENT then
-	hook.Add("EntityNetworkedVarChanged", "newfakeentity", function(ply, name, oldval, rag)
-		-- print(ply,name,oldval,rag)
-		if name == "Ragdoll" then
-			ply.FakeRagdoll = rag
-			if IsValid(rag) then hook.Run("Fake", "faked", ply, rag) end
-		end
-	end)
-end --]]
-
 if CLIENT then
 	hook.Add("NetworkEntityCreated", "hgSyncRagdollsIDK", function(ent)
 		if not ent:IsRagdoll() then return end
@@ -225,10 +214,6 @@ function hg.eyeTrace(ply, dist, ent, aim_vector)
 
 	local headm = ent:GetBoneMatrix(bon)
 	if CLIENT and ply.headmat then headm = ply.headmat end
-
-	-- local att_ang = ply:GetAttachment(ply:LookupAttachment("eyes")).Ang
-	-- ply.lerp_angle = LerpFT(0.1, ply.lerp_angle or Angle(0, 0, 0), ply:GetNWBool("TauntStopMoving", false) and att_ang or aim_vector:Angle())
-	-- aim_vector = ply.lerp_angle:Forward()
 
 	local eyeAng = aim_vector:Angle()
 	eyeAng:Normalize()

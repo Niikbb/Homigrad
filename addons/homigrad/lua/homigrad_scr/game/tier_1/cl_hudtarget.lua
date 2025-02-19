@@ -26,9 +26,6 @@ hook.Add("Think", "ShouldDrawNoclipe", function()
 	end
 end)
 
---[[ I dont like this
-hook.Add("DrawPhysgunBeam", "gg", function(ply) if nodraw_players[ply] then return false end end) --]]
-
 local red = Color(125, 0, 0)
 
 local hg_customname = CreateClientConVar("hg_customname", "", true)
@@ -39,7 +36,7 @@ cvars.AddChangeCallback("hg_customname", function(_, _, value)
 end)
 
 net.Start("custom name")
-	net.WriteString(hg_customname:GetString())
+net.WriteString(hg_customname:GetString())
 net.SendToServer()
 
 hook.Add("HUDPaint", "hgPlrNameHUD", function()
@@ -49,13 +46,13 @@ hook.Add("HUDPaint", "hgPlrNameHUD", function()
 	if IsValid(lply:GetActiveWeapon()) and lply:GetActiveWeapon():GetClass() ~= "weapon_hands" then
 		local ply = lply
 		local eye = ply:GetAttachment(ply:LookupAttachment("eyes"))
-
 		local t = {}
+
 		t.start = eye and eye.Pos or ply:EyePos()
 		t.endpos = t.start + ply:GetAngles():Forward() * 60
 		t.filter = lply
-		local Tr = util.TraceLine(t)
 
+		local Tr = util.TraceLine(t)
 		local Size = math.Clamp(1 - ((Tr.HitPos - lply:GetShootPos()):Length() / 60) ^ 2, .1, .3)
 		local ent = Tr.Entity
 		local col
@@ -77,12 +74,9 @@ hook.Add("HUDPaint", "hgPlrNameHUD", function()
 
 				draw.DrawText(string.rep("c", math.random(1, 12)) .. ":", "DefaultFixedDropShadow", head.x + math.random(-25, 25), head.y + math.random(-25, 25), red, TEXT_ALIGN_CENTER)
 			end
-
 			return
 		end
-
 		col.a = 255 * Size * 2
-
 		draw.DrawText(ent:GetNWString("Nickname", false) or ent:IsPlayer() and ent:Name() or "", "HomigradFontLarge", Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y + 30, col, TEXT_ALIGN_CENTER)
 	end
 end)

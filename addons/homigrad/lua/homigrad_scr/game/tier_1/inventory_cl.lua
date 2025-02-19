@@ -67,8 +67,6 @@ net.Receive("inventory", function()
 
 	local items_ammo = net.ReadTable()
 
-	-- if #items == 0 and #items_ammo == 0 then return end -- wtf
-
 	items.weapon_hands = nil
 
 	panel = vgui.Create("DFrame")
