@@ -15,7 +15,7 @@ if SERVER then
 		func = func and func(ply, class)
 		if func ~= nil then return func end
 
-		if validUserGroup[ply:GetUserGroup()] and ply:Team() ~= TEAM_SPECTATOR or GetGlobalBool("AccessSpawn") or GetConVar("sv_construct"):GetBool() then return true end
+		if validUserGroup[ply:GetUserGroup()] and ply:Team() ~= TEAM_SPECTATOR or GetGlobalBool("AccessSpawn") or GetConVar("hg_ConstructOnly"):GetBool() then return true end
 
 		if not validUserGroup[ply:GetUserGroup()] then
 			ply:Kick("You do not have access to these tools.")
@@ -49,7 +49,7 @@ else
 	local function CanUseSpawnMenu()
 		local ply = LocalPlayer()
 
-		if validUserGroup[ply:GetUserGroup()] and ply:Team() ~= TEAM_SPECTATOR or GetConVar("sv_construct"):GetBool() then
+		if validUserGroup[ply:GetUserGroup()] and ply:Team() ~= TEAM_SPECTATOR or GetConVar("hg_ConstructOnly"):GetBool() then
 			return true
 		else
 			return false

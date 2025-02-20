@@ -28,7 +28,7 @@ function RoundStateSync(ply, data)
 	else net.Broadcast() end
 end
 
-if levelrandom == nil and GetConVar("sv_construct"):GetBool() ~= true then
+if levelrandom == nil and GetConVar("hg_ConstructOnly"):GetBool() ~= true then
 	levelrandom = true
 else
 	levelrandom = false
@@ -46,7 +46,7 @@ COMMANDS.levelrandom = {
 			levelrandom = false
 		end
 
-		if GetConVar("sv_homicideonly"):GetBool() or GetConVar("sv_construct"):GetBool() then
+		if GetConVar("hg_HomicideOnly"):GetBool() or GetConVar("hg_ConstructOnly"):GetBool() then
 			levelrandom = false
 		end
 
@@ -133,7 +133,7 @@ function StartRound()
 			local name = LevelRandom()
 
 			-- tragic code tbh
-			if GetConVar("sv_homicideonly"):GetBool() then
+			if GetConVar("hg_HomicideOnly"):GetBool() then
 				SetActiveNextRound("homicide")
 			else
 				SetActiveNextRound(name)
@@ -382,7 +382,7 @@ end
 
 COMMANDS.levelnext = {
 	function(ply, args)
-		if not GetConVar("sv_homicideonly"):GetBool() then
+		if not GetConVar("hg_HomicideOnly"):GetBool() then
 			if ply:IsAdmin() then
 				if not SetActiveNextRound(args[1]) then
 					return ply:ChatPrint("Error has occured!")

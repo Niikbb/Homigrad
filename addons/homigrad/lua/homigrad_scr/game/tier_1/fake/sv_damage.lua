@@ -358,6 +358,7 @@ hook.Add("Player Death", "plymessage", function(ply, hitgroup, dmginfo)
 			dmgtype,
 			att:Name()
 		}
+		att:AddFrags(1)
 
 		net.Start("hg_sendchat_format")
 			net.WriteTable(tbl)

@@ -138,12 +138,16 @@ local function ToggleScoreboard(toggle)
 			surface.SetDrawColor(15, 15, 15, 200)
 			surface.DrawRect(0, 0, w, h)
 			draw.SimpleText("HOMIGRADED", "HomigradFontLarge", w / 2, h / 2, Color(155, 155, 165, 50), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			
 			draw.SimpleText("#hg.scoreboard.status", "HomigradFont", 100, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-			draw.SimpleText("#hg.scoreboard.nick", "HomigradFont", w / 2, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			draw.SimpleText("#hg.scoreboard.nick", "HomigradFont", w / 2.5, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.role", "HomigradFont", w - 300, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.ping", "HomigradFont", w - 200, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 			draw.SimpleText("#hg.scoreboard.team", "HomigradFont", w - 100, 15, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+
+			if !LocalPlayer():Alive() then -- hiding kd
+				draw.DrawText("#hg.scoreboard.kd", "HomigradFont", w - 450, 6, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+			end
+
 			draw.SimpleText(language.GetPhrase("#hg.scoreboard.players") .. #player.GetAll(), "HomigradFont", 15, h - 25, green, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER)
 
 			local tick = math.Round(1 / engine.ServerFrameTime())
@@ -311,8 +315,13 @@ local function ToggleScoreboard(toggle)
 					draw.SimpleText(ply.last, "HomigradFont", 25, h / 2, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 				end
 
+				if !LocalPlayer():Alive() then 
+					draw.DrawText("K | D", "HomigradFontBigger", ScrW() / 2, ScrH() / 1.15, Color(255, 255, 255, 255), TEXT_ALIGN_CENTER)
+					draw.SimpleText(ply:Frags().." | "..ply:Deaths(),"HomigradFont",w - 450,h / 2,white,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER)
+				end
+
 				draw.SimpleText(alive, "HomigradFont", 100, h / 2, alivecol, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-				draw.SimpleText(name1, "HomigradFont", w / 2, h / 2, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+				draw.SimpleText(name1, "HomigradFont", w / 2.5, h / 2, white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
 				--Table for usergroup names and corresponding display names and colors
 				local userGroupDisplay = {

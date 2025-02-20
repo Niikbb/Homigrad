@@ -26,10 +26,10 @@
 		3
 		{
 			"name"		"hg_SearchTime"
-			"text"		"Inventory Search Time (seconds)"
+			"text"		"Inv. Search Time (Sec 0-10)"
 			"help"		"Items in a player's inventory will appear after a given time (between 0 and 10)"
 			"type"		"Numeric"
-			"default"	"2"
+			"default"	"0"
 		}
 		4
 		{

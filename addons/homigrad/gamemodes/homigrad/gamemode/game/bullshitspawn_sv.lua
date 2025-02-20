@@ -38,7 +38,7 @@ local function randomLoot()
 end
 
 hook.Add("PropBreak", "homigrad", function(att, ent)
-	if GetConVar("sv_construct"):GetBool() == false then
+	if GetConVar("hg_ConstructOnly"):GetBool() == false then
 		if not BOXES_LOOKUP[ent:GetModel()] then return end
 		local posSpawn = ent:GetPos() + ent:OBBCenter()
 		local randomWep, _ = randomLoot()

@@ -385,7 +385,7 @@ hook.Add("PlayerDisconnected", "hgSavePlayerInfo", function(ply) if ply:Alive() 
 hook.Add("PhysgunPickup", "hgPickUpPlayer", function(ply, ent)
 	-- if ply:GetUserGroup()=="servermanager" or ply:GetUserGroup()=="superadmin" or ply:GetUserGroup()=="owner" or ply:GetUserGroup()=="admin" or ply:GetUserGroup()=="operator" then
 
-	if GetConVar("sv_construct"):GetBool() == true then
+	if GetConVar("hg_ConstructOnly"):GetBool() == true then
 		if ent:IsPlayer() and not IsValid(ent.FakeRagdoll) or ent:IsRagdoll() then
 			return false
 		else
@@ -761,30 +761,11 @@ hook.Add("JMod Armor Equip", "Fake", function(ply, slot, item, drop)
 	ent:CallOnRemove("Fake", Remove, ent, ply)
 end, 2)
 
---[[
-local oldFakeCollision = CreateConVar("hg_oldcollidefake", "0")
-
-COMMANDS.oldcollidefake = {
-	function(ply, args)
-		if not ply:IsAdmin() then return end
-		if not args[1] then return end
-
-		local value = tonumber(args[1]) == 1
-
-		GetConVar("hg_oldcollidefake"):SetBool(value)
-		ply:ChatPrint("Old fake collision: " .. tostring(oldFakeCollision:GetBool()))
-	end
-} --]]
-
 hook.Add("Player Collide", "hgFaking", function(ply, hitEnt, data)
-	-- if not ply:HasGodMode() and data.Speed >= 250 / hitEnt:GetPhysicsObject():GetMass() * 20 and not IsValid(ply.FakeRagdoll) and not hitEnt:IsPlayerHolding() and hitEnt:GetVelocity():Length() > 80 then
-	-- if oldFakeCollision:GetBool() and not ply:HasGodMode() and data.Speed > 200 or not oldFakeCollision:GetBool() and not ply:HasGodMode() and data.Speed >= 250 / hitEnt:GetPhysicsObject():GetMass() * 20 and not IsValid(ply.FakeRagdoll) and not hitEnt:IsPlayerHolding() and hitEnt:GetVelocity():Length() > 150 then
-
 	if not ply:HasGodMode() and data.Speed >= 250 / hitEnt:GetPhysicsObject():GetMass() * 20 and not IsValid(ply.FakeRagdoll) and not hitEnt:IsPlayerHolding() and hitEnt:GetVelocity():Length() > 150 then
 		timer.Simple(0, function()
 			if not IsValid(ply) or IsValid(ply.FakeRagdoll) then return end
 			if hook.Run("Should Fake Collide", ply, hitEnt, data) == false then return end
-
 			Faking(ply)
 		end)
 	end
