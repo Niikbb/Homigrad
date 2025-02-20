@@ -64,7 +64,7 @@ end
 function igib.EndRound(winner)
     for i, ply in ipairs( player.GetAll() ) do
 	    if ply:Alive() then
-            PrintMessage(3,"Раунд окончен.")
+            PrintMessage(3,"#hg.levels.ended")
         end
     end
 end

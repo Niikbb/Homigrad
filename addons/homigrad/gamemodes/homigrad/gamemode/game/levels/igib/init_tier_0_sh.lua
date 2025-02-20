@@ -1,42 +1,31 @@
---table.insert(LevelList,"igib")
-igib = {}
-igib.Name = "InstaGib"
-igib.LoadScreenTime = 2.5
+table.insert(LevelList,"igib")
+igib = igib or {}
+igib.Name = "hg.igib.name"
 igib.NoSelectRandom = true
+igib.RoundRandomDefalut = 3
 
-local red = Color(155,155,255)
-
-function igib.GetTeamName(ply)
-    local teamID = ply:Team()
-
-     if teamID == 1 then return "Боец",red end
-end
+function igib.GetTeamName(ply) if ply:Team() == 1 then return "#hg.igib.team",Color(155,155,255) end end
 
 function igib.StartRound(data)
-    team.SetColor(1,red)
-    --team.SetColor(2,blue)
-    --team.SetColor(1,green)
+    team.SetColor(1,Color(155,155,255))
     game.CleanUpMap(false)
-
     if CLIENT then
         roundTimeStart = data[1]
         roundTime = data[2]
         igib.StartRoundCL()
         return
     end
-
     return igib.StartRoundSV()
 end
 
 if SERVER then return end
+
 local kill = 4
 local white,red = Color(255,255,255),Color(255,0,0)
 local fuck,fuckLerp = 0,0
-
 local playsound = false
-function igib.StartRoundCL()
-    playsound = true
-end
+
+function igib.StartRoundCL() playsound = true end
 
 function igib.HUDPaint_RoundLeft(white)
     local lply = LocalPlayer()
@@ -45,12 +34,18 @@ function igib.HUDPaint_RoundLeft(white)
     if startRound > 0 and lply:Alive() then
         if playsound then
             playsound = false
-            surface.PlaySound("snd_jack_hmcd_deathmatch.mp3")
+            sound.PlayURL("https://www.dropbox.com/scl/fi/2ajddo3n45q4bufqwrlmx/egor_letov_ubivat.mp3?rlkey=xf8iz1vhg2fiachxl80uv4n21&st=6zlx1may&dl=1","", function (station)
+                if (IsValid(station)) then
+                    station:SetPos(LocalPlayer():GetPos())
+                    station:Play()
+                    station:SetVolume(.7)
+                    g_station = station
+                else end
+            end)
+            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,220),startRound,startRound)
         end
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,220),0.5,4)
-        draw.DrawText( "SHOOT & RUN", "HomigradFontBig", ScrW() / 2, ScrH() / 2, Color( 155,155,255,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "InstaGib", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,255,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
-        draw.DrawText( "УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ УБИВАТЬ", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        draw.DrawText( "#hg.igib.name", "HomigradFontBig", ScrW() / 2, ScrH() / 8, Color( 155,155,255,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
+        draw.DrawText( "#hg.igib.desc2", "HomigradFontBig", ScrW() / 2, ScrH() / 1.2, Color( 55,55,55,math.Clamp(startRound,0,1) * 255 ), TEXT_ALIGN_CENTER )
         return
     end
 end
@@ -60,5 +55,3 @@ net.Receive("dm die",function()
 end)
 
 function igib.CanUseSpectateHUD() return false end
-
-igib.RoundRandomDefalut = 3
