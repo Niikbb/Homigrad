@@ -461,9 +461,7 @@ function homicide.SyncRole(ply, teamID)
 end
 
 function homicide.PlayerDeath(ply, inf, att)
-	-- TryAssignPolice(ply)
-
-	if (ply:IsAdmin() or (ply:GetUserGroup() == "operator") or (ply:GetUserGroup() == "tmod")) and ply:GetInfoNum("homicide_get", 0) then
+	if ply:IsAdmin() and ply:GetInfoNum("homicide_get", 0) then
 		local role = {{}, {}}
 
 		for _, ply in pairs(team.GetPlayers(1)) do
