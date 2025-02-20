@@ -63,7 +63,7 @@ function GuiltCheck(att, ply)
 
 		if not att:HasGodMode() and att:Alive() then
 			att:Kill()
-			RunConsoleCommand("ulx", "tsay", ":<clr:red>[GUILT] " .. att:Name() .. " has been slayed for exceeding their guilt of 100%.")
+			RunConsoleCommand("ulx", "tsay", "[GUILT] " .. att:Name() .. " has been slayed for exceeding their guilt of 100%.")
 			--[[if not validUserGroup[att:GetUserGroup()] then
 				att:Kill()
 				RunConsoleCommand("ulx", "tsay", ":<clr:red>[GUILT] " .. att:Name() .. " has been slayed for exceeding their guilt of 100%.")
@@ -159,6 +159,7 @@ hook.Add("Player Think", "guilt reduction", function(ply, time)
 end)
 
 concommand.Add("hg_getguilt", function(ply)
+	if !validUserGroup[att:GetUserGroup()] then return print("Bruh. Abusing Guilt is bad.") end
 	local text = "Guilt information\n"
 
 	for _, ply in player.Iterator() do
