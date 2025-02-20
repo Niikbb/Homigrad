@@ -27,31 +27,32 @@ SolidMapVote["Config"]["Time Left Commands"] = {"!timeleft", "/timeleft", ".time
 -- This it the prefix for maps you want to unclude into
 -- the possible maps for the mapvote.
 -- List of typical gamemodes prefixes.
+-- gm 	= Sandbox
 -- ttt  = Trouble in Terrorist Town
 -- bhop = Bunny Hop
 -- surf = Surf
 -- hmcd = Homicide
 -- rp   = Role Play
-SolidMapVote["Config"]["Map Prefix"] = {"ttt", "rp", "gm", "mu", "hmcd", "de", "cs"}
+-- mu	= Murder
+-- ph 	= Prop Hunt
+-- zs	= Zombie Survival
+-- tdm	= Team Death Match
+-- dm 	= Death Match
+-- sm 	= Same as gm
+SolidMapVote["Config"]["Map Prefix"] = {"ttt", "rp", "gm", "mu", "hmcd", "de", "cs", "ph", "zs", "mu", "dm", "tdm", "sm"} 
 
 local namecolor = {
 	default = COLOR_WHITE,
-	servermanager = Color(255, 50, 55),
-	owner = Color(0, 227, 255),
+	--superadmin = Color(255, 50, 55),
 	admin = Color(0, 191, 255),
-	veteran = Color(255, 20, 147),
-	moderator = Color(124, 252, 0),
-	supporter = Color(255, 225, 0),
-	servertreuer = Color(178, 34, 34),
-	nutzer = Color(65, 105, 225),
 	user = Color(230, 230, 250)
 }
 
 -- Use this function to give specific players or groups different colored
 -- avatar borders on the map vote.
 SolidMapVote["Config"]["Avatar Border Color"] = function(ply)
-	if ply:IsUserGroup("servermanager") then return HSVToColor(math.sin(2 * RealTime()) * 128 + 127, 1, 1) end
-	if ply:IsUserGroup("servertreuer") then return namecolor.servertreuer end
+	if ply:IsUserGroup("superadmin") then return HSVToColor(math.sin(2 * RealTime()) * 128 + 127, 1, 1) end
+	if ply:IsUserGroup("admin") then return namecolor.admin end
 
 	-- This is the default color
 	return color_white
@@ -179,7 +180,7 @@ SolidMapVote["Config"]["Nomination Permissions"] = function(ply) return true end
 
 -- Set this to true if you want the option to extend the map on the vote
 -- Set to false to disable
-SolidMapVote["Config"]["Enable Extend"] = false
+SolidMapVote["Config"]["Enable Extend"] = true
 SolidMapVote["Config"]["Extend Image"] = "http://i.imgur.com/zzBeMid.png"
 
 -- Set this to true if you want the option to choose a random map
@@ -420,7 +421,7 @@ SolidMapVote["Config"]["Specific Maps"] = {
 	},
 	{
 		filename = "gm_kleinercomcenter",
-		displayname = "Communtity Center",
+		displayname = "Community Center",
 		image = "https://i.imgur.com/NfqaleF.jpeg",
 		width = 1920,
 		height = 1080
