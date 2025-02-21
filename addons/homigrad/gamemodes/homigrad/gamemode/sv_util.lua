@@ -20,17 +20,6 @@ function NeedAutoBalance(addT, addCT)
 	return favorT, count
 end
 
---[[ NOTE: This function is defined in weapon_cuffs, might delete later if nothing brakes
-function IsCuffed(ply)
-	if not ply:Alive() then return end
-
-	local ent = ply:GetNWEntity("DeathRagdoll")
-	if not IsValid(ent) then return end
-
-	return constraint.FindConstraint(ent, "Rope")
-end
---]]
-
 function AutoBalanceTwoTeam()
 	for _ in pairs(player.GetAll()) do
 		local favorT, count = NeedAutoBalance()
@@ -39,11 +28,9 @@ function AutoBalanceTwoTeam()
 		if favorT then
 			local ply = table.Random(team.GetPlayers(1))
 			ply:SetTeam(2)
-			--ply:ChatPrint("Тебя перекинуло в CT команду, из-за неравенства команд.")
 		else
 			local ply = table.Random(team.GetPlayers(2))
 			ply:SetTeam(1)
-			--ply:ChatPrint("Тебя перекинуло T команду, из-за неравенства команд.")
 		end
 	end
 end
