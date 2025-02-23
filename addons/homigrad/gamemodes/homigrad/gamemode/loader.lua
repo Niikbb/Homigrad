@@ -1,20 +1,16 @@
 AddCSLuaFile()
 
-local string_sub = string.sub
-local string_split = string.Split
-local string_GetFileFromFilename = string.GetFileFromFilename
-
 function GM.includeFile(path)
-	local fileName = string_GetFileFromFilename(path)
-	if string_sub(fileName, 1, 1) == "!" then return end -- Don't load file if it starts with `!`
+	local fileName = string.GetFileFromFilename(path)
+	if string.sub(fileName, 1, 1) == "!" then return end -- Don't load file if it starts with `!`
 
-	local prefix = string_sub(fileName, 1, 3)
+	local prefix = string.sub(fileName, 1, 3)
 
 	if prefix ~= "sv_" and prefix ~= "cl_" and prefix ~= "sh_" then
-		prefix = string_sub(fileName, #fileName - 6, #fileName - 4)
+		prefix = string.sub(fileName, #fileName - 6, #fileName - 4)
 
-		if string_sub(prefix, 1, 1) == "_" then
-			prefix = string_sub(prefix, 2, 3) .. "_"
+		if string.sub(prefix, 1, 1) == "_" then
+			prefix = string.sub(prefix, 2, 3) .. "_"
 		end
 	end
 
@@ -43,10 +39,6 @@ function GM.includeFile(path)
 	return result
 end
 
-local file_Find = file.Find
-local hg_includeFile = GM.includeFile
-local hg_includeDir
-
 INCLUDE_BREAK = 1
 
 function GM.includeDir(path, includes)
@@ -54,7 +46,7 @@ function GM.includeDir(path, includes)
 	if includes[path] then return end
 	includes[path] = path
 
-	local _files, _dirs = file_Find(path .. "*", "LUA")
+	local _files, _dirs = file.Find(path .. "*", "LUA")
 	local files, dirs, tier_files, tier_dirs = {}, {}, {}, {}
 	local v, v2, tier
 
@@ -63,7 +55,7 @@ function GM.includeDir(path, includes)
 
 		tier = nil
 
-		for _, sum in pairs(string_split(v, "_")) do
+		for _, sum in pairs(string.Split(v, "_")) do
 			if tier then
 				sum = string.gsub(sum, ".lua", "")
 				tier = tonumber(sum)
@@ -95,7 +87,7 @@ function GM.includeDir(path, includes)
 		v = _dirs[i]
 		tier = nil
 
-		for _, sum in pairs(string_split(v, "_")) do
+		for _, sum in pairs(string.Split(v, "_")) do
 			if tier then
 				tier = tonumber(sum)
 
@@ -130,13 +122,13 @@ function GM.includeDir(path, includes)
 		v2 = tier_files[tier] or empty
 
 		for i = 1, #v2 do
-			result = hg_includeFile(path .. v2[i])
+			result = GM.includeFile(path .. v2[i])
 			if result == INCLUDE_BREAK then return end
 		end
 	end
 
 	for i = 1, #files do
-		result = hg_includeFile(path .. files[i])
+		result = GM.includeFile(path .. files[i])
 		if result == INCLUDE_BREAK then return end
 	end
 
@@ -144,20 +136,18 @@ function GM.includeDir(path, includes)
 		v2 = tier_dirs[tier] or empty
 
 		for i = 1, #v2 do
-			hg_includeDir(path .. v2[i], includes)
+			GM.includeDir(path .. v2[i], includes)
 		end
 	end
 
 	for i = 1, #dirs do
-		hg_includeDir(path .. dirs[i], includes)
+		GM.includeDir(path .. dirs[i], includes)
 	end
 end
 
-hg_includeDir = GM.includeDir
-
 hg.modesHooks = {}
 
-local function LoadModes()
+function hg.LoadModes()
 	for _, name in pairs(LevelList) do
 		local mode = _G[name]
 
@@ -169,8 +159,6 @@ local function LoadModes()
 		end
 	end
 end
-
-hg.LoadModes = LoadModes
 
 local oldHook = oldHook or hook.Call
 

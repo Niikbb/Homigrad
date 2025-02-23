@@ -30,7 +30,7 @@ hook.Add("HUDPaint", "PainEffect", function()
 		if pain and pain > 250 then
 			draw.DrawText(language.GetPhrase("hg.pain.hint1"):format(tostring(math.floor((pain - 250) / 20 + 1))), "HomigradFontSmall", ScrW() / 2, ScrH() / 1.8, colwhite, TEXT_ALIGN_CENTER)
 		elseif blood and blood < 3000 then
-			draw.DrawText("#hg.pain.hint2", "HomigradFontSmall", ScrW() / 2, ScrH() / 1.8, colred, TEXT_ALIGN_CENTER)
+			draw.DrawText(language.GetPhrase("hg.pain.hint2"), "HomigradFontSmall", ScrW() / 2, ScrH() / 1.8, colred, TEXT_ALIGN_CENTER)
 		end
 	end
 end)

@@ -33,6 +33,14 @@
 		}
 		4
 		{
+			"name"		"hg_LootAlive"
+			"text"		"Loot Alive Players"
+			"help"		"Enables/Disables Looting Alive Players."
+			"type"		"CheckBox"
+			"default"	"1"
+		}
+		5
+		{
 			"name"		"hg_TellPoliceWhoTraitorsAre"
 			"text"		"Announce Traitors on Police Spawn (Not realized for now)"
 			"help"		"If enabled, Police will be alerted to who the traitors are when they arrive."

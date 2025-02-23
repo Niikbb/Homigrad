@@ -2,8 +2,6 @@ util.AddNetworkString("inventory")
 util.AddNetworkString("ply_take_item")
 util.AddNetworkString("ply_take_ammo")
 
-CreateConVar("hg_lootalive", "1", {FCVAR_ARCHIVE, FCVAR_NOTIFY, FCVAR_REPLICATED}, "Toggles ability to loot alive players that are faking.")
-
 local function send(ply, lootEnt, remove)
 	if ply then
 		net.Start("inventory")
@@ -26,10 +24,10 @@ hg.send = send
 
 hook.Add("PlayerSpawn", "hg_syncinventories", function(lootEnt)
 	if lootEnt.UsersInventory ~= nil then
-		for plys, _ in pairs(lootEnt.UsersInventory) do
-			lootEnt.UsersInventory[plys] = nil
+		for ply in pairs(lootEnt.UsersInventory) do
+			lootEnt.UsersInventory[ply] = nil
 
-			send(plys, lootEnt, true)
+			send(ply, lootEnt, true)
 		end
 	end
 end)

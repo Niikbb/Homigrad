@@ -1,4 +1,4 @@
-if GetConVar("hg_ConstructOnly"):GetBool() == true then table.insert(LevelList, "construct") end -- Disabled in normal gameplay
+if GetConVar("hg_ConstructOnly"):GetBool() then table.insert(LevelList, "construct") end -- Disabled in normal gameplay
 
 construct = {}
 construct.Name = "Construct"

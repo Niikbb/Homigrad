@@ -27,24 +27,21 @@ net.Receive("ShowWelcomeWindow", function()
 	closeButton:SetEnabled(false)
 	-- Enable confirm button only if checkbox is checked
 	checkBox.OnChange = function()
-		if closeButton:IsEnabled() then 
+		if closeButton:IsEnabled() then
 			closeButton:SetEnabled(false)
-		else 
-			closeButton:SetEnabled(true) 
+		else
+			closeButton:SetEnabled(true)
 		end
 	end
 
 	-- Define the action for closeButton
-	-- Don't allow player to skip this part until he binds `FAKE`
+	-- Don't allow player to skip this part until he actually binds `fake`
 	closeButton.DoClick = function()
 		if input.LookupBinding("fake") then
-			if timer.Exists("FakeCheck") then timer.Remove("FakeCheck") frame:Close()
-			else frame:Close() end
+			frame:Close()
 		else
-			closeButton:SetText("[ ◄ BIND G FAKE ► ]") -- translation doesn't work here wtf	
-			timer.Create("FakeCheck", 2, 0, function() -- resets text back.
-				closeButton:SetText("#hg.warning.button")
-			end)
+			closeButton:SetText("#hg.warning.no")
+			timer.Simple(2, function() if IsValid(closeButton) then closeButton:SetText("#hg.warning.button") end end)
 		end
 	end
 end)

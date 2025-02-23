@@ -214,7 +214,7 @@ if SERVER then
 end
 
 function CLASS:TeamName()
-	return "Police", CLASS.color
+	return "#hg.modes.team.swat", CLASS.color
 end
 
 local black = Color(0, 0, 0, 200)

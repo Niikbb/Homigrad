@@ -58,7 +58,7 @@ net.Receive("inventory", function()
 	local lootEnt = net.ReadEntity()
 	if lootEnt:GetClass() == "prop_ragdoll" then lootEnt = lootEnt:GetNWEntity("OldRagdollController") end -- If player is dead (lootEnt is prop_ragdoll) return who's ragdoll it was
 
-	if not GetConVar("hg_lootalive"):GetBool() and lootEnt:Alive() then return end
+	if not GetConVar("hg_LootAlive"):GetBool() and lootEnt:Alive() then return end
 
 	local success, items = pcall(net.ReadTable)
 	if not success or not lootEnt then return end
@@ -95,10 +95,7 @@ net.Receive("inventory", function()
 		net.SendToServer()
 	end
 
-	local lootingTime = GetConVar("hg_SearchTime"):GetInt()
-	if lootingTime < 0 then lootingTime = 0 end
-	if lootingTime > 10 then lootingTime = 10 end
-
+	local lootingTime = math.Clamp(GetConVar("hg_SearchTime"):GetInt(), 0, 10)
 	local targetID = IsValid(lootEnt) and lootEnt:SteamID64()
 	local corner = 6
 	local x, y = 40, 40

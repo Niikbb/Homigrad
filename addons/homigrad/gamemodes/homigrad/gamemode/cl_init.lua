@@ -52,10 +52,18 @@ surface.CreateFont("HomigradFontSmall", {
 
 surface.CreateFont("TabLarge", {
 	font = "Trebuchet MS",
-    size = 16,
-    weight = 700,
-    antialias = true,
-    shadow = false,
+	size = 16,
+	weight = 700,
+	antialias = true,
+	shadow = false,
+})
+
+surface.CreateFont("HomigradDefaultFixedDropShadow", {
+	font = "Lucida Console",
+	size = 14,
+	weight = 0,
+	shadow = true,
+	outline = false
 })
 
 -- Harrisons puts ConVar in worst script, asked to leave
