@@ -94,7 +94,7 @@ net.Receive("inventory", function()
 			net.WriteEntity(lootEnt)
 		net.SendToServer()
 	end
-
+	-- Should do the job
 	local lootingTime = math.Clamp(GetConVar("hg_SearchTime"):GetInt(), 0, 10)
 	local targetID = IsValid(lootEnt) and lootEnt:SteamID64()
 	local corner = 6
@@ -212,7 +212,6 @@ net.Receive("inventory", function()
 	end)
 
 	-- "Forget" target's inventory after 1 min
-	timer.Simple(60, function()
-		hg_searched[targetID] = nil
-	end)
+	timer.Simple(60, function() hg_searched[targetID] = nil end)
+	hook.Add("PostCleanupMap", "Forget_Anyones_Inventory", function() hg_searched[targetID] = nil end)
 end)
