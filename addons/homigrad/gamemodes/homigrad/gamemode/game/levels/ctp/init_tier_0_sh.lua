@@ -10,14 +10,14 @@ ctp.WinPoints[1] = ctp.WinPoints[1] or 0
 ctp.WinPoints[2] = ctp.WinPoints[2] or 0
 
 ctp.red = {
-	"#hg.tdm.red", Color(255, 75, 75), weapons = {"weapon_binokle", "weapon_radio", "weapon_kukri", "weapon_hands", "med_band_big", "med_band_small", "medkit", "painkiller"},
+	"#hg.tdm.team1", Color(255, 75, 75), weapons = {"weapon_binokle", "weapon_radio", "weapon_kukri", "weapon_hands", "med_band_big", "med_band_small", "medkit", "painkiller"},
 	main_weapon = {"weapon_aks74u", "weapon_akm", "weapon_remington870", "weapon_galil", "weapon_rpk", "weapon_asval", "weapon_p90", "weapon_scout", "weapon_barret"},
 	secondary_weapon = {"weapon_p220", "weapon_mateba", "weapon_glock"},
 	models = tdm.models
 }
 
 ctp.blue = {
-	"#hg.tdm.blue", Color(75, 75, 255), weapons = {"weapon_binokle", "weapon_radio", "weapon_hands", "weapon_kabar", "med_band_big", "med_band_small", "medkit", "painkiller", "weapon_handcuffs", "weapon_taser"},
+	"#hg.tdm.team2", Color(75, 75, 255), weapons = {"weapon_binokle", "weapon_radio", "weapon_hands", "weapon_kabar", "med_band_big", "med_band_small", "medkit", "painkiller", "weapon_handcuffs", "weapon_taser"},
 	main_weapon = {"weapon_hk416", "weapon_m4a1", "weapon_m4super", "weapon_mp7", "weapon_xm1014", "weapon_sa80", "weapon_asval", "weapon_m249", "weapon_p90", "weapon_scout", "weapon_barret"},
 	secondary_weapon = {"weapon_beretta", "weapon_p99", "weapon_hk_usp"},
 	models = tdm.models

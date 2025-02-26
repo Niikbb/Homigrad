@@ -90,6 +90,10 @@ function construct.GuiltLogic()
 	return false
 end
 
+function construct.ShouldSpawnLoot()
+	return false
+end
+
 util.AddNetworkString("construct_die")
 
 function construct.PlayerDeath()

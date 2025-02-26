@@ -183,7 +183,7 @@ function tdm.EndRoundMessage(winner)
 	net.Start("hg_sendchat_format")
 		net.WriteTable({
 			"#hg.modes.teamwin",
-			(winner == 0 and "#hg.modes.draw") or (tbl[tbl.teamEncoder[winner]] and tbl[tbl.teamEncoder[winner]][1]) or "#hg.modes.draw",
+			winner == 0 and "#hg.modes.draw" or tbl[tbl.teamEncoder[winner]] and tbl[tbl.teamEncoder[winner]][1] or "#hg.modes.draw",
 		})
 	net.Broadcast()
 end

@@ -169,14 +169,14 @@ function SolidMapVote.selectMaps()
 	-- Do nominations
 	if #SolidMapVote.nominations >= 6 then
 		-- Maps are only nominations, can"t fit random maps
-		for steamID64, map in pairs(SolidMapVote.nominations) do
+		for _, map in pairs(SolidMapVote.nominations) do
 			table.insert(SolidMapVote.maps, map)
 		end
 
 		return SolidMapVote.maps
 	else
 		-- Theres room for random maps, first add the nominations
-		for steamID64, map in pairs(SolidMapVote.nominations) do
+		for _, map in pairs(SolidMapVote.nominations) do
 			table.insert(SolidMapVote.maps, map)
 		end
 	end
@@ -253,7 +253,7 @@ function SolidMapVote.selectRandomMapFairly(pool, weights)
 
 	-- Calculate the inverse cumulative sum of the pool weight
 	-- Inverse because less played maps should have a higher chance
-	for map, weight in pairs(weightedPool) do
+	for _, weight in pairs(weightedPool) do
 		inverseCumulativePoolSum = inverseCumulativePoolSum + (1 / weight)
 	end
 
