@@ -2,7 +2,7 @@
 🇷🇺 [Russian version](https://github.com/Niikbb/Homigrad/blob/main/readme_ru.md)
 
 > [!NOTE]
-> This is a fork of [JonnyBro's Homigrad](https://github.com/JonnyBro/homigrad), which are fork of [Harrison's Homigrad](https://github.com/harrisoniam/homigrad).
+> This is a fork of [JonnyBro's Homigrad](https://github.com/JonnyBro/homigrad), which are fork of [Harrison's Homigrad](https://github.com/harrisoniam/homigrad).\
 > Don’t expect features or updates that cater to everyone.
 
 ## What is Homigrad?
