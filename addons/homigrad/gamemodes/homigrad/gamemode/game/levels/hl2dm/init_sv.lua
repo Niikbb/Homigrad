@@ -15,9 +15,7 @@ function hl2dm.RoundEndCheck()
 	if roundTimeStart + roundTime - CurTime() <= 0 then EndRound() end
 	local TAlive = tdm.GetCountAlive(team.GetPlayers(1))
 	local CTAlive = tdm.GetCountAlive(team.GetPlayers(2))
-	if TAlive == 0 and CTAlive == 0 then
-		return EndRound()
-	end
+	if TAlive == 0 and CTAlive == 0 then return EndRound() end
 	if TAlive == 0 then return EndRound(2) end
 	if CTAlive == 0 then return EndRound(1) end
 	tdm.Center()
@@ -36,7 +34,7 @@ function hl2dm.PlayerSpawn2(ply, teamID)
 	local color = teamTbl[2]
 	ply:SetModel(teamTbl.models[math.random(#teamTbl.models)])
 	ply:SetPlayerColor(color:ToVector())
-	for i, weapon in pairs(teamTbl.weapons) do
+	for _, weapon in pairs(teamTbl.weapons) do
 		ply:Give(weapon)
 	end
 
@@ -44,9 +42,9 @@ function hl2dm.PlayerSpawn2(ply, teamID)
 		local r = math.random(1, 3)
 		ply:SetPlayerClass("combine")
 		ply:Give("weapon_hk_usp")
-		ply:SetAmmo(90, (r == 1 and "ar2") or (r == 2 and "12/70 gauge") or (r == 3 and "4.6×30 mm"))
+		ply:SetAmmo(90, r == 1 and "ar2" or r == 2 and "12/70 gauge" or r == 3 and "4.6×30 mm")
 		ply:SetAmmo(90, "9x19mm Parabellum")
-		ply:Give((r == 1 and "weapon_sar2") or (r == 2 and "weapon_spas12") or (r == 3 and "weapon_mp7"))
+		ply:Give(r == 1 and "weapon_sar2" or r == 2 and "weapon_spas12" or r == 3 and "weapon_mp7")
 		if r == 1 then
 			ply:Give("weapon_hg_hl2")
 			JMod.EZ_Equip_Armor(ply, "Super-Soldier-Suit", Color(255, 255, 255, 255))
