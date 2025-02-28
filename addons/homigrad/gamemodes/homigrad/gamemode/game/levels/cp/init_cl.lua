@@ -42,11 +42,11 @@ function cp.HUDPaint_RoundLeft(white2) --позиции точек и счёт
 
 	local startRound = roundTimeStart + 7 - CurTime()
     if startRound > 0 and lply:Alive() then
-        --[[if playsound then
+        if playsound then
             playsound = false
             surface.PlaySound("snd_jack_hmcd_disaster.mp3")
-        end]]--
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),0.5,0.5)
+            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
+        end
 
 
         --[[surface.SetFont("HomigradFontBig")

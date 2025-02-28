@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Remington870 Police"
 SWEP.Author 				= "Homigrad"
@@ -22,7 +22,7 @@ SWEP.RubberBullets = true
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "toz_shotgun/toz_fp.wav"
 SWEP.Primary.SoundFar = "toz_shotgun/toz_dist.wav"
-SWEP.Primary.Force = 0.5
+SWEP.Primary.Force = 40
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.7
 SWEP.TwoHands = true

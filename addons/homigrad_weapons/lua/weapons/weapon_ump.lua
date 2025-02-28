@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "IMI Micro Uzi"
 SWEP.Instructions			= "Настоящий гэнгста носит только УЗИ!"
@@ -19,7 +19,7 @@ SWEP.Primary.Damage = 30
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb/weapons/uzi/shoot.wav"
 SWEP.Primary.SoundFar = "weapons/ump45/ump45_dist.wav"
-SWEP.Primary.Force = 85/3
+SWEP.Primary.Force = 20
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.05
 SWEP.TwoHands = false

@@ -66,8 +66,11 @@ weaponscommon = {
 	"weapon_binokle",
 	"weapon_molotok",
 	"ent_drop_flashlight",
+	"*ammo*",
 
+	"weapon_hg_kitknife",
 	"weapon_knife",
+	"weapon_gurkha",
 	"weapon_pipe",
 	
 	"med_band_small",
@@ -84,44 +87,56 @@ weaponsuncommon = {
 	"weapon_bat",
 	"weapon_hg_metalbat",
 	"weapon_hg_hatchet",
-	"weapon_doublebarrel",
 
 	"*ammo*",
-
+	
+	"ent_jack_gmod_ezarmor_ltorso",
 	"ent_jack_gmod_ezarmor_respirator",
 	"ent_jack_gmod_ezarmor_lhead",
 
+	"shina",
 	"medkit"
 }
 
 weaponsrare = {
 	"weapon_beretta",
-	"weapon_remington870",
-	"weapon_doublebarrel_dulo",
 	"weapon_glock",
 	"weapon_t",
 	"weapon_hg_molotov",
-
 	"*ammo*",
-
 	"weapon_hg_sleagehammer",
 	"weapon_hg_fireaxe",
 
 	"ent_jack_gmod_ezarmor_gasmask",
+	"ent_jack_gmod_ezarmor_mhead",
 	"ent_jack_gmod_ezarmor_mltorso"
 }
 
 weaponsveryrare = {
-	"weapon_m3super",
+	"weapon_doublebarrel_dulo",
+	"weapon_doublebarrel",
+	"weapon_vector",
+	"weapon_csmg40",
+
+	"weapon_hg_flashbang",
 
 	"ent_jack_gmod_ezarmor_mtorso",
-	"ent_jack_gmod_ezarmor_mhead"
+	"ent_jack_gmod_ezarmor_rioth"
 }
 
 weaponslegendary = {
 	"weapon_xm1014",
-	"weapon_ar15",
-	"weapon_civil_famas"
+	"weapon_spas12",
+	"weapon_m3super",
+	"weapon_xm8_lmg",
+	"weapon_rpgg",
+	"weapon_m249",
+
+	"weapon_hg_f1",
+
+	"ent_jack_gmod_ezarmor_mhtorso",
+	"ent_jack_gmod_ezarmor_maska",
+	"ent_jack_gmod_ezarmor_balmask"
 }
 
 local sndsDrop = {
@@ -190,7 +205,7 @@ hook.Add("PropBreak","homigrad",function(att,ent)
 				return
 			end
 
-			if entName == "*ammo*" then
+			if entName ~= "*ammo*" then
 				if IsValid(att) then
 					for i,wep in RandomPairs(att:GetWeapons()) do
 						if wep:GetMaxClip1() > 0 then
@@ -248,13 +263,13 @@ hook.Add("PostCleanupMap","addboxs",function()
 
 	if timer.Exists("SpawnTheBoxes") then timer.Remove("SpawnTheBoxes") end
 
-	timer.Create("SpawnTheBoxes", 15, 0 ,function()
+	timer.Create("SpawnTheBoxes", 10, 0 ,function()
 		hook_Run("Boxes Think")
-	end)--lol4ik?
-end)--насрал, сожри
+	end)
+end)
 
 if timer.Exists("SpawnTheBoxes") then timer.Remove("SpawnTheBoxes") end
-timer.Create("SpawnTheBoxes", 15, 0 ,function()
+timer.Create("SpawnTheBoxes", 10, 0 ,function()
 	hook_Run("Boxes Think")
 end)
 
@@ -304,5 +319,6 @@ hook.Add("Boxes Think", "SpawnBoxes",function()
 	if IsValid(ent) then
 		ent:SetPos(spawns[math.random(#spawns)] + vec)
 		ent:Spawn()
+		--print(ent:GetClass() .. " - Класс заспавненного предмета")
 	end
 end)

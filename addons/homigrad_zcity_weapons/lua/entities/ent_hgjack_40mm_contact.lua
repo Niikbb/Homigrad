@@ -8,7 +8,7 @@ ENT.Spawnable = true
 ENT.JModPreferredCarryAngles = Angle(0, -140, 0)
 --ENT.Model = "models/pwb/weapons/w_f1_thrown.mdl"
 ENT.Model = "models/pwb/weapons/w_m320_projectile.mdl"
-ENT.SpoonScale = 2
+ENT.SpoonScale = 8
 
 if SERVER then
 
@@ -35,7 +35,9 @@ if SERVER then
 		if self.Exploded then return end
 		self.Exploded = true
 		local SelfPos = self:LocalToWorld(self:OBBCenter())
-		JMod.Sploom(self:GetOwner(), self:GetPos(), 175) --math.random(150, 250))
+		JMod.Sploom(self:GetOwner(), self:GetPos(), 900, 500) --math.random(150, 250))
+		--util.BlastDamage(self, self:GetOwner(), self:GetPos(), 175, 350)
+		--JMod.FragSplosion(self, SelfPos + Vector(0, 0, 20), 200, 550, 250, self:GetOwner() or game.GetWorld())
 		--JMod.Sploom(self:GetOwner(), self:GetPos(), 0)
 		self:EmitSound("dwr/explosions/indoors/distant/"..math.random(3,8)..".wav", 90, 100)
 		local plooie = EffectData()

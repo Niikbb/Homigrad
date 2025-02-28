@@ -14,8 +14,8 @@ local function makeT(ply)
     wep:SetClip1(wep:GetMaxClip1())
     ply:GiveAmmo(2 * wep:GetMaxClip1(),wep:GetPrimaryAmmoType())
     ply.nopain = true
-    ply:SetMaxHealth(#player.GetAll() * 200)
-    ply:SetHealth(#player.GetAll() * 200)
+    ply:SetMaxHealth(#player.GetAll() * 250)
+    ply:SetHealth(#player.GetAll() * 250)
 
     ply:ChatPrint("Вы Джон Уик.")
 end
@@ -133,8 +133,8 @@ end
 
 function wick.PlayerCanJoinTeam(ply,teamID)
     if ply:IsAdmin() then
-        if teamID == 2 then ply.forceCT = nil ply.forceT = true ply:ChatPrint("ты будешь за дбгшера некст раунд") return false end
-        if teamID == 3 then ply.forceT = nil ply.forceCT = true ply:ChatPrint("ты будешь за хомисайдера некст раунд") return false end
+        if teamID == 2 then ply.forceCT = nil ply.forceT = true ply:ChatPrint("ты будешь за джона некст раунд") return false end
+        if teamID == 3 then ply.forceT = nil ply.forceCT = true ply:ChatPrint("ты будешь за наёмника некст раунд") return false end
     else
         if teamID == 2 or teamID == 3 then ply:ChatPrint("Иди нахуй") return false end
     end

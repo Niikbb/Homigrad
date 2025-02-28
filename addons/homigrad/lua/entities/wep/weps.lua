@@ -52,6 +52,10 @@ Guns = {
 "weapon_hk_arbalet",
 "weapon_doublebarrel",
 "weapon_doublebarrel_dulo",
+"weapon_cmosin",
+"weapon_csmg40",
+"weapon_ck98",
+"weapon_cppsh41",
 "weapon_spas12"
 }
 GunsModel = {
@@ -114,6 +118,10 @@ GunsModel = {
 ["weapon_awp"]="models/weapons/salatbase/w_snip_awp.mdl",
 ["weapon_doublebarrel_dulo"]="models/weapons/tfa_ins2/w_doublebarrel_sawnoff.mdl",
 ["weapon_doublebarrel_dulo"]="models/weapons/tfa_ins2/w_doublebarrel.mdl",
+["weapon_csmg40"]="models/weapons/w_grub_mp40.mdl",
+["weapon_cppsh41"]="models/weapons/w_smg_ppsh.mdl",
+["weapon_cmosin"]="models/weapons/w_grub_mosin.mdl",
+["weapon_ck98"]="models/weapons/doi/w_kar98k.mdl",
 }
 
 ShootWait = {
@@ -157,6 +165,10 @@ ShootWait = {
 ["weapon_hk_arbalet"]=0,
 ["weapon_doublebarrel_dulo"]=0.1,
 ["weapon_doublebarrel"]=0.1,
+["weapon_csmg40"]=0.12,
+["weapon_cppsh41"]=0.07,
+["weapon_cmosin"]=1.5,
+["weapon_ck98"]=1.5,
 }
 
 ReloadTime = {
@@ -199,6 +211,10 @@ ReloadTime = {
 ["weapon_hk_arbalet"]=2,
 ["weapon_doublebarrel"]=2,
 ["weapon_doublebarrel_dulo"]=2,
+["weapon_csmg40"]=2,
+["weapon_cppsh41"]=2,
+["weapon_ck98"]=2,
+["weapon_cmosin"]=2,
 }
 
 
@@ -242,6 +258,10 @@ TwoHandedOrNo = {
 ["weapon_hk_arbalet"]=true,
 ["weapon_doublebarrel"]=true,
 ["weapon_doublebarrel_dulo"]=true,
+["weapon_csmg40"]=true,
+["weapon_cppsh41"]=true,
+["weapon_ck98"]=true,
+["weapon_cmosin"]=true,
 }
 
 Automatic = {
@@ -284,6 +304,10 @@ Automatic = {
 ["weapon_hk_arbalet"]=false,
 ["weapon_doublebarrel"]=false,
 ["weapon_doublebarrel_dulo"]=false,
+["weapon_csmg40"]=true,
+["weapon_cppsh41"]=true,
+["weapon_ck98"]=false,
+["weapon_cmosin"]=false,
 }
 
 end

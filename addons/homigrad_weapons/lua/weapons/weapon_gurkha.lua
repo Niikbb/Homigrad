@@ -13,7 +13,7 @@ SWEP.AdminSpawnable= true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
-SWEP.ViewModel = "models/weapons/insurgency/v_gurkha.mdl"
+SWEP.ViewModel = "models/weapons/insurgency/w_gurkha.mdl"
 SWEP.WorldModel = "models/weapons/insurgency/w_gurkha.mdl"
 SWEP.ViewModelFlip = false
 

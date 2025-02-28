@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Glock 17"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 25
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "weapons/tfa_ins2/sandstorm_glock/fp.wav"
 SWEP.Primary.SoundFar = "snd_jack_hmcd_smp_far.wav"
-SWEP.Primary.Force = 90/3
+SWEP.Primary.Force = 20
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.12
 

@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "M9 Beretta"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 25
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb2/weapons/fiveseven/fire.wav"
 --SWEP.Primary.SoundFar = "m45/m45_dist.wav"
-SWEP.Primary.Force = 65/3
+SWEP.Primary.Force = 25
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.12
 

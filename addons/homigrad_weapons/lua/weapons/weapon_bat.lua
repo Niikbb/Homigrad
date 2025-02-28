@@ -5,8 +5,8 @@ SWEP.PrintName = "Деревянная бита"
 SWEP.Category = "Ближний Бой"
 SWEP.Instructions = "Часть спортивного инвентаря, предназначенная для нанесения ударов по мячу. Также популярно как холодное оружие благодаря своему удобству. Особенности конструкции биты позволяют наносить ею тяжёлые и мощные удары."
 
-SWEP.Spawnable= true
-SWEP.AdminSpawnable= true
+SWEP.Spawnable = true
+SWEP.AdminSpawnable = true
 SWEP.AdminOnly = false
 
 SWEP.ViewModelFOV = 60
@@ -47,7 +47,7 @@ SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
 function SWEP:DrawWeaponSelection( x, y, wide, tall, alpha )
-	if !IsValid(DrawModel) then
+	if not IsValid(DrawModel) then
 		DrawModel = ClientsideModel( self.WorldModel, RENDER_GROUP_OPAQUE_ENTITY );
 		DrawModel:SetNoDraw( true );
 	else
@@ -56,12 +56,12 @@ function SWEP:DrawWeaponSelection( x, y, wide, tall, alpha )
 		local vec = Vector(55,55,55)
 		local ang = Vector(-48,-48,-48):Angle()
 
-		cam.Start3D( vec, ang, 20, x, y+35, wide, tall, 5, 4096 )
+		cam.Start3D( vec, ang, 20, x, y + 35, wide, tall, 5, 4096 )
 			cam.IgnoreZ( true )
 			render.SuppressEngineLighting( true )
 
 			render.SetLightingOrigin( self:GetPos() )
-			render.ResetModelLighting( 50/255, 50/255, 50/255 )
+			render.ResetModelLighting( 50 / 255, 50 / 255, 50 / 255 )
 			render.SetColorModulation( 1, 1, 1 )
 			render.SetBlend( 255 )
 
@@ -83,40 +83,40 @@ function SWEP:DrawWeaponSelection( x, y, wide, tall, alpha )
 end
 
 function Circle( x, y, radius, seg )
-    local cir = {}
+	local cir = {}
 
-    table.insert( cir, { x = x, y = y, u = 0.5, v = 0.5 } )
-    for i = 0, seg do
-        local a = math.rad( ( i / seg ) * -360 )
-        table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
-    end
+	table.insert( cir, { x = x, y = y, u = 0.5, v = 0.5 } )
+	for i = 0, seg do
+		local a = math.rad( ( i / seg ) * -360 )
+		table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
+	end
 
-    local a = math.rad( 0 ) -- This is needed for non absolute segment counts
-    table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
+	local a = math.rad( 0 ) -- This is needed for non absolute segment counts
+	table.insert( cir, { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 } )
 
-    surface.DrawPoly( cir )
+	surface.DrawPoly( cir )
 end
 
 function SWEP:DrawHUD()
-		if not (GetViewEntity() == LocalPlayer()) then return end
-		if LocalPlayer():InVehicle() then return end
-			local ply = self:GetOwner()
-local t = {}
-t.start = ply:GetAttachment(ply:LookupAttachment("eyes")).Pos
-t.endpos = t.start + ply:GetAngles():Forward() * 90
-t.filter = self:GetOwner()
-local Tr = util.TraceLine(t)
+	if not (GetViewEntity() == LocalPlayer()) then return end
+	if LocalPlayer():InVehicle() then return end
+	local ply = self:GetOwner()
+	local t = {}
+	t.start = ply:GetAttachment(ply:LookupAttachment("eyes")).Pos
+	t.endpos = t.start + ply:GetAngles():Forward() * 90
+	t.filter = self:GetOwner()
+	local Tr = util.TraceLine(t)
 
-if Tr.Hit then
+	if Tr.Hit then
 
-		local Size = math.Clamp(1 - ((Tr.HitPos - self:GetOwner():GetShootPos()):Length() / 90) ^ 2, .1, .3)
-		surface.SetDrawColor(Color(200, 200, 200, 200))
-		draw.NoTexture()
-		Circle(Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y, 55 * Size, 32)
+	local Size = math.Clamp(1 - ((Tr.HitPos - self:GetOwner():GetShootPos()):Length() / 90) ^ 2, .1, .3)
+	surface.SetDrawColor(Color(200, 200, 200, 200))
+	draw.NoTexture()
+	Circle(Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y, 55 * Size, 32)
 
-		surface.SetDrawColor(Color(255, 255, 255, 200))
-		draw.NoTexture()
-		Circle(Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y, 40 * Size, 32)
+	surface.SetDrawColor(Color(255, 255, 255, 200))
+	draw.NoTexture()
+	Circle(Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y, 40 * Size, 32)
 	end
 end
 
@@ -131,15 +131,14 @@ if CLIENT then
 		local _Owner = self:GetOwner()
 
 		if (IsValid(_Owner)) then
-            -- Specify a good position
+			-- Specify a good position
 			local offsetVec = Vector(8,-1,0)
 			local offsetAng = Angle(150, 0, 0)
-			
 			local boneid = _Owner:LookupBone("ValveBiped.Bip01_R_Hand") -- Right Hand
-			if !boneid then return end
+			if not boneid then return end
 
 			local matrix = _Owner:GetBoneMatrix(boneid)
-			if !matrix then return end
+			if not matrix then return end
 
 			local newPos, newAng = LocalToWorld(offsetVec, offsetAng, matrix:GetTranslation(), matrix:GetAngles())
 
@@ -147,7 +146,7 @@ if CLIENT then
 			WorldModel:SetAngles(newAng)
 			WorldModel:SetModelScale(1.3)
 
-            WorldModel:SetupBones()
+			WorldModel:SetupBones()
 		else
 			WorldModel:SetPos(self:GetPos())
 			WorldModel:SetAngles(self:GetAngles())
@@ -173,7 +172,7 @@ end
 
 function SWEP:PrimaryAttack()
 	self:GetOwner():SetAnimation( PLAYER_ATTACK1 )
-	self:SetNextPrimaryFire( CurTime() + self.Primary.Delay/((self:GetOwner().stamina or 100)/100)-(self:GetOwner():GetNWInt("Adrenaline")/5) )
+	self:SetNextPrimaryFire( CurTime() + self.Primary.Delay / ((self:GetOwner().stamina or 100) / 100) - (self:GetOwner():GetNWInt("Adrenaline") / 5) )
 
 	if SERVER then
 		self:GetOwner():EmitSound( "weapons/slam/throw.wav",60 )
@@ -188,7 +187,6 @@ function SWEP:PrimaryAttack()
 	tra.filter = self:GetOwner()
 	local Tr = util.TraceLine(tra)
 	local t = {}
-	local pos1, pos2
 	local tr
 	if not Tr.Hit then
 		t.start = ply:GetAttachment(ply:LookupAttachment("eyes")).Pos
@@ -205,7 +203,7 @@ function SWEP:PrimaryAttack()
 	pos2 = tr.HitPos - tr.HitNormal
 	if true then
 		if SERVER and tr.HitWorld then
-			self:GetOwner():EmitSound(  "physics/wood/wood_plank_impact_hard"..math.random(1,5)..".wav",60  )
+			self:GetOwner():EmitSound(  "physics/wood/wood_plank_impact_hard" .. math.random(1,5) .. ".wav",60  )
 		end
 
 		if IsValid( tr.Entity ) and SERVER then
@@ -231,7 +229,7 @@ function SWEP:PrimaryAttack()
 				if tr.Entity:GetClass() == "prop_ragdoll" then
 					self:GetOwner():EmitSound(  "Flesh.ImpactHard",60  )
 				else
-					self:GetOwner():EmitSound(  "physics/wood/wood_plank_impact_hard"..math.random(1,5)..".wav",60  )
+					self:GetOwner():EmitSound(  "physics/wood/wood_plank_impact_hard" .. math.random(1,5) .. ".wav",60  )
 				end
 
 			end

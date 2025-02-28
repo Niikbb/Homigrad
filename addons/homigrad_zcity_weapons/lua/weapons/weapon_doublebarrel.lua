@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "Обрез ИЖ-43"
 SWEP.Author 				= "Homigrad"
@@ -16,14 +16,14 @@ SWEP.Primary.ClipSize		= 2
 SWEP.Primary.DefaultClip	= 2
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "12/70 gauge"
-SWEP.Primary.Cone = 0.02
-SWEP.Primary.Damage = 30
+SWEP.Primary.Cone = 0.1
+SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "weapons/tfa_ins2/doublebarrel_sawnoff/doublebarrelsawn_fire.wav"
 SWEP.Primary.Force = 35
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.1
-SWEP.NumBullet = 8
+SWEP.NumBullet = 10
 SWEP.Sight = true
 SWEP.TwoHands = true
 
@@ -54,7 +54,7 @@ SWEP.vbwPos = Vector(0,-4.7,1)
 SWEP.vbwAng = Angle(15,5,-90)
 
 SWEP.addAng = Angle(0,0,0)
-SWEP.addPos = Vector(0,38,10)-- shamanskie to4ki
+SWEP.addPos = Vector(0,38,10) -- shamanskie to4ki
 
 SWEP.dwmModeScale = 1 -- pos
 SWEP.dwmForward = 3
@@ -65,11 +65,11 @@ SWEP.dwmAUp = 0 -- ang
 SWEP.dwmARight = -15
 SWEP.dwmAForward = 180
 
-function SWEP:ApplyEyeSpray()
+function SWEP:ApplyEyeSpray() -- recoil
     self.eyeSpray = self.eyeSpray - Angle(5,math.Rand(-4,4),0)
 end
 
-local model 
+local model
 if CLIENT then
     model = GDrawWorldModel or ClientsideModel(SWEP.WorldModel,RENDER_GROUP_OPAQUE_ENTITY)
     GDrawWorldModel = model
@@ -81,7 +81,6 @@ if SERVER then
         local owner = self:GetOwner()
         local Pos,Ang = owner:GetBonePosition(owner:LookupBone("ValveBiped.Bip01_R_Hand"))
         if not Pos then return end
-        
         Pos:Add(Ang:Forward() * self.dwmForward)
         Pos:Add(Ang:Right() * self.dwmRight)
         Pos:Add(Ang:Up() * self.dwmUp)
@@ -106,7 +105,6 @@ function SWEP:DrawWorldModel()
     local owner = self:GetOwner()
     if not IsValid(owner) then
         self:DrawModel()
-
         return
     end
 
@@ -114,23 +112,16 @@ function SWEP:DrawWorldModel()
 
     local Pos,Ang = owner:GetBonePosition(owner:LookupBone("ValveBiped.Bip01_R_Hand"))
     if not Pos then return end
-    
     Pos:Add(Ang:Forward() * self.dwmForward)
     Pos:Add(Ang:Right() * self.dwmRight)
     Pos:Add(Ang:Up() * self.dwmUp)
-
-
     Ang:RotateAroundAxis(Ang:Up(),self.dwmAUp)
     Ang:RotateAroundAxis(Ang:Right(),self.dwmARight)
     Ang:RotateAroundAxis(Ang:Forward(),self.dwmAForward)
-    
     self:SetPosAng(Pos,Ang)
-
     model:SetPos(Pos)
     model:SetAngles(Ang)
-
     model:SetModelScale(self.dwmModeScale)
-
     model:DrawModel()
 end
 

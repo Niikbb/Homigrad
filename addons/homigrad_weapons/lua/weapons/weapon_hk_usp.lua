@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "HK USP"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 26
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "weapons/tfa_ins2/usp_tactical/fp1.wav"
 SWEP.Primary.SoundFar = "weapons/tfa_ins2/usp_tactical/fpddd.wav"
-SWEP.Primary.Force = 90/3
+SWEP.Primary.Force = 20
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.14
 

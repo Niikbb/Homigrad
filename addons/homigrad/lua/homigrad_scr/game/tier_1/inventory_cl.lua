@@ -1,6 +1,13 @@
 if not engine.ActiveGamemode() == "homigrad" then return end
 local blackListedWeps = {
-	["weapon_hands"] = true
+	["weapon_hands"] = true,
+	["weapon_igib"] = true,
+	["weapon_physgun"] = true,
+	["gmod_camera"] = true,
+	["drgbase_possessor"] = true,
+	["weapon_ak74"] = true, --admin minigun
+	["gmod_tool"] = true,
+	["weapon_braaains"] = true
 }
 
 local blackListedAmmo = {
@@ -56,7 +63,11 @@ Gunshuy = {
 	"weapon_knife",
 	"weapon_pipe",
 	"weapon_sar2",
-	"weapon_civil_famas"
+	"weapon_civil_famas",
+	"weapon_csmg40",
+	"weapon_cppsh41",
+	"weapon_ck98",
+	"weapon_cmosin"
 }
 
 local AmmoTypes = {

@@ -161,8 +161,7 @@ local prekols = {
 	"Get a job",
 	"Get a life",
 	"возможно, команда hg_disable_stoprenderunfocus 1 выключит этот прикол...",
-	"ураааа, ты свернулся... Потрогай траву, играть вечность плохо.",
-	"kys"
+	"ураааа, ты свернулся... Потрогай траву, играть вечность плохо."
 }
 
 local developer = GetConVar("developer")
@@ -223,6 +222,7 @@ local scrw, scrh = ScrW(), ScrH()
 local whitelistweps = {
 	["weapon_physgun"] = true,
 	["gmod_tool"] = true,
+	["gred_emp_empty"] = true,
 	["gmod_camera"] = true,
 	["drgbase_possessor"] = true,
 }
@@ -354,7 +354,11 @@ local weps = {
 ["weapon_vector"] = true,
 ["weapon_doublebarrel"] = true,
 ["weapon_doublebarrel_dulo"] = true,
-["weapon_awp"] = true,
+["weapon_csmg40"] = true,
+["weapon_cppsh41"] = true,
+["weapon_igib"] = true,
+["weapon_ck98"] = true,
+["weapon_cmosin"] = true,
 }
 
 local ScopeLerp = 0
@@ -758,6 +762,30 @@ function CalcView(ply,vec,ang,fov,znear,zfar)
 			vecWep = hand.Pos + hand.Ang:Up() * 2.4 - hand.Ang:Forward() * 8 + hand.Ang:Right() * 0.85
 			angWep = hand.Ang + Angle(-24,0,0)
 		end
+		if weaponClass == "weapon_csmg40" then
+			--Vector(3.85,10,1.45)
+			vecWep = hand.Pos + hand.Ang:Up() * 5.3 - hand.Ang:Forward() * 8 + hand.Ang:Right() * 0.25
+			angWep = hand.Ang + Angle(5,10,0)
+		end
+		if weaponClass == "weapon_cppsh41" then
+			--Vector(3.85,10,1.45)
+			vecWep = hand.Pos + hand.Ang:Up() * 3.6 - hand.Ang:Forward() * 10 + hand.Ang:Right() * 0.3
+			angWep = hand.Ang + Angle(-5,5,0)
+		end
+		if weaponClass == "weapon_ck98" then
+			--Vector(5.1,5,0.76)
+			vecWep = hand.Pos + hand.Ang:Up() * 3.7 - hand.Ang:Forward() * 7 + hand.Ang:Right() * 1
+			angWep = hand.Ang + Angle(-8,5,0)
+		end
+		if weaponClass == "weapon_cmosin" then
+			--Vector(5.1,5,0.76)
+			vecWep = hand.Pos + hand.Ang:Up() * 5.5 - hand.Ang:Forward() * 8.5 + hand.Ang:Right() * 0.35
+			angWep = hand.Ang + Angle(-8,5,0)
+		end
+		if weaponClass == "weapon_igib" then -- for weps with no ironsights
+			vecWep = hand.Pos
+			angWep = hand.Ang
+		end
 	end
 
 
@@ -1045,6 +1073,7 @@ end
 
 hook.Add("RenderScreenspaceEffects","BloomEffect-homigrad",function()
 	if GetConVar("hg_bodycam"):GetInt() == 1 and LocalPlayer():Alive() then
+		--if GetConVar("hg_bodycam"):GetInt() == 1 then
 		local splitTbl = string.Split(util.DateStamp()," ")
 		local date,time = splitTbl[1],splitTbl[2]
 		time = string.Replace(time,"-",":")

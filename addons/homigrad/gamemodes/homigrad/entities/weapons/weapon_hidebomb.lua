@@ -123,9 +123,9 @@ if SERVER then
             timer.Simple(0,function()
                 local ZaWarudo = game.GetWorld()
                 local Infl, Att = (IsValid(ent) and ent) or ZaWarudo, (IsValid(ent) and IsValid(ent.owner) and ent.owner) or (IsValid(ent) and ent) or ZaWarudo
-                util.BlastDamage(Infl,Att,SelfPos,60 * PowerMult,120 * PowerMult)
+                util.BlastDamage(Infl,Att,SelfPos,60 * PowerMult,360 * PowerMult)
 
-                --util.BlastDamage(Infl,Att,SelfPos,20 * PowerMult,1000 * PowerMult)
+                --util.BlastDamage(Infl,Att,SelfPos,20 * PowerMult,120 * PowerMult)
             end)
 		end)
         if IsValid(ent.parentBomb) then ent.parentBomb:Remove() end
@@ -168,7 +168,7 @@ if SERVER then
         ent.parentBomb = self
         ent.owner = self:GetOwner()
         ent:CallOnRemove("homigrad-bomb",Bomb)
-        ent:EmitSound("buttons/button24.wav",75,50)
+        ent:EmitSound("snds_jack_gmod/ezsentry_engage.wav",75,150)
         self:SetNWBool("hasbomb",true)
     end
 

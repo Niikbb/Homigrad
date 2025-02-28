@@ -29,8 +29,6 @@ end
     ["gun-free-zone"] = 3
 }--]]
 
-local homicide_setmode = CreateConVar("homicide_setmode","",FCVAR_LUA_SERVER,"")
-
 function homicide.IsMapBig()
     local mins,maxs = game.GetWorld():GetModelBounds()
     local skybox = 0
@@ -46,19 +44,20 @@ function homicide.IsMapBig()
     --Vector(-10000, -2000, -2500) Vector(5000, 10000, 800)
 end
 
+local homicide_setmode = CreateConVar("homicide_setmode", "9999", FCVAR_LUA_SERVER, "Force homicide round mode (1 - State of Emergency, 2 - Casual, 3 - Unarmed Zone, 4 - Wild West)")
+
 function homicide.StartRound(data)
     team.SetColor(1,homicide.red[2])
-
     game.CleanUpMap(false)
 
     if SERVER then
-        local roundType = homicide_setmode:GetInt() == math.random(1,4) or (homicide.IsMapBig() and 1) or false
-        homicide.roundType = math.random(1,4)
-        --homicide.roundType = roundType or math.random(2,4)
-        --soe, standard, gun-free-zone, wild west
-        --print(homicide_setmode:GetString(),homicide.roundType)
+        local roundType = homicide_setmode:GetInt()
+        if roundType < 1 or roundType > 4 then
+            roundType = math.random(1, 4)
+        end
+        homicide.roundType = roundType
         net.Start("roundType")
-        net.WriteInt(homicide.roundType,4)
+        net.WriteInt(homicide.roundType, 4)
         net.Broadcast()
     end
 
@@ -129,8 +128,8 @@ function homicide.HUDPaint_RoundLeft(white2)
         if playsound then
             playsound = false
             surface.PlaySound(roundSound[homicide.roundType])
+            lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,252.5),startRound,startRound)
         end
-        lply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),3,0.5)
 
 
         --[[surface.SetFont("HomigradFontBig")

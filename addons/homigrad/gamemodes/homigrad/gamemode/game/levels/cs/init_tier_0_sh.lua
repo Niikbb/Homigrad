@@ -64,19 +64,3 @@ end
 --тот кто это кодил нужно убить нахуй
 css.RoundRandomDefalut = 1
 css.SupportCenter = true
-
-/*function css.StartRound()
-	game.CleanUpMap(false)
-
-	team.SetColor(1,red)
-	team.SetColor(2,blue)
-
-	if CLIENT then
-		css.StartRoundCL()
-		return
-	end
-
-	css.StartRoundSV()
-end
-css.RoundRandomDefalut = 2
-css.SupportCenter = false*/

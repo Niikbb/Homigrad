@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "FN P90"
 SWEP.Instructions			= "Пистолет-пулемёт под калибр 5,7×28"
@@ -19,7 +19,7 @@ SWEP.Primary.Damage = 30
 SWEP.Primary.Spread = 5
 SWEP.Primary.Sound = "mp5k/mp5k_fp.wav"
 SWEP.Primary.SoundFar = "mp5k/mp5k_dist.wav"
-SWEP.Primary.Force = 120/3
+SWEP.Primary.Force = 40
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.05
 SWEP.TwoHands = true

@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "SPAS-12"
 SWEP.Author 				= "Homigrad"
@@ -15,15 +15,15 @@ SWEP.Primary.ClipSize		= 8
 SWEP.Primary.DefaultClip	= 8
 SWEP.Primary.Automatic		= true
 SWEP.Primary.Ammo			= "12/70 gauge"
-SWEP.Primary.Cone = 0.05
-SWEP.Primary.Damage = 35
+SWEP.Primary.Cone = 0.1
+SWEP.Primary.Damage = 16
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "toz_shotgun/toz_fp.wav"
 SWEP.Primary.SoundFar = "toz_shotgun/toz_dist.wav"
 SWEP.Primary.Force = 15
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.15
-SWEP.NumBullet = 12
+SWEP.NumBullet = 10
 SWEP.Sight = true
 SWEP.TwoHands = true
 

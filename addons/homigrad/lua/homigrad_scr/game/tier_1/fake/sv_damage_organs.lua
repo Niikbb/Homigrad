@@ -1,4 +1,4 @@
-if engine.ActiveGamemode() == "homigrad" then
+if not engine.ActiveGamemode() == "homigrad" then return end
 hook.Add("HomigradDamage","Organs",function(ply,hitgroup,dmginfo,rag,armorMul,armorDur,haveHelmet)
     local ent = rag or ply
     local inf = dmginfo:GetInflictor()
@@ -211,4 +211,3 @@ hook.Add("HomigradDamage","BurnDamage",function(ply,hitgroup,dmginfo)
         dmginfo:ScaleDamage( 5 )
     end
 end)
-end

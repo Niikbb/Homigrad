@@ -302,13 +302,42 @@ COMMANDS.roll = {function(ply,args)
 	end
 end,nil,nil,true}
 
-COMMANDS.fullup = {function(ply,args)
+/*COMMANDS.fullup = {function(ply,args)
 	ply.stamina = 100
 	ply.pain = 0
 	ply.Blood = 5000
 	ply.Bloodlosing = 0
 	ply.dmgimpulse = 0
-end}
+end}*/
+
+concommand.Add("hg_admin_fullup", function(ply, cmd, args)
+    if !ply:IsAdmin() then return end
+    local target = ply
+    if args[1] then
+        local potentialTarget = nil
+        for _, v in ipairs(player.GetAll()) do
+            if string.find(string.lower(v:Nick()), string.lower(args[1])) then
+                potentialTarget = v
+                break
+            end
+        end
+        if potentialTarget then
+            target = potentialTarget
+        else
+            ply:ChatPrint("Игрок с таким именем не найден.")
+            return
+        end
+    end
+    target.stamina = 100
+    target.pain = 0
+    target.Blood = 5000
+    target.Bloodlosing = 0
+    target.dmgimpulse = 0
+    for _, player in ipairs(player.GetAll()) do
+        player:ChatPrint(" " .. ply:Nick() .. " восстановил параметры игрока " .. target:Nick() .. ".")
+    end
+    --print(string.format(" %s использовал команду 'FullUP' на игроке %s", ply:Nick(), target:Nick()))
+end)
 
 function GM:DoPlayerDeath(ply) end
 
@@ -324,23 +353,3 @@ net.Receive("lasertgg",function(len,ply)
 	net.WriteBool(boolen)
 	net.Broadcast()
 end)
-
-/*function GM:IsSpawnpointSuitable( ply, spawnpointent, bMakeSuitable )
-
-	local Pos = spawnpointent:GetPos()
-	local Blockers = 0
-	local Ents = ents.FindInBox( Pos + Vector( -64, -64, 0 ), Pos + Vector( 64, 64, 0 ) )
-
-	--if ( ply:Team() == TEAM_SPECTATOR or ply:Team() == TEAM_UNASSIGNED ) then return true end
-	if (ply:Team() == 1 or ply:Team() == 2 or ply:Team() == 3) then return true end
-
-	for k, v in pairs( Ents ) do
-		if ( IsValid( v ) and v:IsPlayer() and v:Alive() ) then
-			Blockers = Blockers + 1
-		end
-	end
-
-	if ( bMakeSuitable ) then return true end
-	if ( Blockers > 0 ) then return false end
-	return true
-end*/

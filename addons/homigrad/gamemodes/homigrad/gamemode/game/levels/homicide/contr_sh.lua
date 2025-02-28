@@ -1,26 +1,14 @@
 local CLASS = player.RegClass("contr")
 
-CLASS.weapons = {"weapon_radio","weapon_police_bat","med_band_big","medkit","painkiller","adrenaline","weapon_handcuffs","weapon_taser","weapon_hg_flashbang"}
-CLASS.main_weapon = {"weapon_ar15","weapon_m3super"}
-CLASS.secondary_weapon = {"weapon_beretta","weapon_fiveseven"}
+CLASS.weapons = {"weapon_radio","weapon_police_bat","med_band_big","medkit","weapon_taser","weapon_hg_flashbang","weapon_hands","weapon_ar15","weapon_beretta"}
 CLASS.models = {"models/monolithservers/mpd/male_04_2.mdl","models/monolithservers/mpd/male_06_2.mdl","models/monolithservers/mpd/male_07_2.mdl","models/monolithservers/mpd/male_08_2.mdl","models/monolithservers/mpd/male_09_2.mdl"}
 CLASS.color = Color(75,75,75)
 
 function CLASS:Off()
 	if CLIENT then
 		CLASS.CloseMenu()
-
 		return
 	end
-
-	/*local guilt = (self.contrGuilt or 0)
-
-	if guilt >= 40 then
-		self.Guilt = self.Guilt + guilt
-
-		GuiltCheck(ply)
-	end*/
-
 	self.isContr = nil
 end
 
@@ -46,18 +34,10 @@ function CLASS:On()
 	self:SetModel(CLASS.models[math.random(#CLASS.models)])
 	self:SetPlayerColor(color:ToVector())
 
-	self:Give("weapon_hands")
-
 	for i,weapon in pairs(CLASS.weapons or empty) do self:Give(weapon) end
-
-	tdm.GiveSwep(self,CLASS.main_weapon)
-	tdm.GiveSwep(self,CLASS.secondary_weapon)
 
 	JMod.EZ_Equip_Armor(self,"Medium-Helmet",color)
 	JMod.EZ_Equip_Armor(self,"Medium-Vest",color)
-
-	JMod.EZ_Equip_Armor(self,"Light-Right-Shoulder",color)
-	JMod.EZ_Equip_Armor(self,"Light-Left-Shoulder",color)
 	JMod.EZ_Equip_Armor(self,"BallisticMask",color)
 	
 

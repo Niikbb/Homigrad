@@ -1,4 +1,5 @@
-if engine.ActiveGamemode() == "homigrad" then
+if not engine.ActiveGamemode() == "homigrad" then return end
+
 include("shared.lua")
 
 local healsound1 = Sound("snd_jack_hmcd_bandage.wav")
@@ -25,4 +26,4 @@ function SWEP:Heal(ent)
 
 		return true
 	end
-end end
+end

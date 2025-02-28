@@ -1,5 +1,5 @@
 if engine.ActiveGamemode() == "homigrad" then
-SWEP.Base = 'salat_base' -- base
+SWEP.Base = "salat_base" -- base
 
 SWEP.PrintName 				= "АС «Вал»"
 SWEP.Author 				= "Homigrad"
@@ -21,7 +21,7 @@ SWEP.Primary.Damage = 45
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb2/weapons/asval/ak47-1.wav"
 --SWEP.Primary.SoundFar = "mp5k/mp5k_suppressed_tp.wav"
-SWEP.Primary.Force = 200/3
+SWEP.Primary.Force = 60
 SWEP.ReloadTime = 2
 SWEP.ShootWait = 0.065
 SWEP.ReloadSound = "pwb2/weapons/deserteagle/reload.wav"
