@@ -1,12 +1,9 @@
 AddCSLuaFile()
-
 ENT.Type = "anim"
 ENT.PrintName = "Flashlight"
 ENT.Author = "JMOD"
-
 ENT.Spawnable = true
 ENT.AdminSpawnable = false
-
 if SERVER then
 	function ENT:Initialize()
 		self:SetModel("models/maxofs2d/lamp_flashlight.mdl")
@@ -18,13 +15,8 @@ if SERVER then
 	end
 
 	function ENT:Use(ply)
-		-- if not ply:CanUseFlashlight() then
 		if not ply.allowFlashlights then
-			-- ply:AllowFlashlight(true)
 			ply.allowFlashlights = true
-
-			ply:EmitSound("items/ammo_pickup.wav")
-
 			self:Remove()
 		elseif not self:IsPlayerHolding() then
 			ply:PickupObject(self)
