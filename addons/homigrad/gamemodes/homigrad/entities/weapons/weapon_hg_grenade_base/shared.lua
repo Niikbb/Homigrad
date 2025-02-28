@@ -1,31 +1,18 @@
 SWEP.Base = "weapon_base"
-
-SWEP.PrintName = "Grenade Base"
-SWEP.Author = "sadsalat"
-SWEP.Purpose = "kaboom!"
-
-SWEP.Slot = 4
-SWEP.SlotPos = 0
 SWEP.Spawnable = false
-
 SWEP.ViewModel = "models/pwb/weapons/w_f1.mdl"
 SWEP.WorldModel = "models/pwb/weapons/w_f1.mdl"
-
 SWEP.Grenade = ""
-
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = false
 SWEP.Primary.Ammo = "none"
-
 SWEP.Secondary.ClipSize = -1
 SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
-
 SWEP.DrawWeaponSelection = DrawWeaponSelection
 SWEP.OverridePaintIcon = OverridePaintIcon
-
 function TrownGrenade(ply, force, grenade)
 	local ent = ents.Create(grenade)
 	ent:SetPos(ply:GetShootPos() + ply:GetAimVector() * 10)
@@ -35,10 +22,8 @@ function TrownGrenade(ply, force, grenade)
 	ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 	ent:Spawn()
 	ent:Arm()
-
 	local phys = ent:GetPhysicsObject()
 	if not IsValid(phys) then return ent:Remove() end
-
 	phys:SetVelocity(ply:GetVelocity() + ply:GetAimVector() * force)
 	phys:AddAngleVelocity(VectorRand() * force / 2)
 end
