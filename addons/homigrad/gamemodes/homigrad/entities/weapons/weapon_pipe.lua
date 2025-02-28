@@ -4,7 +4,9 @@ if CLIENT then
 	SWEP.PrintName = language.GetPhrase("hg.pipe.name")
 	SWEP.Author = "Homigrad"
 	SWEP.Instructions = language.GetPhrase("hg.pipe.inst")
-	SWEP.Category = language.GetPhrase("hg.category.weapons")
+	SWEP.Category = language.GetPhrase("hg.category.melee")
+	SWEP.Slot = 1
+	SWEP.SlotPos = 2
 end
 
 SWEP.Spawnable = true
@@ -17,9 +19,6 @@ SWEP.ViewModelFlip = false
 
 SWEP.AutoSwitchTo = false
 SWEP.AutoSwitchFrom = false
-
-SWEP.Slot = 1
-SWEP.SlotPos = 2
 
 SWEP.UseHands = true
 
