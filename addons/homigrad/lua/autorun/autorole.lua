@@ -1,4 +1,6 @@
 --[[ You can uncomment this file if you want this functionality
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 -- Define the time threshold in seconds (12 hours = 43200 seconds)
 local TIME_THRESHOLD = 43200
 

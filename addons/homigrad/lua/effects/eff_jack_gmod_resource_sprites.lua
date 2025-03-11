@@ -1,4 +1,6 @@
-﻿local Config = {
+﻿if engine.ActiveGamemode() ~= "homigrad" then return end
+
+local Config = {
 	[JMod.EZ_RESOURCE_TYPES.POWER] = {
 		sprite = "mat_jack_smallarmstracer_front",
 		trail = "mat_jack_smallarmstracer_main",

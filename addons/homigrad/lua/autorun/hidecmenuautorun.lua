@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 if CLIENT then
 	hook.Add("InitPostEntity", "HideCMenu", function()
 		CreateConVar("hg_hidecmenu", 1, FCVAR_ARCHIVE, "Hide/Show C menu options", 0, 1)

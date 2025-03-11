@@ -1,4 +1,6 @@
-﻿AddCSLuaFile()
+﻿if engine.ActiveGamemode() ~= "homigrad" then return end
+
+AddCSLuaFile()
 
 JMod = JMod or {}
 

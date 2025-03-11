@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 if CLIENT then
 	local hg_flashlight_enable = CreateClientConVar("hg_flashlight_enable", "1", true, false)
 	local hg_flashlight_distance = CreateClientConVar("hg_flashlight_distance", "4000", true, false)

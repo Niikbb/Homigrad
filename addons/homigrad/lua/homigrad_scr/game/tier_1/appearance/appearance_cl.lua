@@ -5,7 +5,6 @@ TODO:
 --]]
 
 EasyAppearance = EasyAppearance or {}
-
 EasyAppearance.OpenedMenu = EasyAppearance.OpenedMenu or nil
 
 local Models = {
@@ -35,6 +34,7 @@ function EasyAppearance.Menu()
 	end
 
 	local _, Appearance = EasyAppearance.GetData()
+
 	Appearance = Appearance or {}
 
 	EasyAppearance.OpenedMenu = vgui.Create("DFrame")
@@ -43,7 +43,7 @@ function EasyAppearance.Menu()
 	MainPanel:SetSize(512, 512)
 	MainPanel:Center()
 	MainPanel:MakePopup()
-	MainPanel:SetTitle("Appearance Menu")
+	MainPanel:SetTitle("#hg.skins.title")
 	MainPanel.ModelView = vgui.Create("DModelPanel", MainPanel)
 
 	local ModelView = MainPanel.ModelView
@@ -51,6 +51,7 @@ function EasyAppearance.Menu()
 	ModelView:SetSize(256, 512)
 
 	local tModel = EasyAppearance.Models[Appearance.strModel]
+
 	local sex = "Male"
 
 	ModelView:SetModel(tModel and tModel.strPatch or table.Random(table.GetKeys(Models)))
@@ -61,16 +62,17 @@ function EasyAppearance.Menu()
 		self.Pressed = true
 	end
 
-	function ModelView:DragMouseRelease() 
-		self.Pressed = false 
+	function ModelView:DragMouseRelease()
+		self.Pressed = false
 	end
 
 	function ModelView:LayoutEntity(ent)
-		if (self.Pressed) then
-			local mx, my = gui.MousePos()
-			self.Angles = self.Angles - Angle(0,((self.PressX or mx) - mx) / 2, 0)
+		if self.Pressed then -- 360° model spin
+			local mx, _ = gui.MousePos()
+			self.Angles = self.Angles - Angle(0, ((self.PressX or mx) - mx) / 2, 0)
 			self.PressX, self.PressY = gui.MousePos()
 		end
+
 		ent:SetAngles(self.Angles)
 		ent:SetSubMaterial()
 
@@ -78,6 +80,7 @@ function EasyAppearance.Menu()
 
 		ent:SetupBones()
 		ent:SetSubMaterial(Models[ent:GetModel()][2], Appearance.strColthesStyle and EasyAppearance.Appearances[sex][Appearance.strColthesStyle] or "")
+
 		-- EasyAppearance.DrawAttachment(ent, Appearance.strAttachmets)
 
 		return
@@ -85,14 +88,8 @@ function EasyAppearance.Menu()
 
 	ModelView:SetFOV(37.5)
 
-	function ModelView:DragMousePress()
-		self.PressX, self.PressY = gui.MousePos()
-		self.Pressed = true
-	end
-
-	function ModelView:DragMouseRelease() self.Pressed = false end
-
 	MainPanel.RightPanel = vgui.Create("DPanel", MainPanel)
+
 	local DPanel = MainPanel.RightPanel
 	DPanel:Dock(FILL)
 	DPanel.ComboMdlBox = vgui.Create("DComboBox", DPanel)
@@ -120,6 +117,7 @@ function EasyAppearance.Menu()
 	end
 
 	DPanel.ComboApperBox = vgui.Create("DComboBox", DPanel)
+
 	local CombApperBox = DPanel.ComboApperBox
 	CombApperBox:Dock(TOP)
 	CombApperBox:DockMargin(15, 10, 15, 0)
@@ -132,14 +130,15 @@ function EasyAppearance.Menu()
 		Appearance.strColthesStyle = text
 	end
 
-	--[[DPanel.CombAttBox = vgui.Create("DComboBox", DPanel)
+	DPanel.CombAttBox = vgui.Create("DComboBox", DPanel)
+
 	local CombAttBox = DPanel.CombAttBox
 	CombAttBox:Dock(TOP)
 	CombAttBox:DockMargin(15, 10, 15, 0)
 
 	for k in pairs(EasyAppearance.Attachmets) do
 		CombAttBox:AddChoice(k, k)
-	end--]]
+	end
 
 	--[[
 	function CombAttBox:OnSelect(index, text, data)
@@ -147,9 +146,10 @@ function EasyAppearance.Menu()
 	end --]]
 
 	DPanel.ApplyButton = vgui.Create("DButton", DPanel)
+
 	local AplyBtn = DPanel.ApplyButton
 	AplyBtn:Dock(BOTTOM)
-	AplyBtn:SetText("Apply appearance")
+	AplyBtn:SetText("#hg.skins.apply")
 
 	function AplyBtn:DoClick()
 		if not Appearance.strColthesStyle or not Appearance.strModel then
@@ -164,9 +164,7 @@ function EasyAppearance.Menu()
 	end
 end
 
-concommand.Add("hg_appearance_menu", function()
-	EasyAppearance.Menu(LocalPlayer())
-end)
+concommand.Add("hg_appearance_menu", function() EasyAppearance.Menu(LocalPlayer()) end)
 
 function EasyAppearance.SendNet(bRandom, tAppearanceData)
 	net.Start("EasyAppearance_SendData")
@@ -176,23 +174,20 @@ function EasyAppearance.SendNet(bRandom, tAppearanceData)
 end
 
 function EasyAppearance.SaveData(tAppearanceData)
-	if not file.Exists("homigrad", "DATA") then
-		file.CreateDir("homigrad")
-	end
+	if not file.Exists("homigrad", "DATA") then file.CreateDir("homigrad") end
 
 	file.Write("homigrad/appearancedata.json", util.TableToJSON(tAppearanceData, true))
-	
-	--SaveData() should call SendNet(). W/o this - Old skins are the same as the new skins for the host - Niik
+
+	-- SaveData() should call SendNet(). W/o this - Old skins are the same as the new skins for the host - Niik
+
 	EasyAppearance.SendNet(bRandom, tAppearanceData or {})
 end
 
 function EasyAppearance.GetData(bForceRandom)
-	if not file.Exists("homigrad", "DATA") then
-		file.CreateDir("homigrad")
-	end
-
+	if not file.Exists("homigrad", "DATA") then file.CreateDir("homigrad") end
 	if bForceRandom then return true end
 	if not file.Exists("homigrad/appearancedata.json", "DATA") then return true end
+
 	local tAppearanceData = util.JSONToTable(file.Read("homigrad/appearancedata.json", "DATA"))
 
 	return false, tAppearanceData
@@ -202,12 +197,13 @@ local cvrForceRandom = CreateClientConVar("hg_random_appearance", 0, true, false
 
 net.Receive("EasyAppearance_SendReqData", function()
 	local bRandom, tAppearanceData = EasyAppearance.GetData(cvrForceRandom:GetBool())
-	-- print(tAppearanceData)
+
 	EasyAppearance.SendNet(bRandom, tAppearanceData or {})
 end)
 
 -- PrintTable(tAppearanceData)
 -- self:SetNWEntity("Ragdoll", rag)
+
 CreateClientConVar("hg_appearance_dis", "6000", true, false)
 
 --[[
@@ -224,7 +220,7 @@ CreateClientConVar("hg_appearance_dis", "6000", true, false)
 	}
 --]]
 
---[[function EasyAppearance.DrawAttachment(eEnt, strAtt, ply)
+function EasyAppearance.DrawAttachment(eEnt, strAtt, ply)
 	local att = EasyAppearance.Attachmets[strAtt]
 	if not IsValid(eEnt) or not att then return end
 
@@ -243,30 +239,22 @@ CreateClientConVar("hg_appearance_dis", "6000", true, false)
 	if not IsValid(eEnt.AttachModel) then
 		eEnt.AttachModel = ClientsideModel(att.strModel)
 
-		eEnt:CallOnRemove("RemoveAttach", function()
-			eEnt.AttachModel:Remove()
-		end)
+		eEnt:CallOnRemove("RemoveAttach", function() eEnt.AttachModel:Remove() end)
 
 		eEnt.AttachModel:SetNoDraw(true)
 
-		if att.strMaterial then
-			eEnt.AttachModel:SetMaterial(att.strMaterial)
-		end
-
-		if att.iSkin then
-			eEnt.AttachModel:SetSkin(att.iSkin)
-		end
+		if att.strMaterial then eEnt.AttachModel:SetMaterial(att.strMaterial) end
+		if att.iSkin then eEnt.AttachModel:SetSkin(att.iSkin) end
 
 		eEnt.AttachModel:AddEffects(EF_BONEMERGE)
 		-- eEnt.AttachModel:AddEffects(EF_FOLLOWBONE)
 	elseif IsValid(eEnt.AttachModel) then
 		-- if not IsValid(eEnt.AttachModel) then eEnt.AttachModel = nil return end
-		if IsValid(eEnt.AttachModel) and eEnt.AttachModel:GetModel() ~= att.strModel then
-			eEnt.AttachModel:SetModel(att.strModel)
-		end
 
+		if IsValid(eEnt.AttachModel) and eEnt.AttachModel:GetModel() ~= att.strModel then eEnt.AttachModel:SetModel(att.strModel) end
 		if att.bDrawOnLocal or GetViewEntity() ~= ply then
 			local lPos, lAng = LocalToWorld(modelSex > 1 and att.vFPos or att.vPos, modelSex > 1 and att.aFAng or att.aAng, pos, ang)
+
 			-- eEnt.AttachModel:SetPos(lPos)
 			eEnt.AttachModel:SetParent(eEnt, iBone)
 			eEnt.AttachModel:SetRenderOrigin(lPos)
@@ -284,4 +272,4 @@ hook.Add("HG_PostPlayerDraw", "EA_AttachmentsRender", function(ent, ply)
 	ent:SetupBones()
 
 	EasyAppearance.DrawAttachment(ent, Attachmets, ply)
-end)--]]
+end)

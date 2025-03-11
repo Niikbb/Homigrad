@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 --[[
     A Simple Garry's mod drawing library
     Copyright (C) 2016 Bull [STEAM_0:0:42437032] [76561198045139792]

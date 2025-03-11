@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 util.AddNetworkString("SolidMapVote.start")
 util.AddNetworkString("SolidMapVote.end")
 util.AddNetworkString("SolidMapVote.sendVotes")

@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 SolidMapVote.isOpen = SolidMapVote.isOpen or false
 SolidMapVote.isNominating = SolidMapVote.isNominating or false
 

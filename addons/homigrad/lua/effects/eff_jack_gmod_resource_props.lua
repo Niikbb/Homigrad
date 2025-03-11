@@ -1,4 +1,6 @@
-﻿local RockModels = {"models/jmod/resources/rock01a.mdl", "models/jmod/resources/rock02a.mdl", "models/jmod/resources/rock03a.mdl", "models/jmod/resources/rock04a.mdl", "models/jmod/resources/rock05a.mdl"}
+﻿if engine.ActiveGamemode() ~= "homigrad" then return end
+
+local RockModels = {"models/jmod/resources/rock01a.mdl", "models/jmod/resources/rock02a.mdl", "models/jmod/resources/rock03a.mdl", "models/jmod/resources/rock04a.mdl", "models/jmod/resources/rock05a.mdl"}
 local SheetModels = {"models/squad/sf_plates/sf_plate1x1.mdl", "models/squad/sf_plates/sf_plate2x2.mdl"}
 local MedModels = {"models/healthvial.mdl", "models/bandages.mdl", "models/jmod/items/medjit_small.mdl", "models/jmod/items/medjit_small.mdl", "models/bloocobalt/l4d/items/w_eq_adrenaline.mdl", "models/bloocobalt/l4d/items/w_eq_adrenaline_cap.mdl", "models/bloocobalt/l4d/items/w_eq_pills.mdl", "models/bloocobalt/l4d/items/w_eq_pills_cap.mdl", "models/bandages.mdl"}
 local WoodModels = {"models/nova/chair_wood01.mdl", "models/props_junk/wood_crate001a_chunk04.mdl", "models/props_junk/wood_crate001a_chunk01.mdl", "models/props_phx/construct/wood/wood_boardx1.mdl", "models/props_phx/construct/wood/wood_boardx1.mdl", "models/props_phx/construct/wood/wood_boardx1.mdl", "models/props_phx/wheels/wooden_wheel1.mdl"}

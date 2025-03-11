@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 -- !fake
 function ulx.hg_fake(ply, targets)
 	for _, v in pairs(targets) do
@@ -38,11 +40,9 @@ guilt:defaultAccess(ULib.ACCESS_SUPERADMIN)
 guilt:help("Toggles guilt system for a given player(s). (currently does nothing)")
 
 -- forceteam
-local teams = {"Join Game", "Spectator"}
 local AllTeams = team.GetAllTeams()
 
 function ulx.hg_forceteam(ply, targets, arg)
-
 	for i, v in pairs(AllTeams) do
 		if v.Name == arg then
 			arg = tonumber(i)
@@ -62,7 +62,7 @@ forceteam:addParam({
 })
 forceteam:addParam({
 	type = ULib.cmds.StringArg,
-	completes = teams,
+	completes = {"Join Game", "Spectator"},
 	hint = "Team Name",
 	error = "Invalid Team Name specified",
 	ULib.cmds.restrictToCompletes

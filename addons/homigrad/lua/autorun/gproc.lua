@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 local source, offset, len, errordata, path, file
 local gproclib = {}
 _G.gproclib = gproclib

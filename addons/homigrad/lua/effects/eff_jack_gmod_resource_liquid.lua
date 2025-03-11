@@ -1,4 +1,6 @@
-﻿local LiquidConfig = {
+﻿if engine.ActiveGamemode() ~= "homigrad" then return end
+
+local LiquidConfig = {
 	[JMod.EZ_RESOURCE_TYPES.WATER] = {
 		mat = "models/mat_jack_refract_liquid_blue"
 	},

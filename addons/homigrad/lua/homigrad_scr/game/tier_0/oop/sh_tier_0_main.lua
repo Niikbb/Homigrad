@@ -5,9 +5,11 @@ local listClass = oop.listClass
 
 function oop.Inherit(class)
 	local oldBase = class.oldBase
+
 	if oldBase then
 		class.oldBase = nil
-		for i, base in pairs(oldBase) do
+
+		for _, base in pairs(oldBase) do
 			base = listClass[base]
 			base.baseChildrens[class.ClassName] = nil
 		end
@@ -15,11 +17,15 @@ function oop.Inherit(class)
 
 	local content = class[1]
 	local base = class.base
+
 	if not base then return end
+
 	local copyContent = util.tableCopy(content)
-	for i, base in pairs(base) do
+
+	for _, base in pairs(base) do
 		base = listClass[base]
 		base.baseChildrens[class.ClassName] = class
+
 		util.tableLink(content, base[1])
 	end
 
@@ -27,8 +33,7 @@ function oop.Inherit(class)
 end
 
 function oop.InheritChildren(base)
-	local contentBase = base[1]
-	for className, class in pairs(base.baseChildrens) do
+	for className, _ in pairs(base.baseChildrens) do
 		oop.Get(className)
 	end
 end
@@ -37,6 +42,7 @@ function oop.RegEx(className, base)
 	if type(base) ~= "table" then base = {base} end
 
 	local class = listClass[className]
+
 	if not class then
 		class = {
 			{}, -- content
@@ -51,12 +57,15 @@ function oop.RegEx(className, base)
 
 	class.oldBase = class.base
 	class.base = base
+
 	local content = class[1]
+
 	for k in pairs(content) do
 		content[k] = nil
 	end
 
 	local nonInheritContent = class[2]
+
 	for k in pairs(nonInheritContent) do
 		nonInheritContent[k] = nil
 	end
@@ -69,8 +78,10 @@ end
 function oop.InsertFile(class, isFolder)
 	local pathInsert = hg.GetPath(2)
 	local listFiles = class[3]
+
 	if isFolder then pathInsert = string.GetPathFromFilename(pathInsert) end
-	for i, path in pairs(listFiles) do
+
+	for _, path in pairs(listFiles) do
 		if path == pathInsert then return end
 	end
 
@@ -78,10 +89,13 @@ function oop.InsertFile(class, isFolder)
 end
 
 oop.override = {}
+
 local override = oop.override
+
 function oop.Include(class, isFirst)
 	local className = class.ClassName
-	for i, path in pairs(class[3]) do
+
+	for _, path in pairs(class[3]) do
 		if string.sub(path, #path - 3, #path) == ".lua" then
 			include(path)
 		else
@@ -93,6 +107,7 @@ function oop.Include(class, isFirst)
 
 	local func = class[1].Construct
 	if func then func(class) end
+
 	oop.InheritChildren(class)
 	override[className] = nil
 end
@@ -107,9 +122,13 @@ end
 
 function oop.Reg(className, base, isFolder)
 	className = oop.GetClassName(className)
+
 	local overrideClass = override[className]
+
 	if overrideClass then return overrideClass[1], overrideClass end
+
 	local class = oop.RegEx(className, base)
+
 	oop.InsertFile(class, isFolder)
 	override[className] = class
 	oop.Include(class)
@@ -117,17 +136,24 @@ end
 
 function oop.RegConnect(className, isFolder)
 	className = oop.GetClassName(className)
+
 	local overrideClass = override[className]
+
 	if overrideClass then return overrideClass[1], overrideClass end
+
 	local class = listClass[className]
+
 	oop.InsertFile(class, isFolder)
 	oop.Include(class, true)
 end
 
 function oop.Get(className)
 	className = oop.GetClassName(className)
+
 	local overrideClass = override[className]
+
 	if overrideClass then return overrideClass[1], overrideClass end
+
 	oop.Include(listClass[className], true)
 end
 

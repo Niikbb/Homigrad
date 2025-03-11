@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 hook.Add("InitPostEntity", "SolidMapVote.Init", function()
 	SolidMapVote.votes = {}
 	SolidMapVote.isOpen = false

@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 net.Receive("SolidMapVote.start", function(len)
 	local maps = net.ReadTable()
 	SolidMapVote.open(maps)

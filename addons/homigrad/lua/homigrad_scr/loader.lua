@@ -2,22 +2,17 @@ AddCSLuaFile()
 
 hg = hg or {}
 
-local string_sub = string.sub
-local string_split = string.Split
-local string_find = string.find
-local string_GetFileFromFilename = string.GetFileFromFilename
-
 function hg.includeFile(path)
-	local fileName = string_GetFileFromFilename(path)
-	if string_sub(fileName, 1, 1) == "!" then return end
+	local fileName = string.GetFileFromFilename(path)
+	if string.sub(fileName, 1, 1) == "!" then return end
 
-	local prefix = string_sub(fileName, 1, 3)
+	local prefix = string.sub(fileName, 1, 3)
 
 	if prefix ~= "sv_" and prefix ~= "cl_" and prefix ~= "sh_" then
-		prefix = string_sub(fileName, #fileName - 6, #fileName - 4)
+		prefix = string.sub(fileName, #fileName - 6, #fileName - 4)
 
-		if string_sub(prefix, 1, 1) == "_" then
-			prefix = string_sub(prefix, 2, 3) .. "_"
+		if string.sub(prefix, 1, 1) == "_" then
+			prefix = string.sub(prefix, 2, 3) .. "_"
 		end
 	end
 
@@ -46,11 +41,6 @@ function hg.includeFile(path)
 	return result
 end
 
-local file_Find = file.Find
-local string_gsub = string.gsub
-local hg_includeFile = hg.includeFile
-local hg_includeDir
-
 INCLUDE_BREAK = 1
 
 function hg.includeDir(path, includes)
@@ -58,7 +48,7 @@ function hg.includeDir(path, includes)
 	if includes[path] then return end
 	includes[path] = path
 
-	local _files, _dirs = file_Find(path .. "*", "LUA")
+	local _files, _dirs = file.Find(path .. "*", "LUA")
 	local files, dirs, tier_files, tier_dirs = {}, {}, {}, {}
 	local v, v2, tier
 
@@ -66,7 +56,7 @@ function hg.includeDir(path, includes)
 		v = _files[i]
 		tier = nil
 
-		for _, sum in pairs(string_split(v, "_")) do
+		for _, sum in pairs(string.Split(v, "_")) do
 			if tier then
 				sum = string.gsub(sum, ".lua", "")
 				tier = tonumber(sum)
@@ -97,7 +87,7 @@ function hg.includeDir(path, includes)
 		v = _dirs[i]
 		tier = nil
 
-		for _, sum in pairs(string_split(v, "_")) do
+		for _, sum in pairs(string.Split(v, "_")) do
 			if tier then
 				tier = tonumber(sum)
 				break
@@ -130,13 +120,13 @@ function hg.includeDir(path, includes)
 		v2 = tier_files[tier] or empty
 
 		for i = 1, #v2 do
-			result = hg_includeFile(path .. v2[i])
+			result = hg.includeFile(path .. v2[i])
 			if result == INCLUDE_BREAK then return end
 		end
 	end
 
 	for i = 1, #files do
-		result = hg_includeFile(path .. files[i])
+		result = hg.includeFile(path .. files[i])
 		if result == INCLUDE_BREAK then return end
 	end
 
@@ -144,16 +134,14 @@ function hg.includeDir(path, includes)
 		v2 = tier_dirs[tier] or empty
 
 		for i = 1, #v2 do
-			hg_includeDir(path .. v2[i], includes)
+			hg.includeDir(path .. v2[i], includes)
 		end
 	end
 
 	for i = 1, #dirs do
-		hg_includeDir(path .. dirs[i], includes)
+		hg.includeDir(path .. dirs[i], includes)
 	end
 end
-
-hg_includeDir = hg.includeDir
 
 local trace
 
@@ -164,18 +152,18 @@ function hg.GetPath(levelUp)
 		levelUp = 3 + levelUp
 	end
 
-	trace = string_split(trace, "\n")
+	trace = string.Split(trace, "\n")
 	trace = trace[levelUp or #trace]
-	trace = string_split(trace, ":")[1]
-	trace = string_gsub(trace, "	", "")
+	trace = string.Split(trace, ":")[1]
+	trace = string.gsub(trace, "	", "")
 
-	if string_sub(trace, 1, 7) == "addons/" then
-		trace = string_sub(trace, 8, #trace)
-		s = string_find(trace, "/")
+	if string.sub(trace, 1, 7) == "addons/" then
+		trace = string.sub(trace, 8, #trace)
+		s = string.find(trace, "/")
 
-		return string_sub(trace, s + 5, #trace)
-	elseif string_sub(trace, 1, 4) == "lua/" then
-		return string_sub(trace, 5, #trace)
+		return string.sub(trace, s + 5, #trace)
+	elseif string.sub(trace, 1, 4) == "lua/" then
+		return string.sub(trace, 5, #trace)
 	end
 
 	return trace

@@ -8,7 +8,9 @@ local _event, list, min, max
 
 function LIB:Event_Add(class, name, func, prio)
 	_event = self.event[class]
+
 	prio = prio or 0
+
 	if not _event then
 		_event = {
 			list = {}
@@ -18,9 +20,13 @@ function LIB:Event_Add(class, name, func, prio)
 	end
 
 	list = _event.list
+
 	if not list[prio] then list[prio] = {} end
+
 	list[prio][name] = func
+
 	min, max = 0, 0
+
 	for prio in pairs(list) do
 		if min > prio then min = prio end
 		if max < prio then max = prio end
@@ -28,8 +34,10 @@ function LIB:Event_Add(class, name, func, prio)
 
 	_event.min = min
 	_event.max = max
+
 	if not IsValid(self) then
 		local hr = self.eventRemove
+
 		if hr then
 			hr = hr[class] and hr[class][name]
 			if hr then hr[prio] = nil end
@@ -40,12 +48,18 @@ end
 function LIB:Event_Remove(class, name, prio)
 	_event = self.event[class]
 	if not _event then return end
+
 	prio = prio or 0
+
 	local list = _event.list[prio]
 	if not list then return end
+
 	local exists = list[name]
+
 	list[name] = nil
+
 	local e
+
 	for _ in pairs(list) do
 		e = true
 		break
@@ -53,7 +67,9 @@ function LIB:Event_Remove(class, name, prio)
 
 	if not e then
 		_event.list[prio] = nil
+
 		local min, max = 0, 0
+
 		for prio in pairs(_event.list) do
 			if min > prio then min = prio end
 			if max < prio then max = prio end
@@ -75,20 +91,23 @@ function LIB:Event_Remove(class, name, prio)
 		hr = hr[name]
 		hr[prio] = true
 	end
+
 	return exists
 end
 
 local _event, r1, r2, r3, r4, r5, r6, success
 local empty = {}
-local pcall = pcall
+
 function LIB:Event_Call(class, ...)
 	_event = self.event[class]
 	if not _event then return end
+
 	local event_list = _event.list
 	local i = _event.min
 	local max = _event.max
+
 	::loop::
-	for name, func in pairs(event_list[i] or empty) do
+	for _, func in pairs(event_list[i] or empty) do
 		success, r1, r2, r3, r4, r5, r6 = pcall(func, self, ...)
 		if success and r1 ~= nil then return r1, r2, r3, r4, r5, r6 end
 	end
@@ -102,12 +121,15 @@ end
 function LIB:Event_CallNoSelf(class, ...)
 	_event = self.event[class]
 	if not _event then return end
+
 	local event_list = _event.list
 	local i = _event.min
 	local max = _event.max
+
 	::loop::
-	for name, func in pairs(event_list[i] or empty) do
+	for _, func in pairs(event_list[i] or empty) do
 		success, r1, r2, r3, r4, r5, r6 = pcall(func, ...)
+
 		if success and r1 ~= nil then return r1, r2, r3, r4, r5, r6 end
 	end
 
@@ -120,12 +142,15 @@ end
 function LIB:Event_Call1(class, callback1, ...)
 	_event = self.event[class]
 	if not _event then return end
+
 	local event_list = _event.list
 	local i = _event.min
 	local max = _event.max
+
 	::loop::
 	for name, func in pairs(event_list[i] or empty) do
 		if callback1(name) == false then return end
+
 		success, r1, r2, r3, r4, r5, r6 = pcall(func, self, ...)
 		if success and r1 ~= nil then return r1, r2, r3, r4, r5, r6 end
 	end
@@ -139,12 +164,15 @@ end
 function LIB:Event_Call2(class, callback2, ...)
 	_event = self.event[class]
 	if not _event then return end
+
 	local event_list = _event.list
 	local i = _event.min
 	local max = _event.max
+
 	::loop::
 	for name, func in pairs(event_list[i] or empty) do
 		success, r1, r2, r3, r4, r5, r6 = pcall(func, self, ...)
+
 		if not success then continue end
 		if callback2(name, r1, r2, r3, r4, r5, r6) == false then return end
 		if success and r1 ~= nil then return r1, r2, r3, r4, r5, r6 end
@@ -159,13 +187,17 @@ end
 function LIB:Event_Call12(class, callback1, callback2, ...)
 	_event = self.event[class]
 	if not _event then return end
+
 	local event_list = _event.list
 	local i = _event.min
 	local max = _event.max
+
 	::loop::
 	for name, func in pairs(event_list[i] or empty) do
 		if callback1(name) == false then return end
+
 		success, r1, r2, r3, r4, r5, r6 = pcall(func, self, ...)
+
 		if not success then continue end
 		if callback2(name, r1, r2, r3, r4, r5, r6) == false then return end
 		if success and r1 ~= nil then return r1, r2, r3, r4, r5, r6 end
@@ -186,8 +218,9 @@ function LIB:Event_Construct()
 		end
 	end
 
-	for class, event in pairs(self.event) do
+	for _, event in pairs(self.event) do
 		local min, max
+
 		for prio in pairs(event.list) do
 			if not min then
 				min = prio
@@ -206,6 +239,7 @@ end
 
 function LIB:Construct()
 	local content = self[1]
+
 	content:Event_Construct()
 	content:Event_CallNoSelf("Construct", self)
 end

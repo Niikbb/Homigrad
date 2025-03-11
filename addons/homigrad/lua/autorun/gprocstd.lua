@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 gproclib.addFormating("hex", function(v, n)
 	if n then return ("%0" .. n .. "x"):format(v) end
 

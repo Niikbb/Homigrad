@@ -1,3 +1,5 @@
+if engine.ActiveGamemode() ~= "homigrad" then return end
+
 -- Checks and Sets
 function SolidMapVote.playerHasVoted(steamId64)
 	return SolidMapVote.votes[steamId64]

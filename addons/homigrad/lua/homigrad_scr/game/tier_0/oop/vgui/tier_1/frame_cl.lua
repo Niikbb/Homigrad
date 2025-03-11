@@ -7,7 +7,7 @@ local vgui_color = vgui.color
 
 PANEL:Event_Add("Init", "Main", function(self)
 	self:Color_Manual("main", {main = vgui_color.main}, 0.1)
-	self:Color_Manual("top", {main = vgui_color.white,focus = vgui_color.use3}, 0.1)
+	self:Color_Manual("top", {main = vgui_color.white, focus = vgui_color.use3}, 0.1)
 	self:Color_Manual("text", {main = vgui_color.white}, 0.1)
 	self:Color_Manual("bg", {main = vgui_color.whiteBG}, 0.1)
 	self:Color_Manual("frame1", {main = vgui_color.frame1}, 0.1)
