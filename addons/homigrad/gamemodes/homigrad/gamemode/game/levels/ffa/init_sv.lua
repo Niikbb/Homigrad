@@ -1,4 +1,4 @@
-/*
+
 function ffa.StartRoundSV()
     tdm.RemoveItems()
 

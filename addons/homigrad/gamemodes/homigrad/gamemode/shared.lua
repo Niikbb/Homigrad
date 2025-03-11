@@ -18,6 +18,8 @@ hg.LoadModes()
 
 print("Homigrad loaded! Time taken: " .. math.Round(SysTime() - start, 4) .. "s")
 
+math.randomseed(os.time())
+
 function GM:CreateTeams()
 	team.SetUp(1, "Join Game", Color(255, 0, 0))
 	team.SetUp(2, "#######", Color(0, 0, 255))

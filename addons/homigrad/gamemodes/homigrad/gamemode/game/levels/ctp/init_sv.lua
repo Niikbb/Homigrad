@@ -228,21 +228,6 @@ function ctp.EndRound(winner)
 		})
 	net.Broadcast()
 
-	-- for _, ply in ipairs(player.GetAll()) do
-	-- 	if not winner then
-	-- 		ply:ChatPrint("Nobody Wins")
-	-- 		continue
-	-- 	end
-
-	-- 	if winner == ply:Team() then
-	-- 		ply:ChatPrint("Victory!")
-	-- 	end
-
-	-- 	if winner ~= ply:Team() then
-	-- 		ply:ChatPrint("Defeat")
-	-- 	end
-	-- end
-
 	timer.Remove("CP_NewWave")
 	timer.Remove("CP_ThinkAboutPoints")
 end

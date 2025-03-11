@@ -1,5 +1,5 @@
 --table.insert(LevelList, "ffa")
-/*ffa = {}
+ffa = {}
 ffa.Name = "Free For All"
 ffa.LoadScreenTime = 5.5
 

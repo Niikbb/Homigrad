@@ -10,21 +10,27 @@ local function GetFriends(ply)
 		table.insert(tbl, p:Name())
 	end
 
-	return tlb
+	return tbl
 end
 
 COMMANDS.homicide_get = {
 	function(ply, args)
 		if not ply:IsAdmin() then return end
+		-- if ply:Alive() then return end
+		-- if ply:Team() ~= 1002 then return end
+
 		local role = {{}, {}}
+
 		for _, ply in pairs(team.GetPlayers(1)) do
 			if ply.roleT then
 				table.insert(role[1], ply)
 			end
+
 			if ply.roleCT then
 				table.insert(role[2], ply)
 			end
 		end
+
 		net.Start("homicide_roleget")
 			net.WriteTable(role)
 		net.Send(ply)
@@ -33,60 +39,58 @@ COMMANDS.homicide_get = {
 
 local function makeT(ply)
 	if not IsValid(ply) then return end
+
 	ply.roleT = true
+
 	table.insert(homicide.t, ply)
 
 	if homicide.roundType == 1 or homicide.roundType == 2 then
 		local wep = ply:Give("weapon_hk_usps")
-		wep:SetClip1(wep:GetMaxClip1())
 
-		ply:Give("weapon_kabar")
+		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 1, wep:GetPrimaryAmmoType(), true)
+
+		ply:Give("weapon_hg_rgd5")
 		ply:Give("weapon_hg_t_vxpoison")
 		ply:Give("weapon_hidebomb")
-		ply:Give("weapon_hg_rgd5")
+		ply:Give("weapon_kabar")
 		ply:Give("weapon_radar")
-		ply:GiveAmmo(wep:GetMaxClip1(), wep:GetPrimaryAmmoType(), true)
-
 	elseif homicide.roundType == 3 then
 		local wep = ply:Give("weapon_hg_crossbow")
+
 		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 8, "XBowBolt", true)
 
-		ply:Give("weapon_kabar")
 		ply:Give("weapon_hg_rgd5")
-		ply:Give("weapon_hidebomb")
 		ply:Give("weapon_hg_t_vxpoison")
+		ply:Give("weapon_hidebomb")
+		ply:Give("weapon_kabar")
 		ply:Give("weapon_radar")
-		ply:GiveAmmo(8, "XBowBolt", true)
-
 	elseif homicide.roundType == 5 then
-		local wep
+		local wep = math.random(1, 2) == 1 and ply:Give("weapon_scout") or ply:Give("weapon_barret")
 
-		if math.random(1, 2) == 1 then wep = ply:Give("weapon_scout")
-		else wep = ply:Give("weapon_barret") end
 		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 2, wep:GetPrimaryAmmoType(), true)
 
-		ply:Give("weapon_kabar")
 		ply:Give("weapon_hg_rgd5")
-		ply:Give("weapon_hidebomb")
 		ply:Give("weapon_hg_t_vxpoison")
+		ply:Give("weapon_hidebomb")
+		ply:Give("weapon_kabar")
 		ply:Give("weapon_radar")
-
-		ply:GiveAmmo(20, "XBowBolt", true)
 	else
 		local wep = ply:Give("weapon_mateba")
-		wep:SetClip1(wep:GetMaxClip1())
 
-		ply:Give("weapon_kabar")
+		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 2, wep:GetPrimaryAmmoType(), true)
+
+		ply:Give("weapon_hg_rgd5")
 		ply:Give("weapon_hg_t_vxpoison")
 		ply:Give("weapon_hidebomb")
-		ply:Give("weapon_hg_rgd5")
+		ply:Give("weapon_kabar")
 		ply:Give("weapon_radar")
-
-		ply:GiveAmmo(3 * 8, wep:GetPrimaryAmmoType(), true)
-		ply:GiveAmmo(12, 5, true)
 	end
 
-	timer.Simple(5, function()
+	timer.Simple(1, function()
 		ply.allowFlashlights = true
 	end)
 
@@ -104,30 +108,31 @@ local function makeCT(ply)
 	if not IsValid(ply) then return end
 
 	ply.roleCT = true
+
 	table.insert(homicide.ct, ply)
 
 	if homicide.roundType == 1 or homicide.roundType == 5 then
 		local wep = ply:Give("weapon_remington870")
-		wep:SetClip1(wep:GetMaxClip1())
 
-		ply:GiveAmmo(wep:GetMaxClip1(), wep:GetPrimaryAmmoType(), true)
+		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 1, wep:GetPrimaryAmmoType(), true)
 	elseif homicide.roundType == 2 then
 		local wep = ply:Give("weapon_beretta")
-		wep:SetClip1(wep:GetMaxClip1())
 
+		wep:SetClip1(wep:GetMaxClip1())
 		ply:GiveAmmo(wep:GetMaxClip1(), wep:GetPrimaryAmmoType(), true)
 	elseif homicide.roundType == 3 then
 		local wep = ply:Give("weapon_taser")
+
 		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 3, wep:GetPrimaryAmmoType(), true)
 
 		ply:Give("weapon_police_bat")
-
-		ply:GiveAmmo(3, wep:GetPrimaryAmmoType(), true)
 	elseif homicide.roundType == 4 then
 		local wep = ply:Give("weapon_mateba")
-		wep:SetClip1(wep:GetMaxClip1())
 
-		ply:GiveAmmo(3, wep:GetPrimaryAmmoType(), true)
+		wep:SetClip1(wep:GetMaxClip1())
+		ply:GiveAmmo(wep:GetMaxClip1() * 2, wep:GetPrimaryAmmoType(), true)
 	end
 end
 
@@ -136,7 +141,7 @@ COMMANDS.russian_roulette = {
 		if not ply:IsAdmin() then return end
 
 		for _, plr in pairs(player.GetListByName(args[1], ply)) do
-			local wep = plr:Give("weapon_mateba", true)
+			local wep = plr:GetWeapon("weapon_mateba") or plr:Give("weapon_mateba", true)
 			wep:SetClip1(1)
 			wep:RollDrum()
 		end
@@ -150,13 +155,14 @@ function homicide.Spawns()
 		table.insert(aviable, point)
 	end
 
+	--[[
 	for _, point in pairs(ReadDataMap("spawnpointst")) do
 		table.insert(aviable, point)
 	end
 
 	for _, point in pairs(ReadDataMap("spawnpointsct")) do
 		table.insert(aviable, point)
-	end
+	end --]]
 
 	return aviable
 end
@@ -290,6 +296,7 @@ function homicide.StartRoundSV()
 
 			makeCT(ply)
 		end
+
 	end)
 
 	local players = PlayersInGame()
@@ -378,6 +385,7 @@ COMMANDS.forcepolice = {
 
 function homicide.EndRound(winner)
 	local tbl = TableRound()
+
 	net.Start("hg_sendchat_format")
 		net.WriteTable({
 			"#hg.modes.teamwin",

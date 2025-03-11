@@ -41,6 +41,7 @@ else
 	end)
 end
 
+local turnTable = {
 CreateConVar("homicide_setmode", "", FCVAR_LUA_SERVER, "")
 CreateClientConVar("homicide_get", 0, true, true, "Show traitors and stuff while you're spectating", 0, 1)
 
