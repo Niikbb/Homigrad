@@ -126,7 +126,7 @@ COMMANDS.blevota = {
 	1
 } --]]
 
-concommand.Add("hg_vomit", function(ply, cmd, args)
+concommand.Add("vomit", function(ply, cmd, args)
 	if not ply:Alive() or ply.unconscious then return end
 
 	local r = math.random(1, 30)
