@@ -1,4 +1,4 @@
-LimitAutoBalance = 1
+/*LimitAutoBalance = 1
 
 function NeedAutoBalance(addT, addCT)
 	addT = addT or 0
