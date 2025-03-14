@@ -1,4 +1,3 @@
-local team_GetPlayers = team.GetPlayers
 local GetAll = player.GetAll
 local max, abs, min = math.max, math.abs, math.min
 
@@ -8,7 +7,7 @@ function NeedAutoBalance(addT, addCT)
 	addT = addT or 0
 	addCT = addCT or 0
 
-	local count = (#team_GetPlayers(1) + addT) - (#team_GetPlayers(2) + addCT)
+	local count = (#team.GetPlayers(1) + addT) - (#team.GetPlayers(2) + addCT)
 	if count == 0 then return end
 
 	local favorT
@@ -24,21 +23,19 @@ function NeedAutoBalance(addT, addCT)
 	return favorT, count
 end
 
-local table_Random = table.Random
-
 function AutoBalanceTwoTeam()
 	for _ in pairs(GetAll()) do
 		local favorT, count = NeedAutoBalance()
 		if not count then break end
 
 		if favorT then
-			local ply = table_Random(team_GetPlayers(1))
+			local ply = team.GetPlayers(1)[math.random(#team.GetPlayers(1))]
+			--local ply = math.random(#team.GetPlayers(1))
 			ply:SetTeam(2)
-			-- ply:ChatPrint("Тебя перекинуло в CT команду, из-за неравенства команд.")
 		else
-			local ply = table_Random(team_GetPlayers(2))
+			local ply = team.GetPlayers(2)[math.random(#team.GetPlayers(2))]
+			--local ply = math.random(#team.GetPlayers(2))
 			ply:SetTeam(1)
-			-- ply:ChatPrint("Тебя перекинуло в T команду, из-за неравенства команд.")
 		end
 	end
 end
@@ -48,14 +45,14 @@ local table_CopyFromTo = table.CopyFromTo
 function OpposingAllTeam()
 	local oldT, oldCT = {}, {}
 
-	table_CopyFromTo(team_GetPlayers(1), oldT)
-	table_CopyFromTo(team_GetPlayers(2), oldCT)
+	table_CopyFromTo(team.GetPlayers(1), oldT)
+	table_CopyFromTo(team.GetPlayers(2), oldCT)
 
 	for _, ply in pairs(oldT) do
-		ply:SetTeam(2)
+		ply:SetTeam(math.random(2))
 	end
 
 	for _, ply in pairs(oldCT) do
-		ply:SetTeam(1)
+		ply:SetTeam(math.random(2))
 	end
 end
