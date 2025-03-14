@@ -1,3 +1,5 @@
+hl2dm.GetTeamName = tdm.GetTeamName
+
 local playsound = false
 function hl2dm.StartRoundCL()
 	playsound = true
@@ -5,7 +7,7 @@ end
 
 function hl2dm.HUDPaint_RoundLeft(white)
 	local lply = LocalPlayer()
-	local name, color = tdm.GetTeamName(lply)
+	local name, color = hl2dm.GetTeamName(lply)
 	local startRound = roundTimeStart + 5 - CurTime()
 	if startRound > 0 and lply:Alive() then
 		if playsound then
