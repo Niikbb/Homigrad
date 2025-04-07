@@ -13,7 +13,7 @@
 
 1. [Скачайте репозиторий](https://github.com/Niikbb/Homigrad/archive/refs/heads/main.zip).
 2. Подпишитесь на коллекцию: [\*нажми на меня\*](https://s.team/sf/3251006969).
-3. Распакуйте `homigrad-main` и перенесите все файлы в папку `папка_с_гмодом/garrysmod/addons` или в директорию сервера `addons`.
+3. Распакуйте `homigrad-main` и перенесите все файлы в папку `GarrysMod/garrysmod/` или в директорию сервера `GarrysModDS/garrysmod`.
 4. Переместите папку `data` из `homigrad-main` в папку `папка_с_гмодом/garrysmod/`.
    - В данной папке содержатся данные для поддержки режимов, вроде 'Захвата флага' и других.
 5. Убедитесь что у вас выбран режим `Homigrad` (используйте `+gamemode homigrad` для серверов).
