@@ -14,7 +14,7 @@ It features a somewhat realistic health and movement system and offers several s
 
 1. [Download the repository](https://github.com/Niikbb/Homigrad/archive/refs/heads/main.zip).
 2. Subscribe to this collection: [\*click\*](https://s.team/sf/3251006969).
-3. Extract the `homigrad-main` folder and place it in `your_gmod_install/garrysmod/` folder or server’s `garrysmod` directory.
+3. Extract the `homigrad-main` folder and place it in `GarrysMod/garrysmod/` folder or server’s `GarrysModDS/garrysmod` directory.
 4. Move the `data` folder from `homigrad-main` to `your_gmod_install/garrysmod/`.
    - This folder contains points data that are used in some modes.
 5. Ensure the gamemode is set to `Homigrad` (use `+gamemode homigrad` for servers).
